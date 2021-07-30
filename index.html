@@ -1,7 +1,7 @@
 ---
 layout: default
-title: A stunning personal blog Jekyll theme
-description: Journal is a stunning personal blog Jekyll theme with an image-focused design.
+title: Steven Truong
+description: A Data Scientist who is highly motivated to learn and grow within the advanced analytics field.
 featured_image: /images/demo/demo-landscape.jpg
 ---
 
@@ -19,7 +19,8 @@ featured_image: /images/demo/demo-landscape.jpg
 			</div>
 
 			{% if post.featured_image %}
-			<a href="{{ post.url | relative_url }}" class="blog-post__image" style="background-image: url({{ post.featured_image | relative_url }});"></a>
+			<a href="{{ post.url | relative_url }}" class="blog-post__image"
+				style="background-image: url({{ post.featured_image | relative_url }});"></a>
 			{% endif %}
 
 			<div class="blog-post__content">
@@ -41,12 +42,14 @@ featured_image: /images/demo/demo-landscape.jpg
 
 	{% if paginator.previous_page %}
 	<div class="pagination__prev">
-		<a href="{{ paginator.previous_page_path | relative_url }}" class="button button--large"><i class="fa fa-angle-left" aria-hidden="true"></i> <span>Newer Posts</span></a>
+		<a href="{{ paginator.previous_page_path | relative_url }}" class="button button--large"><i
+				class="fa fa-angle-left" aria-hidden="true"></i> <span>Newer Posts</span></a>
 	</div>
 	{% endif %}
 	{% if paginator.next_page %}
 	<div class="pagination__next">
-		<a href="{{ paginator.next_page_path | relative_url }}" class="button button--large"><span>Older Posts</span> <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+		<a href="{{ paginator.next_page_path | relative_url }}" class="button button--large"><span>Older Posts</span> <i
+				class="fa fa-angle-right" aria-hidden="true"></i></a>
 	</div>
 	{% endif %}
 
