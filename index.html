@@ -2,7 +2,7 @@
 layout: default
 title: Steven Truong
 description: A Data Scientist who is highly motivated to learn and grow within the advanced analytics field.
-featured_image: /images/demo/demo-landscape.jpg
+featured_image: /images/my-portrait.jpg
 ---
 
 <section class="blog single">
@@ -14,8 +14,8 @@ featured_image: /images/demo/demo-landscape.jpg
 		<article class="blog-post">
 
 			<div class="blog-post__header">
-				<h2 class="blog-post__title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
-				<p class="blog-post__subtitle">{{ post.date | date_to_long_string }}</p>
+				<h2 class="blog-post__title">{{ post.title }}</h2>
+				<!-- <p class="blog-post__subtitle">{{ post.date | date_to_long_string }}</p> -->
 			</div>
 
 			{% if post.featured_image %}
@@ -25,7 +25,16 @@ featured_image: /images/demo/demo-landscape.jpg
 
 			<div class="blog-post__content">
 				<p>{{ post.excerpt }}</p>
-				<p><a href="{{ post.url | relative_url }}" class="button">Read More</a>
+				<hr />
+				<p>Hi there! Thank you for being here. My name is Luong-Steven Truong and I am a data scientist with
+					mathematical background.</p>
+				<p>Please click <a href="projects/">here</a> to see the data science projects
+					that I have done are what I am currently working on.
+				</p>
+
+				<p><img src="\images\data-science-wordcloud.jpeg"></p>
+
+
 			</div>
 
 		</article>
@@ -38,7 +47,7 @@ featured_image: /images/demo/demo-landscape.jpg
 
 {% if paginator.total_pages > 1 %}
 
-<section class="pagination">
+<section class=" pagination">
 
 	{% if paginator.previous_page %}
 	<div class="pagination__prev">

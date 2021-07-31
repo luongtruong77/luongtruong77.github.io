@@ -1,35 +1,55 @@
 ---
-title: About Journal
-subtitle: A stunning personal blog Jekyll theme with an image-focused design.
-description: A stunning personal blog Jekyll theme with an image-focused design.
-featured_image: /images/demo/demo-portrait.jpg
+title: About Me
+subtitle: Currently open for work as Data Scientist / Data Analyst / Data Science Consultant
+description: 
+featured_image: /images/about-background.jpg
 ---
 
-![](/images/demo/demo-landscape.jpg)
+Luong-Steven Truong is a Data Scientist who is highly motivated to learn and grow within the advanced analytics field. Steve is currently working as freelance data science consultant and data science teaching assistant at Metis data science and machine learning bootcamp. Prior to joining Metis, Steve was a student at the University of Washington, Seattle studying Mathematics. While supporting himself through college, Steve worked in the hospitality and entertainment industry, honing customer service and client focused skills will easily translate into industry. Steve loves using his skills in analytics and programming to build web applications and deploy them into production. In his free time, Steve invents new cocktails and practices his DJ skills.
 
-## Features
+## Technical skills
 
-Journal is packed with powerful features to showcase your work:
+#### Languages
+- Python
+- SQL
+- HTML/CSS
 
-* Beautiful, minimal design
-* Fixed sidebar images that animate as you browse
-* Single column post layout
-* Responsive – works perfectly on all devices
-* Portfolio/projects post type to show your work
-* Blog with pagination
-* Sleek Ajax navigation and page transitions
-* Unique 'gallery' feature for image grids and carousels
-* Built-in contact form with Formspree integration
-* Full markdown support and code highlighting
-* Social media icons
-* Fast page rendering
-* Built with SEO best practices in mind
-* Customize everything – colors, spacing, fonts, sizes etc. – via a simple settings file
-* Works with GitHub Pages
-* Updated and supported by the developers
+#### Machine Learning
+- Logistic Regression
+- Linear Regression
+- Naive-Bayes
+- Random Forests
+- XGBoost
+- K-Means
+- Principal Component Analysis
+- Natural Language Processing
+- Convolutional Neural Networks
 
-## Get Index
+#### Libraries and Frameworks
+- Pandas
+- Numpy
+- Scikit-learn
+- XGBoost
+- Tensorfl ow
+- Keras
+- NLTK
+- BeautifulSoup
+- Selenium
 
-Journal is created and supported by [Jekyll Themes](https://jekyllthemes.io), and is available for $49.
+#### Data Visualization
+- Tableau
+- Matplotlib
+- Seaborn
+- Plotly
 
-<a href="https://jekyllthemes.io/theme/journal-personal-jekyll-theme" class="button button--large">Get This Theme</a>
+#### Cloud, Database, and Deployment Tools
+- Streamlit
+- Heroku
+- Google Cloud Platform
+- AWS SageMaker
+- GIT/GITHUB
+- NoSQL(MongoDB)
+
+---
+
+<a href="https://www.linkedin.com/in/luongtruong77/" class="button button--large">Contact Me / Hire Me</a>
