@@ -110,3 +110,4 @@ The way the recommendation system work is that it would takes an user's input as
 To try out the web application, the recommendation system is being deployed using [Streamlit](https://streamlit.io/) and can be accessed [here](https://share.streamlit.io/luongtruong77/nlp-drinks-cocktails-recommender/main/app/app.py)
 
 ---
+**Thank you for your time!** If you're interested in this project, you can see the source code [here](https://github.com/luongtruong77/nlp-drinks-cocktails-recommender) on Github, or you can reach out to me [here](https://www.linkedin.com/in/luongtruong77/) on LinkedIn.
