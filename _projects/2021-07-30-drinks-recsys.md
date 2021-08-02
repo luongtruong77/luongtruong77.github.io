@@ -40,7 +40,9 @@ In order to acquire enough volume of data needed, I had to scrape from multiple 
 
 ![](\images\drinks-recsys\thecocktaildb-api.png)
 
-- The final ready-to-work-with dataset has around *12,000* instances and *24* features with 5 text-heavy features to work with (descriptions, reviews, tasting info, ingredients, and instructions).
+- The final ready-to-work-with dataset has around *12,000* instances and *24* features with 5 text-heavy features to work with (descriptions, reviews, tasting info, ingredients, and instructions). Here is the sample of our cleaned dataset:
+
+![](\images\drinks-recsys\sample-df.png)
 
 
 ---
@@ -67,6 +69,23 @@ The main data we use in this project is the **review** and **description** of ea
 ![](\images\drinks-recsys\text-cleaning.png)
 
 As we can see, before we clean the text, there are capitalized words, numbers, punctuations, and symbols. These are not helpful for us in the process. However, after we clean it, there are just lowercase words with no numbers and symbols.
+
+### Exploratory Data Analysis (EDA)
+#### Sentiment Analysis
+
+![](\images\drinks-recsys\sentiment-polarity.png)
+
+The majority of our **reviews** are neutral (0 polarity). We also have mostly positive reviews (centered around 0.2) with a very few slight negative reviews.
+
+#### EDA
+
+**Price Distribution**
+
+![](\images\drinks-recsys\price-dist.png)
+
+**Top words after removing stop words**
+
+![](\images\drinks-recsys\top-words.png)
 
 ### Topic modeling
 **Term Frequency–Inverse Document Frequency (TF-IDF)** for encoding and **Non-negative Matrix Factorization (NMF)** for topic modeling and building recommendation system. But, what are **TF-IDF** and **NMF**? Let's take a minute and look closer into our algorithms being used in this projects.
