@@ -475,6 +475,26 @@
       .add-leg-grid { grid-template-columns: 1fr; }
     }
 
+    /* ── COMBOBOX ── */
+    .combo-wrap { position: relative; }
+    .combo-inp { width: 100%; }
+    .combo-list {
+      position: absolute; top: calc(100% + 3px); left: 0; right: 0; z-index: 600;
+      background: var(--surf2); border: 1px solid var(--border2);
+      border-radius: 8px; max-height: 210px; overflow-y: auto;
+      box-shadow: 0 8px 24px rgba(0,0,0,.45);
+      display: none;
+    }
+    .combo-list.open { display: block; }
+    .combo-item {
+      padding: 8px 12px; cursor: pointer; font-size: 13px; color: var(--text);
+      border-bottom: 1px solid var(--border);
+    }
+    .combo-item:last-child { border-bottom: none; }
+    .combo-item:hover { background: var(--blue-bg); color: var(--blue); }
+    .combo-empty { color: var(--muted); cursor: default; }
+    .combo-empty:hover { background: transparent; color: var(--muted); }
+
     /* ── SYNC MODAL ── */
     .modal-overlay {
       position: fixed; inset: 0; z-index: 500;
@@ -1286,10 +1306,10 @@ async function toggleAddLegForm(parlayId) {
 }
 
 async function loadFormGames(parlayId, date) {
-  const sel = document.getElementById(`leg-game-${parlayId}`);
-  if (!sel) return;
-  sel.innerHTML = '<option value="">Loading games…</option>';
-  sel.disabled = true;
+  const inp = document.getElementById(`combo-game-inp-${parlayId}`);
+  if (!inp) return;
+  setComboDisabled(parlayId, 'game', true);
+  inp.placeholder = 'Loading games…';
 
   let games = FORM_GAMES_CACHE.get(date);
   if (!games) {
@@ -1298,35 +1318,37 @@ async function loadFormGames(parlayId, date) {
       games.sort((a,b) => new Date(a.gameDate)-new Date(b.gameDate));
       FORM_GAMES_CACHE.set(date, games);
     } catch(e) {
-      sel.innerHTML = '<option value="">Failed to load games</option>';
-      sel.disabled = false; return;
+      setComboDisabled(parlayId, 'game', false);
+      inp.placeholder = 'Failed to load games';
+      return;
     }
   }
 
-  sel.disabled = false;
-  sel.innerHTML = '<option value="">— Pick a game —</option>' +
-    games.map(g => {
-      const aw = shortTeamName(g.teams.away.team);
-      const hw = shortTeamName(g.teams.home.team);
-      const state = g.status.abstractGameState;
-      const time  = new Date(g.gameDate).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
-      const lbl   = state==='Final' ? 'Final' : state==='Live' ? 'Live' : time;
-      return `<option value="${g.gamePk}">${aw} @ ${hw} · ${lbl}</option>`;
-    }).join('');
+  setComboDisabled(parlayId, 'game', false);
+  const options = games.map(g => {
+    const aw    = shortTeamName(g.teams.away.team);
+    const hw    = shortTeamName(g.teams.home.team);
+    const state = g.status.abstractGameState;
+    const time  = new Date(g.gameDate).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+    const lbl   = state==='Final' ? 'Final' : state==='Live' ? 'Live' : time;
+    return { value: String(g.gamePk), label: `${aw} @ ${hw} · ${lbl}` };
+  });
+  setComboOptions(parlayId, 'game', options, '— Pick a game —');
 }
 
 async function onGameSelect(parlayId) {
-  const gameSel   = document.getElementById(`leg-game-${parlayId}`);
-  const playerSel = document.getElementById(`leg-player-${parlayId}`);
-  const gamePk    = parseInt(gameSel.value);
+  const gamePk    = parseInt(document.getElementById(`leg-game-${parlayId}`)?.value);
+  const playerInp = document.getElementById(`combo-player-inp-${parlayId}`);
+  const playerHid = document.getElementById(`leg-player-${parlayId}`);
 
-  playerSel.innerHTML = '<option value="">— Pick a game first —</option>';
-  playerSel.disabled = true;
+  setComboDisabled(parlayId, 'player', true);
+  if (playerHid) playerHid.value = '';
+  COMBO_STATE.set(`player-${parlayId}`, { selectedValue: '', selectedLabel: '' });
+  if (playerInp) { playerInp.value = ''; playerInp.placeholder = '— Pick a game first —'; }
   if (!gamePk) return;
 
-  playerSel.innerHTML = '<option value="">Loading players…</option>';
+  if (playerInp) playerInp.placeholder = 'Loading players…';
 
-  // Determine game state from cache
   const parlay = PARLAYS.find(p => p.id === parlayId);
   const date   = parlay?.date || ymd(S.selectedDate);
   const games  = FORM_GAMES_CACHE.get(date) || [];
@@ -1339,8 +1361,9 @@ async function onGameSelect(parlayId) {
       bs = await fetchBoxscore(gamePk);
       S.boxscores.set(gamePk, bs);
     } catch(e) {
-      playerSel.innerHTML = '<option value="">Failed to load roster</option>';
-      playerSel.disabled = false; return;
+      setComboDisabled(parlayId, 'player', false);
+      if (playerInp) playerInp.placeholder = 'Failed to load roster';
+      return;
     }
   }
   populatePlayerSelect(parlayId, bs, gState);
@@ -1360,7 +1383,6 @@ function onPropTypeChange(parlayId) {
 }
 
 function populatePlayerSelect(parlayId, bs, gameState) {
-  const playerSel = document.getElementById(`leg-player-${parlayId}`);
   const propType  = document.getElementById(`leg-type-${parlayId}`)?.value;
   const isPitcher = propType === 'K_PIT';
   const players   = [];
@@ -1373,7 +1395,8 @@ function populatePlayerSelect(parlayId, bs, gameState) {
       (team.pitchers || []).forEach(id => {
         const p = team.players[`ID${id}`];
         if (!p) return;
-        players.push({ name: `${p.person.fullName} (${teamAbbr})`, label: `${p.person.fullName} — ${teamAbbr} (P)` });
+        const val = `${p.person.fullName} (${teamAbbr})`;
+        players.push({ value: val, label: `${p.person.fullName} — ${teamAbbr} (P)` });
       });
     } else {
       const order = team.battingOrder || [];
@@ -1393,18 +1416,20 @@ function populatePlayerSelect(parlayId, bs, gameState) {
         const hasStats = pa > 0 || !!(b?.hits);
         if (!inOrder && !hasStats && !pos) return;
 
-        players.push({ name: `${p.person.fullName} (${teamAbbr})`, label: `${p.person.fullName} — ${teamAbbr} (${pos})` });
+        const val = `${p.person.fullName} (${teamAbbr})`;
+        players.push({ value: val, label: `${p.person.fullName} — ${teamAbbr} (${pos})` });
       });
     }
   });
 
+  const playerInp = document.getElementById(`combo-player-inp-${parlayId}`);
   if (!players.length) {
-    playerSel.innerHTML = '<option value="">No players available yet</option>';
-    playerSel.disabled = false; return;
+    setComboDisabled(parlayId, 'player', false);
+    if (playerInp) playerInp.placeholder = 'No players available yet';
+    return;
   }
-  playerSel.disabled = false;
-  playerSel.innerHTML = '<option value="">— Pick a player —</option>' +
-    players.map(p => `<option value="${escHtml(p.name)}">${escHtml(p.label)}</option>`).join('');
+  setComboDisabled(parlayId, 'player', false);
+  setComboOptions(parlayId, 'player', players, '— Pick a player —');
 }
 
 function addLeg(parlayId) {
@@ -1447,6 +1472,7 @@ function renderParlays() {
     return;
   }
   el.innerHTML = PARLAYS.map(parlayCardHTML).join('');
+  PARLAYS.forEach(p => comboInit(p.id));
 }
 
 function parlayCardHTML(parlay) {
@@ -1497,13 +1523,18 @@ function parlayCardHTML(parlay) {
     ${legsHTML}
     <div class="parlay-add-form" id="alf-${parlay.id}" style="display:none">
       <div class="add-leg-grid">
-        <select id="leg-game-${parlay.id}" class="form-inp full-col"
-          onchange="onGameSelect('${parlay.id}')">
-          <option value="">Loading games…</option>
-        </select>
-        <select id="leg-player-${parlay.id}" class="form-inp full-col" disabled>
-          <option value="">— Pick a game first —</option>
-        </select>
+        <div class="combo-wrap full-col">
+          <input type="text" class="form-inp combo-inp" id="combo-game-inp-${parlay.id}"
+            placeholder="— Pick a game —" autocomplete="off" />
+          <input type="hidden" id="leg-game-${parlay.id}" />
+          <div class="combo-list" id="combo-game-list-${parlay.id}"></div>
+        </div>
+        <div class="combo-wrap full-col">
+          <input type="text" class="form-inp combo-inp" id="combo-player-inp-${parlay.id}"
+            placeholder="— Pick a game first —" autocomplete="off" disabled />
+          <input type="hidden" id="leg-player-${parlay.id}" />
+          <div class="combo-list" id="combo-player-list-${parlay.id}"></div>
+        </div>
         <select id="leg-type-${parlay.id}" class="form-inp"
           onchange="onPropTypeChange('${parlay.id}')">
           ${PROP_TYPES.map(t=>`<option value="${t.value}">${t.label}</option>`).join('')}
@@ -1688,6 +1719,92 @@ function getPropVal(bt, propType) {
     case 'HRR':   return (bt.hits??0) + (bt.runs??0) + (bt.rbi??0);
     default:      return null;
   }
+}
+
+/* ══════════════════════════════════════════════════
+   COMBOBOX
+══════════════════════════════════════════════════ */
+const COMBO_STATE = new Map();
+
+function comboInit(parlayId) {
+  ['game', 'player'].forEach(type => {
+    const inp  = document.getElementById(`combo-${type}-inp-${parlayId}`);
+    const list = document.getElementById(`combo-${type}-list-${parlayId}`);
+    if (!inp || !list) return;
+
+    inp.addEventListener('input', () => {
+      const q = inp.value.toLowerCase();
+      list.querySelectorAll('.combo-item:not(.combo-empty)').forEach(item => {
+        const lbl = (item.dataset.label || '').toLowerCase();
+        item.style.display = lbl.includes(q) ? '' : 'none';
+      });
+      list.classList.add('open');
+    });
+
+    inp.addEventListener('focus', () => list.classList.add('open'));
+
+    inp.addEventListener('blur', () => {
+      setTimeout(() => {
+        list.classList.remove('open');
+        list.querySelectorAll('.combo-item').forEach(i => i.style.display = '');
+        const state = COMBO_STATE.get(`${type}-${parlayId}`);
+        if (state?.selectedLabel) inp.value = state.selectedLabel;
+        else if (!state?.selectedValue) inp.value = '';
+      }, 200);
+    });
+  });
+}
+
+function setComboOptions(parlayId, type, options, placeholder) {
+  const inp    = document.getElementById(`combo-${type}-inp-${parlayId}`);
+  const list   = document.getElementById(`combo-${type}-list-${parlayId}`);
+  const hidden = document.getElementById(`leg-${type}-${parlayId}`);
+  if (!inp || !list || !hidden) return;
+
+  const prevVal = hidden.value;
+
+  list.innerHTML = options.length
+    ? options.map(o => `<div class="combo-item" data-value="${escHtml(o.value)}" data-label="${escHtml(o.label)}">${escHtml(o.label)}</div>`).join('')
+    : `<div class="combo-item combo-empty">${escHtml(placeholder || 'No options')}</div>`;
+
+  list.querySelectorAll('.combo-item:not(.combo-empty)').forEach(item => {
+    item.addEventListener('mousedown', e => {
+      e.preventDefault();
+      selectComboItem(parlayId, type, item.dataset.value, item.dataset.label);
+    });
+  });
+
+  const match = options.find(o => o.value === prevVal);
+  if (match) {
+    inp.value    = match.label;
+    hidden.value = match.value;
+    COMBO_STATE.set(`${type}-${parlayId}`, { selectedValue: match.value, selectedLabel: match.label });
+  } else {
+    inp.value    = '';
+    hidden.value = '';
+    inp.placeholder = placeholder || '— Select —';
+    COMBO_STATE.set(`${type}-${parlayId}`, { selectedValue: '', selectedLabel: '' });
+  }
+}
+
+function selectComboItem(parlayId, type, value, label) {
+  const inp    = document.getElementById(`combo-${type}-inp-${parlayId}`);
+  const list   = document.getElementById(`combo-${type}-list-${parlayId}`);
+  const hidden = document.getElementById(`leg-${type}-${parlayId}`);
+  if (!inp || !hidden) return;
+
+  inp.value    = label;
+  hidden.value = value;
+  COMBO_STATE.set(`${type}-${parlayId}`, { selectedValue: value, selectedLabel: label });
+  list?.classList.remove('open');
+  list?.querySelectorAll('.combo-item').forEach(i => i.style.display = '');
+
+  if (type === 'game') onGameSelect(parlayId);
+}
+
+function setComboDisabled(parlayId, type, disabled) {
+  const inp = document.getElementById(`combo-${type}-inp-${parlayId}`);
+  if (inp) inp.disabled = disabled;
 }
 
 /* ══════════════════════════════════════════════════
