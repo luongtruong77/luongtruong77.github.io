@@ -574,12 +574,20 @@
         <button id="cloudLoadBtn" class="p-btn" onclick="loadFromCloud()" title="Load parlays from cloud">↓ Load</button>
         <button class="p-btn" onclick="openSyncSettings()" title="Cloud sync settings">⚙</button>
         <button id="parlayUpdateBtn" class="p-btn" onclick="updateParlayStats()">⟳ Update Stats</button>
+        <button class="p-btn" onclick="collapseAllParlays()" title="Collapse / expand all parlays">⊟ Collapse All</button>
         <span id="updateStatus" style="font-size:12px;color:var(--green);display:none;align-self:center"></span>
         <button class="p-btn primary" onclick="newParlay()">+ New Parlay</button>
       </div>
     </div>
     <div id="parlaysList"></div>
-    <div style="margin-top:12px;text-align:right">
+    <div style="margin-top:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <button class="p-btn" onclick="saveToCloud()" title="Save parlays to cloud">↑ Save</button>
+        <button class="p-btn" onclick="loadFromCloud()" title="Load parlays from cloud">↓ Load</button>
+        <button class="p-btn" onclick="openSyncSettings()" title="Cloud sync settings">⚙</button>
+        <button class="p-btn" onclick="updateParlayStats()">⟳ Update Stats</button>
+        <button class="p-btn" onclick="collapseAllParlays()" title="Collapse / expand all parlays">⊟ Collapse All</button>
+      </div>
       <button class="p-btn primary" onclick="newParlay()">+ New Parlay</button>
     </div>
   </section>
@@ -714,6 +722,16 @@ async function fetchBoxscore(gamePk) {
   const r = await fetch(`${API}/game/${gamePk}/boxscore`);
   if (!r.ok) throw new Error('boxscore fetch failed');
   return r.json();
+}
+
+async function fetchTeamRoster(teamId) {
+  if (ROSTER_CACHE.has(teamId)) return ROSTER_CACHE.get(teamId);
+  const r = await fetch(`${API}/teams/${teamId}/roster?rosterType=40Man`);
+  if (!r.ok) throw new Error('roster fetch failed');
+  const data = await r.json();
+  const roster = data.roster || [];
+  ROSTER_CACHE.set(teamId, roster);
+  return roster;
 }
 
 /* ══════════════════════════════════════════════════
@@ -1232,11 +1250,19 @@ function escHtml(str) {
 const PARLAYS_KEY = 'mlb-parlays-v1';
 let PARLAYS = (() => { try { return JSON.parse(localStorage.getItem(PARLAYS_KEY)) || []; } catch { return []; } })();
 const FORM_GAMES_CACHE = new Map();
+const ROSTER_CACHE = new Map(); // teamId → roster array
 const PARLAY_COLLAPSED = new Set();
 
 function toggleParlayCollapse(id) {
   if (PARLAY_COLLAPSED.has(id)) PARLAY_COLLAPSED.delete(id);
   else PARLAY_COLLAPSED.add(id);
+  renderParlays();
+}
+
+function collapseAllParlays() {
+  const allCollapsed = PARLAYS.every(p => PARLAY_COLLAPSED.has(p.id));
+  if (allCollapsed) PARLAYS.forEach(p => PARLAY_COLLAPSED.delete(p.id));
+  else PARLAYS.forEach(p => PARLAY_COLLAPSED.add(p.id));
   renderParlays();
 }
 
@@ -1364,19 +1390,22 @@ async function onGameSelect(parlayId) {
   const games  = FORM_GAMES_CACHE.get(date) || [];
   const game   = games.find(g => g.gamePk === gamePk);
   const gState = game?.status.abstractGameState || 'Preview';
+  const awayId = game?.teams?.away?.team?.id;
+  const homeId = game?.teams?.home?.team?.id;
 
-  let bs = S.boxscores.get(gamePk);
-  if (!bs) {
-    try {
-      bs = await fetchBoxscore(gamePk);
-      S.boxscores.set(gamePk, bs);
-    } catch(e) {
-      setComboDisabled(parlayId, 'player', false);
-      if (playerInp) playerInp.placeholder = 'Failed to load roster';
-      return;
-    }
+  try {
+    const [bs, awayRoster, homeRoster] = await Promise.all([
+      S.boxscores.has(gamePk)
+        ? Promise.resolve(S.boxscores.get(gamePk))
+        : fetchBoxscore(gamePk).then(b => { S.boxscores.set(gamePk, b); return b; }),
+      awayId ? fetchTeamRoster(awayId) : Promise.resolve([]),
+      homeId ? fetchTeamRoster(homeId) : Promise.resolve([]),
+    ]);
+    populatePlayerSelect(parlayId, bs, gState, awayRoster, homeRoster);
+  } catch(e) {
+    setComboDisabled(parlayId, 'player', false);
+    if (playerInp) playerInp.placeholder = 'Failed to load roster';
   }
-  populatePlayerSelect(parlayId, bs, gState);
 }
 
 function onPropTypeChange(parlayId) {
@@ -1384,51 +1413,62 @@ function onPropTypeChange(parlayId) {
   const gamePk  = parseInt(gameSel?.value);
   if (!gamePk) return;
   const bs = S.boxscores.get(gamePk);
-  // Get game state from cache
   const parlay = PARLAYS.find(p => p.id === parlayId);
   const date   = parlay?.date || ymd(S.selectedDate);
   const games  = FORM_GAMES_CACHE.get(date) || [];
   const game   = games.find(g => g.gamePk === gamePk);
-  if (bs) populatePlayerSelect(parlayId, bs, game?.status.abstractGameState || 'Preview');
+  const awayId = game?.teams?.away?.team?.id;
+  const homeId = game?.teams?.home?.team?.id;
+  const awayRoster = awayId ? (ROSTER_CACHE.get(awayId) || []) : [];
+  const homeRoster = homeId ? (ROSTER_CACHE.get(homeId) || []) : [];
+  if (bs) populatePlayerSelect(parlayId, bs, game?.status.abstractGameState || 'Preview', awayRoster, homeRoster);
 }
 
-function populatePlayerSelect(parlayId, bs, gameState) {
+function populatePlayerSelect(parlayId, bs, gameState, awayRoster, homeRoster) {
   const propType  = document.getElementById(`leg-type-${parlayId}`)?.value;
   const isPitcher = propType === 'K_PIT';
   const players   = [];
 
-  ['away','home'].forEach(side => {
+  const sides = [
+    { side: 'away', roster: awayRoster || [] },
+    { side: 'home', roster: homeRoster || [] },
+  ];
+
+  sides.forEach(({ side, roster }) => {
     const team     = bs.teams[side];
     const teamAbbr = abbr(team.team);
 
-    if (isPitcher) {
-      (team.pitchers || []).forEach(id => {
-        const p = team.players[`ID${id}`];
-        if (!p) return;
-        const val = `${p.person.fullName} (${teamAbbr})`;
-        players.push({ value: val, label: `${p.person.fullName} — ${teamAbbr} (P)` });
+    if (roster.length) {
+      roster.forEach(rp => {
+        const pos   = rp.position?.abbreviation || '';
+        const isPit = rp.position?.type === 'Pitcher' || pos === 'P';
+        if (isPitcher !== isPit) return;
+        const val = `${rp.person.fullName} (${teamAbbr})`;
+        players.push({ value: val, label: `${rp.person.fullName} — ${teamAbbr} (${pos})` });
       });
     } else {
-      const order = team.battingOrder || [];
-      const seen  = new Set();
-      const ids   = [...order.map(id=>`ID${id}`), ...Object.keys(team.players)]
-        .filter(id => { if(seen.has(id)) return false; seen.add(id); return true; });
-
-      ids.forEach(pid => {
-        const p   = team.players[pid];
-        if (!p) return;
-        const pos = p.position?.abbreviation || '';
-        if (pos === 'P') return;
-
-        const inOrder  = order.includes(p.person.id);
-        const b        = p.stats?.batting;
-        const pa       = b?.plateAppearances ?? b?.atBats ?? 0;
-        const hasStats = pa > 0 || !!(b?.hits);
-        if (!inOrder && !hasStats && !pos) return;
-
-        const val = `${p.person.fullName} (${teamAbbr})`;
-        players.push({ value: val, label: `${p.person.fullName} — ${teamAbbr} (${pos})` });
-      });
+      // Fall back to boxscore players
+      if (isPitcher) {
+        (team.pitchers || []).forEach(id => {
+          const p = team.players[`ID${id}`];
+          if (!p) return;
+          const val = `${p.person.fullName} (${teamAbbr})`;
+          players.push({ value: val, label: `${p.person.fullName} — ${teamAbbr} (P)` });
+        });
+      } else {
+        const order = team.battingOrder || [];
+        const seen  = new Set();
+        const ids   = [...order.map(id => `ID${id}`), ...Object.keys(team.players)]
+          .filter(id => { if (seen.has(id)) return false; seen.add(id); return true; });
+        ids.forEach(pid => {
+          const p   = team.players[pid];
+          if (!p) return;
+          const pos = p.position?.abbreviation || '';
+          if (pos === 'P') return;
+          const val = `${p.person.fullName} (${teamAbbr})`;
+          players.push({ value: val, label: `${p.person.fullName} — ${teamAbbr} (${pos})` });
+        });
+      }
     }
   });
 
