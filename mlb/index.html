@@ -183,6 +183,8 @@
     .badge-preview  { background: var(--blue-bg); color: var(--blue); border: 1px solid rgba(59,130,246,.3); }
     .game-time { font-size: 11px; color: var(--muted); }
     .game-inn  { font-size: 11px; color: var(--dim); font-weight: 500; }
+    .atbat-count { font-size: 10px; color: var(--muted); }
+    .atbat-row { display: block; font-size: 11px; color: var(--dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 140px; }
     .fullnames { font-size: 11px; color: var(--muted); max-width: 120px; text-align: right; }
 
     /* chevron */
@@ -793,9 +795,17 @@ function gameCardHTML(g) {
   // Badge + sub
   let badge, sub='';
   if (state==='Live') {
-    const half = linescore?.inningHalf||'', inn = linescore?.currentInningOrdinal||'';
+    const half    = linescore?.inningHalf||'', inn = linescore?.currentInningOrdinal||'';
+    const batter  = linescore?.offense?.batter?.fullName;
+    const pitcher = linescore?.defense?.pitcher?.fullName;
+    const balls   = linescore?.balls   ?? '';
+    const strikes = linescore?.strikes ?? '';
+    const outs    = linescore?.outs    ?? '';
+    const countStr = (balls!==''&&strikes!=='') ? `<span class="atbat-count">${balls}-${strikes} · ${outs} out${outs!==1?'s':''}</span>` : '';
+    const batterStr  = batter  ? `<span class="atbat-row">🏏 ${batter}</span>`  : '';
+    const pitcherStr = pitcher ? `<span class="atbat-row">⚾ ${pitcher}</span>` : '';
     badge = `<span class="badge badge-live">● LIVE</span>`;
-    sub   = `<span class="game-inn">${half} ${inn}</span>`;
+    sub   = `<span class="game-inn">${half} ${inn}</span>${countStr}${batterStr}${pitcherStr}`;
   } else if (state==='Final') {
     badge = `<span class="badge badge-final">FINAL</span>`;
   } else {
