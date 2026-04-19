@@ -1,76 +1,638 @@
----
-layout: default
-title: Steven Truong
-description: A Data Scientist who is highly motivated to learn and grow within the advanced analytics field.
-featured_image: /images/my-portrait.jpg
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Steven Truong — Senior Analytics Engineer</title>
+  <link rel="icon" href="/images/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<section class="blog single">
+    :root {
+      --bg:       #04080f;
+      --surf:     #0b1120;
+      --surf2:    #111827;
+      --surf3:    #182033;
+      --border:   #1c2b42;
+      --border2:  #253550;
+      --text:     #e2e8f0;
+      --dim:      #94a3b8;
+      --muted:    #4b5e78;
+      --blue:     #3b82f6;
+      --blue-dim: rgba(59,130,246,.15);
+      --gold:     #f59e0b;
+      --green:    #10b981;
+      --purple:   #8b5cf6;
+    }
 
-	<div class="wrap">
+    html { scroll-behavior: smooth; }
 
-		{% for post in paginator.posts %}
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
 
-		<article class="blog-post">
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
 
-			<div class="blog-post__header">
-				<h2 class="blog-post__title">{{ post.title }}</h2>
-				<!-- <p class="blog-post__subtitle">{{ post.date | date_to_long_string }}</p> -->
-			</div>
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(4,8,15,.82);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      height: 60px;
+    }
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--blue); }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      color: var(--dim);
+      font-size: .875rem;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
 
-			{% if post.featured_image %}
-			<a href="{{ post.url | relative_url }}" class="blog-post__image"
-				style="background-image: url({{ post.featured_image | relative_url }});"></a>
-			{% endif %}
+    /* ── SECTIONS ── */
+    section {
+      padding: clamp(4rem, 10vw, 7rem) clamp(1.5rem, 5vw, 4rem);
+      max-width: 900px;
+      margin: 0 auto;
+    }
 
-			<div class="blog-post__content">
-				<p>{{ post.excerpt }}</p>
-				<hr />
-				<p>Hi there! Thank you for being here. My name is Luong-Steven Truong and I am a data scientist with
-					mathematical background.</p>
+    .section-label {
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: .75rem;
+    }
 
-				<p>
-					I am currently practicing my skills in <strong>Computer Vision, Transfer Learning, Natural Language
-						Processing, and Time Series</strong> with <a href="https://www.tensorflow.org/">Tensorflow</a>
-					and
-					<a href="https://keras.io/">Keras</a> with the purpose of taking <a
-						href="https://www.tensorflow.org/certificate">Tensorflow Developer Certificate Exam</a> by the
-					beginning of September.
-				</p>
-				<p>Please click <a href="projects/">here</a> to see the data science projects
-					that I have done and what I am currently working on.
-				</p>
+    h2.section-title {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      color: var(--text);
+      margin-bottom: 2.5rem;
+    }
 
-				<p><img src="\images\data-science-wordcloud.jpeg"></p>
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 60px;
+    }
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      gap: clamp(2rem, 6vw, 5rem);
+      flex-wrap: wrap;
+    }
+    .hero-text { flex: 1; min-width: 280px; }
+    .hero-greeting {
+      font-size: .875rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 1rem;
+    }
+    .hero-name {
+      font-size: clamp(2.4rem, 7vw, 4.2rem);
+      font-weight: 800;
+      letter-spacing: -.04em;
+      line-height: 1.05;
+      margin-bottom: .75rem;
+    }
+    .hero-name .accent { color: var(--blue); }
+    .hero-title {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-weight: 400;
+      color: var(--dim);
+      margin-bottom: 1.5rem;
+    }
+    .hero-bio {
+      color: var(--dim);
+      max-width: 480px;
+      margin-bottom: 2rem;
+      font-size: .95rem;
+    }
+    .hero-actions { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .6rem 1.2rem;
+      border-radius: 6px;
+      font-size: .875rem;
+      font-weight: 600;
+      transition: all .2s;
+      cursor: pointer;
+      text-decoration: none !important;
+    }
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+    }
+    .btn-primary:hover { background: #2563eb; }
+    .btn-ghost {
+      background: transparent;
+      color: var(--dim);
+      border: 1px solid var(--border2);
+    }
+    .btn-ghost:hover { border-color: var(--blue); color: var(--text); }
 
+    .hero-photo {
+      width: clamp(140px, 22vw, 220px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--border2);
+      box-shadow: 0 0 0 6px var(--blue-dim);
+      flex-shrink: 0;
+    }
 
-			</div>
+    /* ── EXPERIENCE ── */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
 
-		</article>
+    .company-block {
+      display: flex;
+      gap: 1.5rem;
+      padding-bottom: 2.5rem;
+      position: relative;
+    }
+    .company-block::before {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 40px;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+    .company-block:last-child::before { display: none; }
 
-		{% endfor %}
+    .timeline-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--surf2);
+      border: 2px solid var(--border2);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .65rem;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: .02em;
+      text-align: center;
+      line-height: 1.2;
+    }
 
-	</div>
+    .company-content { flex: 1; }
+    .company-header {
+      display: flex;
+      align-items: baseline;
+      gap: .75rem;
+      flex-wrap: wrap;
+      margin-bottom: .25rem;
+    }
+    .company-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .company-meta {
+      font-size: .78rem;
+      color: var(--muted);
+    }
 
+    .role-list { display: flex; flex-direction: column; gap: 1.1rem; margin-top: .75rem; }
+    .role {
+      background: var(--surf);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      transition: border-color .2s;
+    }
+    .role:hover { border-color: var(--border2); }
+    .role-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; }
+    .role-title { font-size: .95rem; font-weight: 600; color: var(--text); }
+    .role-dates { font-size: .78rem; color: var(--muted); white-space: nowrap; }
+    .role-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-top: .6rem;
+    }
+    .tag {
+      background: var(--blue-dim);
+      color: var(--blue);
+      border: 1px solid rgba(59,130,246,.25);
+      border-radius: 4px;
+      padding: .15rem .55rem;
+      font-size: .72rem;
+      font-weight: 500;
+    }
+    .tag.green { background: rgba(16,185,129,.1); color: var(--green); border-color: rgba(16,185,129,.25); }
+    .tag.purple { background: rgba(139,92,246,.1); color: var(--purple); border-color: rgba(139,92,246,.25); }
+    .tag.gold { background: rgba(245,158,11,.1); color: var(--gold); border-color: rgba(245,158,11,.25); }
+
+    .role-desc {
+      font-size: .85rem;
+      color: var(--dim);
+      margin-top: .6rem;
+      line-height: 1.65;
+    }
+    .role-desc li { margin-left: 1rem; margin-bottom: .2rem; }
+    .role-desc ul { list-style: disc; }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .skill-card {
+      background: var(--surf);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.1rem 1.2rem;
+      transition: border-color .2s, transform .2s;
+    }
+    .skill-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+    .skill-cat {
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: .6rem;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+
+    /* ── CONTACT / FOOTER ── */
+    #contact {
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .contact-links { display: flex; justify-content: center; gap: 1.25rem; flex-wrap: wrap; margin-top: 1.5rem; }
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .55rem 1.1rem;
+      border: 1px solid var(--border2);
+      border-radius: 6px;
+      color: var(--dim);
+      font-size: .875rem;
+      font-weight: 500;
+      transition: all .2s;
+      text-decoration: none !important;
+    }
+    .contact-link:hover { border-color: var(--blue); color: var(--text); }
+    .contact-link svg { width: 16px; height: 16px; }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: .8rem;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: .8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">Steven <span>Truong</span></span>
+  <div class="nav-links">
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="hero-greeting">Hey there, I'm</p>
+      <h1 class="hero-name">Steven<br/><span class="accent">Truong</span></h1>
+      <p class="hero-title">Senior Analytics Engineer &nbsp;·&nbsp; Data Scientist</p>
+      <p class="hero-bio">
+        I build the data foundations that power product and business decisions —
+        from pipeline architecture on Databricks to ML-driven insights.
+        Currently at <strong style="color:var(--text)">Ibotta</strong>, working remotely.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://www.linkedin.com/in/steventruong77/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M20.447 20.452H17.21v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.984V9h3.101v1.561h.044c.432-.82 1.487-1.685 3.059-1.685 3.271 0 3.875 2.153 3.875 4.951l-.016 6.625ZM5.337 7.433a1.8 1.8 0 1 1 0-3.6 1.8 1.8 0 0 1 0 3.6Zm1.56 13.019H3.775V9h3.122v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z"/></svg>
+          LinkedIn
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/luongtruong77" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+    <img class="hero-photo" src="/images/my-portrait.jpg" alt="Steven Truong" onerror="this.style.display='none'" />
+  </div>
 </section>
 
-{% if paginator.total_pages > 1 %}
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">Career</p>
+  <h2 class="section-title">Experience</h2>
 
-<section class=" pagination">
+  <div class="timeline">
 
-	{% if paginator.previous_page %}
-	<div class="pagination__prev">
-		<a href="{{ paginator.previous_page_path | relative_url }}" class="button button--large"><i
-				class="fa fa-angle-left" aria-hidden="true"></i> <span>Newer Posts</span></a>
-	</div>
-	{% endif %}
-	{% if paginator.next_page %}
-	<div class="pagination__next">
-		<a href="{{ paginator.next_page_path | relative_url }}" class="button button--large"><span>Older Posts</span> <i
-				class="fa fa-angle-right" aria-hidden="true"></i></a>
-	</div>
-	{% endif %}
+    <!-- Ibotta -->
+    <div class="company-block">
+      <div class="timeline-dot">IBO</div>
+      <div class="company-content">
+        <div class="company-header">
+          <span class="company-name">Ibotta</span>
+          <span class="company-meta">Full-time · 2 yrs 9 mos · Remote</span>
+        </div>
+        <div class="role-list">
+          <div class="role">
+            <div class="role-header">
+              <span class="role-title">Senior Analytics Engineer</span>
+              <span class="role-dates">Jan 2026 – Present</span>
+            </div>
+            <div class="role-tech">
+              <span class="tag">Databricks</span>
+              <span class="tag">Airflow</span>
+              <span class="tag">AWS</span>
+            </div>
+            <div class="role-desc">
+              Continue building and maintaining foundational datasets within Core Data &amp; Analytics Org.
+              Taken on mentorship opportunities alongside technical work.
+            </div>
+          </div>
+          <div class="role">
+            <div class="role-header">
+              <span class="role-title">Analytics Engineer, Core Data &amp; Analytics</span>
+              <span class="role-dates">Aug 2023 – Jan 2026 · 2 yrs 6 mos</span>
+            </div>
+            <div class="role-tech">
+              <span class="tag">Databricks</span>
+              <span class="tag">Airflow</span>
+              <span class="tag">AWS</span>
+            </div>
+            <div class="role-desc">
+              Built and maintained foundational datasets within the Core Data Org, tackling challenging
+              problems and driving cross-company impact.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <!-- Avant -->
+    <div class="company-block">
+      <div class="timeline-dot">AVT</div>
+      <div class="company-content">
+        <div class="company-header">
+          <span class="company-name">Avant</span>
+          <span class="company-meta">Full-time · 1 yr 8 mos · Remote</span>
+        </div>
+        <div class="role-list">
+          <div class="role">
+            <div class="role-header">
+              <span class="role-title">Analytics Engineer</span>
+              <span class="role-dates">Jul 2022 – Jun 2023 · 1 yr</span>
+            </div>
+            <div class="role-tech">
+              <span class="tag green">PySpark</span>
+              <span class="tag green">Data Management</span>
+              <span class="tag green">Python</span>
+            </div>
+          </div>
+          <div class="role">
+            <div class="role-header">
+              <span class="role-title">Data Management Analyst</span>
+              <span class="role-dates">Nov 2021 – Jul 2022 · 9 mos</span>
+            </div>
+            <div class="role-tech">
+              <span class="tag green">PySpark</span>
+              <span class="tag green">Data Management</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Metis -->
+    <div class="company-block">
+      <div class="timeline-dot">MET</div>
+      <div class="company-content">
+        <div class="company-header">
+          <span class="company-name">Metis</span>
+          <span class="company-meta">9 mos · Seattle, WA</span>
+        </div>
+        <div class="role-list">
+          <div class="role">
+            <div class="role-header">
+              <span class="role-title">Data Science Teaching Assistant</span>
+              <span class="role-dates">Jul 2021 – Nov 2021 · 5 mos</span>
+            </div>
+            <div class="role-desc">
+              <ul>
+                <li>Assisted students in scoping end-to-end data science and ML projects.</li>
+                <li>Debugged Python code, supported technical issues, and managed virtual learning experiences.</li>
+                <li>Maintained communication between students and instructors.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="role">
+            <div class="role-header">
+              <span class="role-title">Data Scientist</span>
+              <span class="role-dates">Mar 2021 – Nov 2021 · 9 mos</span>
+            </div>
+            <div class="role-tech">
+              <span class="tag purple">Python</span>
+              <span class="tag purple">ML</span>
+              <span class="tag purple">Deep Learning</span>
+              <span class="tag purple">Statistics</span>
+            </div>
+            <div class="role-desc">
+              14-week immersive data science bootcamp focused on Python, supervised &amp; unsupervised ML,
+              deep learning, data analysis, and visualization.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tamarind Tree -->
+    <div class="company-block">
+      <div class="timeline-dot">TAM</div>
+      <div class="company-content">
+        <div class="company-header">
+          <span class="company-name">Tamarind Tree Restaurant</span>
+          <span class="company-meta">Part-time · 7 yrs 7 mos · Seattle, WA</span>
+        </div>
+        <div class="role-list">
+          <div class="role">
+            <div class="role-header">
+              <span class="role-title">Bar Waiter</span>
+              <span class="role-dates">Jan 2014 – Jul 2021</span>
+            </div>
+            <div class="role-desc">
+              Server, bartender, bus boy, food runner, host — anything and everything.
+              Funded my college education and data science bootcamp through this work.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Highline College -->
+    <div class="company-block">
+      <div class="timeline-dot" style="font-size:.6rem">HCC</div>
+      <div class="company-content">
+        <div class="company-header">
+          <span class="company-name">Highline College</span>
+          <span class="company-meta">Seasonal · 1 yr 10 mos</span>
+        </div>
+        <div class="role-list">
+          <div class="role">
+            <div class="role-header">
+              <span class="role-title">Math Tutor</span>
+              <span class="role-dates">Sep 2016 – Jun 2018</span>
+            </div>
+            <div class="role-tech">
+              <span class="tag gold">Calculus</span>
+              <span class="tag gold">Linear Algebra</span>
+            </div>
+            <div class="role-desc">
+              <ul>
+                <li>Helped students with homework and exam prep at the tutoring center.</li>
+                <li>Held 20+ exam review sessions covering Calculus, Multivariate Calculus, and Linear Algebra.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </section>
 
-{% endif %}
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">Tech</p>
+  <h2 class="section-title">Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-cat">Data Engineering</div>
+      <div class="skill-tags">
+        <span class="tag">Databricks</span>
+        <span class="tag">Apache Airflow</span>
+        <span class="tag">dbt</span>
+        <span class="tag">Spark / PySpark</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Cloud &amp; Infra</div>
+      <div class="skill-tags">
+        <span class="tag">AWS</span>
+        <span class="tag">S3</span>
+        <span class="tag">Redshift</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Languages</div>
+      <div class="skill-tags">
+        <span class="tag green">Python</span>
+        <span class="tag green">SQL</span>
+        <span class="tag green">Scala</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Machine Learning</div>
+      <div class="skill-tags">
+        <span class="tag purple">TensorFlow / Keras</span>
+        <span class="tag purple">scikit-learn</span>
+        <span class="tag purple">NLP</span>
+        <span class="tag purple">Computer Vision</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Analytics</div>
+      <div class="skill-tags">
+        <span class="tag gold">Statistics</span>
+        <span class="tag gold">Data Modeling</span>
+        <span class="tag gold">Tableau</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Other</div>
+      <div class="skill-tags">
+        <span class="tag">Git</span>
+        <span class="tag">Docker</span>
+        <span class="tag">Linux</span>
+        <span class="tag">Agile</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Say Hi</p>
+  <h2 class="section-title">Get in Touch</h2>
+  <p style="color:var(--dim); max-width:480px; margin:0 auto;">
+    Open to interesting conversations, opportunities, or just chatting about data, baseball, or anything in between.
+  </p>
+  <div class="contact-links">
+    <a class="contact-link" href="https://www.linkedin.com/in/steventruong77/" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452H17.21v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.984V9h3.101v1.561h.044c.432-.82 1.487-1.685 3.059-1.685 3.271 0 3.875 2.153 3.875 4.951l-.016 6.625ZM5.337 7.433a1.8 1.8 0 1 1 0-3.6 1.8 1.8 0 0 1 0 3.6Zm1.56 13.019H3.775V9h3.122v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z"/></svg>
+      LinkedIn
+    </a>
+    <a class="contact-link" href="https://github.com/luongtruong77" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      GitHub
+    </a>
+    <a class="contact-link" href="mailto:tqluong77@gmail.com">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Email
+    </a>
+  </div>
+</section>
+
+<footer>
+  Built by Steven Truong · <a href="https://github.com/luongtruong77" style="color:var(--muted)">luongtruong77</a>
+</footer>
+
+</body>
+</html>
