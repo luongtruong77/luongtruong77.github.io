@@ -390,7 +390,8 @@
     .pb-pending { background: rgba(100,116,139,.1); color: var(--dim); border: 1px solid var(--border); }
 
     /* Leg table */
-    .parlay-tbl th, .parlay-tbl td { padding: 9px 14px; }
+    .parlay-tbl th, .parlay-tbl td { padding: 9px 14px; vertical-align: middle; }
+    .parlay-tbl td:last-child { white-space: nowrap; }
     .leg-badge {
       display: inline-flex; align-items: center; gap: 4px;
       padding: 2px 8px; border-radius: 5px; font-size: 11px; font-weight: 700;
@@ -1655,10 +1656,10 @@ function legRowHTML(parlayId, leg) {
     <td class="num-cell" style="color:var(--muted)">≥ ${leg.line}</td>
     <td class="num-cell ${(val===null||val===undefined)?'zero':''}">${(val===null||val===undefined)?'—':val}</td>
     <td>${legBadgeHTML(status)}</td>
-    <td style="display:flex;gap:2px;align-items:center">
+    <td><div style="display:flex;gap:2px;align-items:center">
       <button class="leg-edit-btn" onclick="startLegEdit('${leg.id}')" title="Edit leg">✎</button>
       <button class="leg-del-btn" onclick="deleteLeg('${parlayId}','${leg.id}')" title="Remove">✕</button>
-    </td>
+    </div></td>
   </tr>`;
 }
 
@@ -1678,10 +1679,10 @@ function legEditRowHTML(parlayId, leg) {
     <td><select class="leg-edit-sel" id="edit-line-${leg.id}" style="width:52px">${lineOpts}</select></td>
     <td></td>
     <td></td>
-    <td style="display:flex;gap:2px;align-items:center">
+    <td><div style="display:flex;gap:2px;align-items:center">
       <button class="leg-save-btn" onclick="saveLegEdit('${parlayId}','${leg.id}')" title="Save">✓</button>
       <button class="leg-del-btn" onclick="cancelLegEdit('${leg.id}')" title="Cancel">✕</button>
-    </td>
+    </div></td>
   </tr>`;
 }
 
