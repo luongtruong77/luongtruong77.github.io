@@ -587,6 +587,7 @@
         <button class="p-btn" onclick="openSyncSettings()" title="Cloud sync settings">⚙</button>
         <button class="p-btn" onclick="updateParlayStats()">⟳ Update Stats</button>
         <button class="p-btn" onclick="collapseAllParlays()" title="Collapse / expand all parlays">⊟ Collapse All</button>
+        <span id="updateStatusBottom" style="font-size:12px;color:var(--green);display:none;align-self:center"></span>
       </div>
       <button class="p-btn primary" onclick="newParlay()">+ New Parlay</button>
     </div>
@@ -1673,12 +1674,14 @@ function parlayOverallStatus(parlay) {
 
 // ── UPDATE STATS ──────────────────────────────
 function showUpdateStatus(msg) {
-  const el = document.getElementById('updateStatus');
-  if (!el) return;
-  el.textContent = msg;
-  el.style.display = 'inline';
-  clearTimeout(el._timer);
-  el._timer = setTimeout(() => { el.style.display = 'none'; }, 6000);
+  ['updateStatus', 'updateStatusBottom'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = msg;
+    el.style.display = 'inline';
+    clearTimeout(el._timer);
+    el._timer = setTimeout(() => { el.style.display = 'none'; }, 6000);
+  });
 }
 
 async function updateParlayStats() {
