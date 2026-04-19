@@ -405,6 +405,19 @@
       background: transparent; color: var(--muted); cursor: pointer; font-size: 12px; transition: .2s;
     }
     .leg-del-btn:hover { background: rgba(239,68,68,.1); color: var(--red); }
+    .leg-edit-btn {
+      width: 22px; height: 22px; border-radius: 4px; border: none;
+      background: transparent; color: var(--muted); cursor: pointer; font-size: 12px; transition: .2s;
+    }
+    .leg-edit-btn:hover { background: rgba(59,130,246,.1); color: var(--blue); }
+    .leg-save-btn {
+      width: 22px; height: 22px; border-radius: 4px; border: none;
+      background: transparent; color: var(--green); cursor: pointer; font-size: 14px; font-weight: 700; transition: .2s;
+    }
+    .leg-save-btn:hover { background: rgba(16,185,129,.1); }
+    .leg-editing td { background: rgba(59,130,246,.04); }
+    .leg-edit-sel { font-size: 12px; padding: 3px 5px; background: var(--surf3);
+      border: 1px solid var(--border); border-radius: 5px; color: var(--text); }
 
     /* Progress bar */
     .progress-bar-wrap { height: 3px; background: var(--surf3); margin: 0; }
@@ -1253,6 +1266,7 @@ let PARLAYS = (() => { try { return JSON.parse(localStorage.getItem(PARLAYS_KEY)
 const FORM_GAMES_CACHE = new Map();
 const ROSTER_CACHE = new Map(); // teamId → roster array
 const PARLAY_COLLAPSED = new Set();
+const LEG_EDITING = new Set(); // legId
 
 function toggleParlayCollapse(id) {
   if (PARLAY_COLLAPSED.has(id)) PARLAY_COLLAPSED.delete(id);
@@ -1629,6 +1643,7 @@ function parlaySummaryHTML(parlay, collapsed) {
 }
 
 function legRowHTML(parlayId, leg) {
+  if (LEG_EDITING.has(leg.id)) return legEditRowHTML(parlayId, leg);
   const status = leg._status || 'pending';
   const val    = leg._value;
   return `<tr>
@@ -1640,8 +1655,53 @@ function legRowHTML(parlayId, leg) {
     <td class="num-cell" style="color:var(--muted)">≥ ${leg.line}</td>
     <td class="num-cell ${(val===null||val===undefined)?'zero':''}">${(val===null||val===undefined)?'—':val}</td>
     <td>${legBadgeHTML(status)}</td>
-    <td><button class="leg-del-btn" onclick="deleteLeg('${parlayId}','${leg.id}')" title="Remove">✕</button></td>
+    <td style="display:flex;gap:2px;align-items:center">
+      <button class="leg-edit-btn" onclick="startLegEdit('${leg.id}')" title="Edit leg">✎</button>
+      <button class="leg-del-btn" onclick="deleteLeg('${parlayId}','${leg.id}')" title="Remove">✕</button>
+    </td>
   </tr>`;
+}
+
+function legEditRowHTML(parlayId, leg) {
+  const typeOpts = PROP_TYPES.map(t =>
+    `<option value="${t.value}"${t.value === leg.propType ? ' selected' : ''}>${t.label}</option>`
+  ).join('');
+  const lineOpts = [1,2,3,4,5,6,7,8,9,10].map(n =>
+    `<option value="${n}"${n === leg.line ? ' selected' : ''}>${n}</option>`
+  ).join('');
+  return `<tr class="leg-editing">
+    <td>
+      <span class="player-name">${escHtml(leg.playerName)}</span>
+      ${leg.gameLabel ? `<br><span class="player-meta">${escHtml(leg.gameLabel)}</span>` : ''}
+    </td>
+    <td><select class="leg-edit-sel" id="edit-type-${leg.id}">${typeOpts}</select></td>
+    <td><select class="leg-edit-sel" id="edit-line-${leg.id}" style="width:52px">${lineOpts}</select></td>
+    <td></td>
+    <td></td>
+    <td style="display:flex;gap:2px;align-items:center">
+      <button class="leg-save-btn" onclick="saveLegEdit('${parlayId}','${leg.id}')" title="Save">✓</button>
+      <button class="leg-del-btn" onclick="cancelLegEdit('${leg.id}')" title="Cancel">✕</button>
+    </td>
+  </tr>`;
+}
+
+function startLegEdit(legId) { LEG_EDITING.add(legId); renderParlays(); }
+function cancelLegEdit(legId) { LEG_EDITING.delete(legId); renderParlays(); }
+
+function saveLegEdit(parlayId, legId) {
+  const p   = PARLAYS.find(x => x.id === parlayId);
+  const leg = p?.legs.find(l => l.id === legId);
+  if (!leg) return;
+  const newType = document.getElementById(`edit-type-${legId}`)?.value;
+  const newLine = parseInt(document.getElementById(`edit-line-${legId}`)?.value);
+  const typeChanged = newType && newType !== leg.propType;
+  if (newType) leg.propType = newType;
+  if (!isNaN(newLine)) leg.line = newLine;
+  if (typeChanged) { leg._status = undefined; leg._value = undefined; }
+  else             { leg._status = undefined; }
+  LEG_EDITING.delete(legId);
+  saveParlays();
+  renderParlays();
 }
 
 function legBadgeHTML(status) {
