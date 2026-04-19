@@ -56,12 +56,19 @@
       height: 60px;
     }
     .nav-logo {
-      font-weight: 700;
-      font-size: 1rem;
-      color: var(--text);
-      letter-spacing: -0.02em;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: var(--blue);
+      color: #fff;
+      font-weight: 800;
+      font-size: .8rem;
+      letter-spacing: .02em;
+      flex-shrink: 0;
     }
-    .nav-logo span { color: var(--blue); }
     .nav-links { display: flex; gap: 2rem; }
     .nav-links a {
       color: var(--dim);
@@ -332,11 +339,11 @@
 
 <!-- NAV -->
 <nav>
-  <span class="nav-logo">Steven <span>Truong</span></span>
+  <span class="nav-logo">ST</span>
   <div class="nav-links">
     <a href="#experience">Experience</a>
     <a href="#skills">Skills</a>
-    <a href="#contact">Contact</a>
+    <a href="mailto:tqluong77@gmail.com">Contact</a>
   </div>
 </nav>
 
@@ -346,7 +353,7 @@
     <div class="hero-text">
       <p class="hero-greeting">Hey there, I'm</p>
       <h1 class="hero-name">Steven<br/><span class="accent">Truong</span></h1>
-      <p class="hero-title">Senior Analytics Engineer &nbsp;·&nbsp; Data Scientist</p>
+      <p class="hero-title">Senior Analytics Engineer</p>
       <p class="hero-bio">
         I build the data foundations that power product and business decisions —
         from pipeline architecture on Databricks to ML-driven insights.
