@@ -1300,14 +1300,18 @@ function shortTeamName(team) {
 }
 
 const PROP_TYPES = [
-  { value:'H',     label:'Hits' },
-  { value:'HR',    label:'Home Runs' },
-  { value:'TB',    label:'Total Bases' },
-  { value:'RBI',   label:'RBIs' },
-  { value:'HRR',   label:'HRR (H+R+RBI)' },
-  { value:'K_BAT', label:'Batter Strikeouts' },
-  { value:'K_PIT', label:'Pitcher Strikeouts' },
+  { value:'H',        label:'Hits' },
+  { value:'HR',       label:'Home Runs' },
+  { value:'TB',       label:'Total Bases' },
+  { value:'RBI',      label:'RBIs' },
+  { value:'HRR',      label:'HRR (H+R+RBI)' },
+  { value:'K_BAT',    label:'Batter Strikeouts' },
+  { value:'K_PIT',    label:'Pitcher Strikeouts' },
+  { value:'GAMELINE', label:'Moneyline (Team Win)' },
+  { value:'SPREAD',   label:'Run Line (±1.5)' },
+  { value:'TOTAL',    label:'Total (Over/Under)' },
 ];
+const GAME_BET_TYPES = new Set(['GAMELINE','SPREAD','TOTAL']);
 function propLabel(v) { return PROP_TYPES.find(p=>p.value===v)?.label || v; }
 
 // ── CRUD ──────────────────────────────────────
@@ -1409,6 +1413,9 @@ async function onGameSelect(parlayId) {
   const awayId = game?.teams?.away?.team?.id;
   const homeId = game?.teams?.home?.team?.id;
 
+  // Always populate team selector when a game is picked
+  populateTeamSelect(parlayId);
+
   try {
     const [bs, awayRoster, homeRoster] = await Promise.all([
       S.boxscores.has(gamePk)
@@ -1424,20 +1431,58 @@ async function onGameSelect(parlayId) {
   }
 }
 
-function onPropTypeChange(parlayId) {
-  const gameSel = document.getElementById(`leg-game-${parlayId}`);
-  const gamePk  = parseInt(gameSel?.value);
-  if (!gamePk) return;
-  const bs = S.boxscores.get(gamePk);
+function populateTeamSelect(parlayId) {
+  const gamePk  = parseInt(document.getElementById(`leg-game-${parlayId}`)?.value);
+  const teamSel = document.getElementById(`leg-team-${parlayId}`);
+  if (!teamSel) return;
+  if (!gamePk) {
+    teamSel.innerHTML = '<option value="">— Pick a game first —</option>';
+    return;
+  }
   const parlay = PARLAYS.find(p => p.id === parlayId);
   const date   = parlay?.date || ymd(S.selectedDate);
   const games  = FORM_GAMES_CACHE.get(date) || [];
   const game   = games.find(g => g.gamePk === gamePk);
-  const awayId = game?.teams?.away?.team?.id;
-  const homeId = game?.teams?.home?.team?.id;
-  const awayRoster = awayId ? (ROSTER_CACHE.get(awayId) || []) : [];
-  const homeRoster = homeId ? (ROSTER_CACHE.get(homeId) || []) : [];
-  if (bs) populatePlayerSelect(parlayId, bs, game?.status.abstractGameState || 'Preview', awayRoster, homeRoster);
+  if (!game) return;
+  const aw = shortTeamName(game.teams.away.team);
+  const hw = shortTeamName(game.teams.home.team);
+  teamSel.innerHTML = `
+    <option value="">— Pick a team —</option>
+    <option value="away">${aw} (Away)</option>
+    <option value="home">${hw} (Home)</option>
+  `;
+}
+
+function onPropTypeChange(parlayId) {
+  const type      = document.getElementById(`leg-type-${parlayId}`)?.value;
+  const isGameBet = GAME_BET_TYPES.has(type);
+
+  const playerWrap = document.getElementById(`leg-player-wrap-${parlayId}`);
+  const lineWrap   = document.getElementById(`leg-line-wrap-${parlayId}`);
+  const teamWrap   = document.getElementById(`leg-gambet-team-wrap-${parlayId}`);
+  const spreadWrap = document.getElementById(`leg-gambet-spread-wrap-${parlayId}`);
+  const totalWrap  = document.getElementById(`leg-gambet-total-wrap-${parlayId}`);
+
+  if (playerWrap) playerWrap.style.display = isGameBet ? 'none' : '';
+  if (lineWrap)   lineWrap.style.display   = isGameBet ? 'none' : '';
+  if (teamWrap)   teamWrap.style.display   = (type === 'GAMELINE' || type === 'SPREAD') ? '' : 'none';
+  if (spreadWrap) spreadWrap.style.display = (type === 'SPREAD') ? '' : 'none';
+  if (totalWrap)  totalWrap.style.display  = (type === 'TOTAL')  ? '' : 'none';
+
+  if (!isGameBet) {
+    const gamePk = parseInt(document.getElementById(`leg-game-${parlayId}`)?.value);
+    if (!gamePk) return;
+    const bs = S.boxscores.get(gamePk);
+    const parlay = PARLAYS.find(p => p.id === parlayId);
+    const date   = parlay?.date || ymd(S.selectedDate);
+    const games  = FORM_GAMES_CACHE.get(date) || [];
+    const game   = games.find(g => g.gamePk === gamePk);
+    const awayId = game?.teams?.away?.team?.id;
+    const homeId = game?.teams?.home?.team?.id;
+    const awayRoster = awayId ? (ROSTER_CACHE.get(awayId) || []) : [];
+    const homeRoster = homeId ? (ROSTER_CACHE.get(homeId) || []) : [];
+    if (bs) populatePlayerSelect(parlayId, bs, game?.status.abstractGameState || 'Preview', awayRoster, homeRoster);
+  }
 }
 
 function populatePlayerSelect(parlayId, bs, gameState, awayRoster, homeRoster) {
@@ -1499,24 +1544,49 @@ function populatePlayerSelect(parlayId, bs, gameState, awayRoster, homeRoster) {
 }
 
 function addLeg(parlayId) {
-  const p       = PARLAYS.find(x => x.id === parlayId);
-  const name    = document.getElementById(`leg-player-${parlayId}`)?.value;
-  const type    = document.getElementById(`leg-type-${parlayId}`)?.value;
-  const lineRaw = document.getElementById(`leg-line-${parlayId}`)?.value;
-  const line    = parseInt(lineRaw, 10);
-  const gamePk  = parseInt(document.getElementById(`leg-game-${parlayId}`)?.value);
+  const p      = PARLAYS.find(x => x.id === parlayId);
+  const type   = document.getElementById(`leg-type-${parlayId}`)?.value;
+  const gamePk = parseInt(document.getElementById(`leg-game-${parlayId}`)?.value);
 
-  if (!name) { alert('Select a player.'); return; }
-  if (isNaN(line) || line < 1) { alert('Enter a line of 1 or more.'); return; }
-
-  // Build a short game label to display under the player name
-  const games = FORM_GAMES_CACHE.get(p.date) || [];
-  const game  = games.find(g => g.gamePk === gamePk);
+  const games     = FORM_GAMES_CACHE.get(p.date) || [];
+  const game      = games.find(g => g.gamePk === gamePk);
   const gameLabel = game
     ? `${shortTeamName(game.teams.away.team)} @ ${shortTeamName(game.teams.home.team)}`
     : '';
 
-  p.legs.push({ id: uid(), playerName: name, propType: type, line, gamePk, gameLabel });
+  if (GAME_BET_TYPES.has(type)) {
+    if (!gamePk || !game) { alert('Select a game.'); return; }
+
+    if (type === 'TOTAL') {
+      const dir = document.getElementById(`leg-total-dir-${parlayId}`)?.value || 'over';
+      const val = parseFloat(document.getElementById(`leg-total-val-${parlayId}`)?.value);
+      if (isNaN(val) || val <= 0) { alert('Enter a valid total runs number.'); return; }
+      const displayName = `${dir === 'over' ? 'Over' : 'Under'} ${val}`;
+      p.legs.push({ id: uid(), propType: type, isGameLeg: true, gamePk, gameLabel, playerName: displayName, totalDir: dir, line: val });
+    } else {
+      const teamSide = document.getElementById(`leg-team-${parlayId}`)?.value;
+      if (!teamSide) { alert('Select a team.'); return; }
+      const teamName = teamSide === 'away'
+        ? shortTeamName(game.teams.away.team)
+        : shortTeamName(game.teams.home.team);
+      if (type === 'SPREAD') {
+        const spreadDir  = document.getElementById(`leg-spread-${parlayId}`)?.value || '-1.5';
+        const displayName = `${teamName} ${spreadDir}`;
+        p.legs.push({ id: uid(), propType: type, isGameLeg: true, gamePk, gameLabel, playerName: displayName, teamSide, spreadDir, line: 1.5 });
+      } else {
+        const displayName = `${teamName} Win`;
+        p.legs.push({ id: uid(), propType: type, isGameLeg: true, gamePk, gameLabel, playerName: displayName, teamSide, line: 1 });
+      }
+    }
+  } else {
+    const name    = document.getElementById(`leg-player-${parlayId}`)?.value;
+    const lineRaw = document.getElementById(`leg-line-${parlayId}`)?.value;
+    const line    = parseInt(lineRaw, 10);
+    if (!name) { alert('Select a player.'); return; }
+    if (isNaN(line) || line < 1) { alert('Enter a line of 1 or more.'); return; }
+    p.legs.push({ id: uid(), playerName: name, propType: type, line, gamePk, gameLabel });
+  }
+
   saveParlays(); renderParlays();
 }
 
@@ -1595,17 +1665,37 @@ function parlayCardHTML(parlay) {
           <input type="hidden" id="leg-game-${parlay.id}" />
           <div class="combo-list" id="combo-game-list-${parlay.id}"></div>
         </div>
-        <div class="combo-wrap full-col">
+        <div class="combo-wrap full-col" id="leg-player-wrap-${parlay.id}">
           <input type="text" class="form-inp combo-inp" id="combo-player-inp-${parlay.id}"
             placeholder="— Pick a game first —" autocomplete="off" disabled />
           <input type="hidden" id="leg-player-${parlay.id}" />
           <div class="combo-list" id="combo-player-list-${parlay.id}"></div>
         </div>
+        <div class="full-col" id="leg-gambet-team-wrap-${parlay.id}" style="display:none">
+          <select id="leg-team-${parlay.id}" class="form-inp">
+            <option value="">— Pick a game first —</option>
+          </select>
+        </div>
+        <div class="full-col form-row" id="leg-gambet-spread-wrap-${parlay.id}" style="display:none">
+          <label class="form-lbl">Spread</label>
+          <select id="leg-spread-${parlay.id}" class="form-inp">
+            <option value="-1.5">-1.5 (Win by 2+)</option>
+            <option value="+1.5">+1.5 (Lose ≤1 or win)</option>
+          </select>
+        </div>
+        <div class="full-col form-row" id="leg-gambet-total-wrap-${parlay.id}" style="display:none">
+          <label class="form-lbl">Total</label>
+          <select id="leg-total-dir-${parlay.id}" class="form-inp" style="width:90px">
+            <option value="over">Over</option>
+            <option value="under">Under</option>
+          </select>
+          <input type="number" id="leg-total-val-${parlay.id}" class="form-inp" style="width:70px" placeholder="8.5" min="1" max="30" step="0.5" />
+        </div>
         <select id="leg-type-${parlay.id}" class="form-inp"
           onchange="onPropTypeChange('${parlay.id}')">
           ${PROP_TYPES.map(t=>`<option value="${t.value}">${t.label}</option>`).join('')}
         </select>
-        <div class="form-row">
+        <div class="form-row" id="leg-line-wrap-${parlay.id}">
           <label class="form-lbl">At least</label>
           <select id="leg-line-${parlay.id}" class="form-inp" style="width:70px">
             ${[1,2,3,4,5,6,7,8,9,10].map(n=>`<option value="${n}">${n}</option>`).join('')}
@@ -1635,10 +1725,14 @@ function parlaySummaryHTML(parlay, collapsed) {
     const st   = leg._status || 'pending';
     const cls  = st === 'hit' ? 'sl-hit' : st === 'miss' ? 'sl-miss' : st === 'live' ? 'sl-live' : '';
     const icon = STATUS_ICON[st] || '—';
-    const lastName = leg.playerName.split(' (')[0].split(' ').pop();
     const hasVal = leg._value !== null && leg._value !== undefined;
+    if (leg.isGameLeg) {
+      const valStr = hasVal ? ` · <span style="opacity:.75">${leg._value}</span>` : '';
+      return `<span class="sum-leg ${cls}">${icon} ${escHtml(leg.playerName)}${valStr}</span>`;
+    }
+    const lastName = leg.playerName.split(' (')[0].split(' ').pop();
     const valStr = hasVal ? ` · <span style="opacity:.75">${leg._value}/≥${leg.line}</span>` : '';
-    return `<span class="sum-leg ${cls}">${icon} ${lastName} · ${leg.propType}${valStr}</span>`;
+    return `<span class="sum-leg ${cls}">${icon} ${lastName} · ${propLabel(leg.propType)}${valStr}</span>`;
   }).join('');
   return `<div class="parlay-summary">${pills}</div>`;
 }
@@ -1647,14 +1741,31 @@ function legRowHTML(parlayId, leg) {
   if (LEG_EDITING.has(leg.id)) return legEditRowHTML(parlayId, leg);
   const status = leg._status || 'pending';
   const val    = leg._value;
+  const noVal  = val === null || val === undefined;
+
+  let lineDisplay, nowDisplay;
+  if (leg.isGameLeg) {
+    if (leg.propType === 'GAMELINE') {
+      lineDisplay = 'Win';
+    } else if (leg.propType === 'SPREAD') {
+      lineDisplay = leg.spreadDir || '-1.5';
+    } else {
+      lineDisplay = `${leg.totalDir === 'over' ? 'Over' : 'Under'} ${leg.line}`;
+    }
+    nowDisplay = noVal ? '—' : (val > 0 && leg.propType !== 'TOTAL' ? `+${val}` : val);
+  } else {
+    lineDisplay = `≥ ${leg.line}`;
+    nowDisplay  = noVal ? '—' : val;
+  }
+
   return `<tr>
     <td>
       <span class="player-name">${escHtml(leg.playerName)}</span>
       ${leg.gameLabel ? `<br><span class="player-meta">${escHtml(leg.gameLabel)}</span>` : ''}
     </td>
     <td><span style="color:var(--dim);font-size:12px">${propLabel(leg.propType)}</span></td>
-    <td class="num-cell" style="color:var(--muted)">≥ ${leg.line}</td>
-    <td class="num-cell ${(val===null||val===undefined)?'zero':''}">${(val===null||val===undefined)?'—':val}</td>
+    <td class="num-cell" style="color:var(--muted)">${lineDisplay}</td>
+    <td class="num-cell ${noVal?'zero':''}">${nowDisplay}</td>
     <td>${legBadgeHTML(status)}</td>
     <td><div style="display:flex;gap:2px;align-items:center">
       <button class="leg-edit-btn" onclick="startLegEdit('${leg.id}')" title="Edit leg">✎</button>
@@ -1664,7 +1775,44 @@ function legRowHTML(parlayId, leg) {
 }
 
 function legEditRowHTML(parlayId, leg) {
-  const typeOpts = PROP_TYPES.map(t =>
+  if (leg.isGameLeg) {
+    const typeOpts = PROP_TYPES.filter(t => GAME_BET_TYPES.has(t.value)).map(t =>
+      `<option value="${t.value}"${t.value === leg.propType ? ' selected' : ''}>${t.label}</option>`
+    ).join('');
+    let lineCtrl = '';
+    if (leg.propType === 'SPREAD') {
+      lineCtrl = `<select class="leg-edit-sel" id="edit-line-${leg.id}" style="width:80px">
+        <option value="-1.5"${leg.spreadDir !== '+1.5' ? ' selected' : ''}>-1.5</option>
+        <option value="+1.5"${leg.spreadDir === '+1.5' ? ' selected' : ''}>+1.5</option>
+      </select>`;
+    } else if (leg.propType === 'TOTAL') {
+      lineCtrl = `<div style="display:flex;gap:3px">
+        <select class="leg-edit-sel" id="edit-total-dir-${leg.id}" style="width:48px">
+          <option value="over"${leg.totalDir !== 'under' ? ' selected' : ''}>O</option>
+          <option value="under"${leg.totalDir === 'under' ? ' selected' : ''}>U</option>
+        </select>
+        <input type="number" class="leg-edit-sel" id="edit-line-${leg.id}" value="${leg.line}" min="1" max="30" step="0.5" style="width:50px" />
+      </div>`;
+    } else {
+      lineCtrl = `<span style="color:var(--muted);font-size:12px">Win</span>`;
+    }
+    return `<tr class="leg-editing">
+      <td>
+        <span class="player-name">${escHtml(leg.playerName)}</span>
+        ${leg.gameLabel ? `<br><span class="player-meta">${escHtml(leg.gameLabel)}</span>` : ''}
+      </td>
+      <td><select class="leg-edit-sel" id="edit-type-${leg.id}">${typeOpts}</select></td>
+      <td>${lineCtrl}</td>
+      <td></td>
+      <td></td>
+      <td><div style="display:flex;gap:2px;align-items:center">
+        <button class="leg-save-btn" onclick="saveLegEdit('${parlayId}','${leg.id}')" title="Save">✓</button>
+        <button class="leg-del-btn" onclick="cancelLegEdit('${leg.id}')" title="Cancel">✕</button>
+      </div></td>
+    </tr>`;
+  }
+
+  const typeOpts = PROP_TYPES.filter(t => !GAME_BET_TYPES.has(t.value)).map(t =>
     `<option value="${t.value}"${t.value === leg.propType ? ' selected' : ''}>${t.label}</option>`
   ).join('');
   const lineOpts = [1,2,3,4,5,6,7,8,9,10].map(n =>
@@ -1693,13 +1841,39 @@ function saveLegEdit(parlayId, legId) {
   const p   = PARLAYS.find(x => x.id === parlayId);
   const leg = p?.legs.find(l => l.id === legId);
   if (!leg) return;
-  const newType = document.getElementById(`edit-type-${legId}`)?.value;
-  const newLine = parseInt(document.getElementById(`edit-line-${legId}`)?.value);
-  const typeChanged = newType && newType !== leg.propType;
-  if (newType) leg.propType = newType;
-  if (!isNaN(newLine)) leg.line = newLine;
-  if (typeChanged) { leg._status = undefined; leg._value = undefined; }
-  else             { leg._status = undefined; }
+
+  if (leg.isGameLeg) {
+    const newType    = document.getElementById(`edit-type-${legId}`)?.value;
+    const typeChanged = newType && newType !== leg.propType;
+    if (newType) leg.propType = newType;
+
+    if (leg.propType === 'SPREAD') {
+      const newDir = document.getElementById(`edit-line-${legId}`)?.value;
+      if (newDir) {
+        leg.spreadDir = newDir;
+        const teamName = leg.playerName.replace(/ [+-]\d+\.\d+$/, '');
+        leg.playerName = `${teamName} ${newDir}`;
+      }
+    } else if (leg.propType === 'TOTAL') {
+      const newDir  = document.getElementById(`edit-total-dir-${legId}`)?.value;
+      const newLine = parseFloat(document.getElementById(`edit-line-${legId}`)?.value);
+      if (newDir) leg.totalDir = newDir;
+      if (!isNaN(newLine)) leg.line = newLine;
+      leg.playerName = `${leg.totalDir === 'over' ? 'Over' : 'Under'} ${leg.line}`;
+    }
+
+    if (typeChanged) { leg._status = undefined; leg._value = undefined; }
+    else             { leg._status = undefined; }
+  } else {
+    const newType = document.getElementById(`edit-type-${legId}`)?.value;
+    const newLine = parseInt(document.getElementById(`edit-line-${legId}`)?.value);
+    const typeChanged = newType && newType !== leg.propType;
+    if (newType) leg.propType = newType;
+    if (!isNaN(newLine)) leg.line = newLine;
+    if (typeChanged) { leg._status = undefined; leg._value = undefined; }
+    else             { leg._status = undefined; }
+  }
+
   LEG_EDITING.delete(legId);
   saveParlays();
   renderParlays();
@@ -1776,16 +1950,38 @@ async function updateParlayStats() {
   for (const parlay of PARLAYS) {
     const dateMap = cache.get(parlay.date) || new Map();
     for (const leg of parlay.legs) {
-      const result = findPlayerStat(leg.playerName, leg.propType, dateMap);
-      leg._value = result.value;
+      if (leg.isGameLeg) {
+        const result = findGameStat(leg, dateMap);
+        leg._value = result.value;
+        if (result.value === null) { leg._status = 'pending'; continue; }
+        const fin = result.gameState === 'Final';
 
-      if (result.value === null) { leg._status = 'pending'; continue; }
-
-      const v = result.value, l = leg.line;
-      const fin = result.gameState === 'Final';
-      if (v >= l)   { leg._status = 'hit'; }
-      else if (fin) { leg._status = 'miss'; }
-      else          { leg._status = 'live'; }
+        if (leg.propType === 'GAMELINE') {
+          if (result.value > 0)      leg._status = 'hit';
+          else if (fin)              leg._status = 'miss';
+          else                       leg._status = 'live';
+        } else if (leg.propType === 'SPREAD') {
+          const covered = leg.spreadDir === '-1.5' ? result.value >= 2 : result.value >= -1;
+          if (covered)  leg._status = 'hit';
+          else if (fin) leg._status = 'miss';
+          else          leg._status = 'live';
+        } else { // TOTAL
+          const total = result.value, line = leg.line;
+          if (total === line)                                       leg._status = 'push';
+          else if (leg.totalDir === 'over'  ? total > line : total < line) leg._status = 'hit';
+          else if (fin)                                             leg._status = 'miss';
+          else                                                      leg._status = 'live';
+        }
+      } else {
+        const result = findPlayerStat(leg.playerName, leg.propType, dateMap);
+        leg._value = result.value;
+        if (result.value === null) { leg._status = 'pending'; continue; }
+        const v = result.value, l = leg.line;
+        const fin = result.gameState === 'Final';
+        if (v >= l)   { leg._status = 'hit'; }
+        else if (fin) { leg._status = 'miss'; }
+        else          { leg._status = 'live'; }
+      }
     }
   }
 
@@ -1821,6 +2017,21 @@ function findPlayerStat(playerName, propType, dateMap) {
     }
   }
   return { value: null, gameState: null };
+}
+
+function findGameStat(leg, dateMap) {
+  const entry = dateMap.get(leg.gamePk);
+  if (!entry) return { value: null, gameState: null };
+  const { bs, gameState } = entry;
+  const awayRuns = bs.teams?.away?.teamStats?.batting?.runs ?? null;
+  const homeRuns = bs.teams?.home?.teamStats?.batting?.runs ?? null;
+  if (awayRuns === null || homeRuns === null) return { value: null, gameState };
+  if (leg.propType === 'TOTAL') {
+    return { value: awayRuns + homeRuns, gameState };
+  }
+  const myRuns    = leg.teamSide === 'home' ? homeRuns : awayRuns;
+  const theirRuns = leg.teamSide === 'home' ? awayRuns : homeRuns;
+  return { value: myRuns - theirRuns, gameState };
 }
 
 function getPropVal(bt, propType) {
