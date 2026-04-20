@@ -1314,6 +1314,23 @@ const PROP_TYPES = [
 const GAME_BET_TYPES = new Set(['GAMELINE','SPREAD','TOTAL']);
 function propLabel(v) { return PROP_TYPES.find(p=>p.value===v)?.label || v; }
 
+function spreadOpts(selected = '-1.5') {
+  const vals = [];
+  for (let v = -5; v <= 5; v += 0.5) { if (v !== 0) vals.push(v); }
+  return vals.map(v => {
+    const s = (v > 0 ? '+' : '') + v;
+    return `<option value="${s}"${s === selected ? ' selected' : ''}>${s}</option>`;
+  }).join('');
+}
+
+function totalOpts(selected = 8.5) {
+  const vals = [];
+  for (let v = 4.5; v <= 15; v += 0.5) vals.push(v);
+  return vals.map(v =>
+    `<option value="${v}"${v === +selected ? ' selected' : ''}>${v}</option>`
+  ).join('');
+}
+
 // ── CRUD ──────────────────────────────────────
 function newParlay() {
   const p = { id: uid(), name: `Parlay ${PARLAYS.length + 1}`, date: ymd(S.selectedDate), legs: [] };
@@ -1679,8 +1696,7 @@ function parlayCardHTML(parlay) {
         <div class="full-col form-row" id="leg-gambet-spread-wrap-${parlay.id}" style="display:none">
           <label class="form-lbl">Spread</label>
           <select id="leg-spread-${parlay.id}" class="form-inp">
-            <option value="-1.5">-1.5 (Win by 2+)</option>
-            <option value="+1.5">+1.5 (Lose ≤1 or win)</option>
+            ${spreadOpts()}
           </select>
         </div>
         <div class="full-col form-row" id="leg-gambet-total-wrap-${parlay.id}" style="display:none">
@@ -1689,7 +1705,9 @@ function parlayCardHTML(parlay) {
             <option value="over">Over</option>
             <option value="under">Under</option>
           </select>
-          <input type="number" id="leg-total-val-${parlay.id}" class="form-inp" style="width:70px" placeholder="8.5" min="1" max="30" step="0.5" />
+          <select id="leg-total-val-${parlay.id}" class="form-inp" style="width:80px">
+            ${totalOpts()}
+          </select>
         </div>
         <select id="leg-type-${parlay.id}" class="form-inp"
           onchange="onPropTypeChange('${parlay.id}')">
@@ -1781,9 +1799,8 @@ function legEditRowHTML(parlayId, leg) {
     ).join('');
     let lineCtrl = '';
     if (leg.propType === 'SPREAD') {
-      lineCtrl = `<select class="leg-edit-sel" id="edit-line-${leg.id}" style="width:80px">
-        <option value="-1.5"${leg.spreadDir !== '+1.5' ? ' selected' : ''}>-1.5</option>
-        <option value="+1.5"${leg.spreadDir === '+1.5' ? ' selected' : ''}>+1.5</option>
+      lineCtrl = `<select class="leg-edit-sel" id="edit-line-${leg.id}" style="width:70px">
+        ${spreadOpts(leg.spreadDir || '-1.5')}
       </select>`;
     } else if (leg.propType === 'TOTAL') {
       lineCtrl = `<div style="display:flex;gap:3px">
@@ -1791,7 +1808,9 @@ function legEditRowHTML(parlayId, leg) {
           <option value="over"${leg.totalDir !== 'under' ? ' selected' : ''}>O</option>
           <option value="under"${leg.totalDir === 'under' ? ' selected' : ''}>U</option>
         </select>
-        <input type="number" class="leg-edit-sel" id="edit-line-${leg.id}" value="${leg.line}" min="1" max="30" step="0.5" style="width:50px" />
+        <select class="leg-edit-sel" id="edit-line-${leg.id}" style="width:65px">
+          ${totalOpts(leg.line)}
+        </select>
       </div>`;
     } else {
       lineCtrl = `<span style="color:var(--muted);font-size:12px">Win</span>`;
