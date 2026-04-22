@@ -148,9 +148,25 @@
 
     .game-row {
       display: grid;
-      grid-template-columns: 1fr auto auto;
+      grid-template-columns: 1fr auto auto auto;
       align-items: center; gap: 12px;
       padding: 14px 16px; cursor: pointer;
+    }
+    .fir-badge {
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      flex-shrink: 0;
+    }
+    .fir-badge .fir-dot {
+      width: 22px; height: 22px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 800;
+    }
+    .fir-badge .fir-dot.yes { background: var(--green-bg); color: var(--green); }
+    .fir-badge .fir-dot.no  { background: rgba(239,68,68,.12); color: #f87171; }
+    .fir-badge .fir-dot.pending { background: var(--surf3); color: var(--muted); font-size: 10px; }
+    .fir-badge span {
+      font-size: 9px; font-weight: 700; color: var(--muted); letter-spacing: .04em;
+      text-transform: uppercase; white-space: nowrap;
     }
     .game-row:hover { background: var(--surf2); }
 
@@ -817,6 +833,28 @@ function abbr(team) {
   return team.abbreviation || team.teamName?.slice(0,3).toUpperCase() || '???';
 }
 
+function firstInningRunHTML(g) {
+  const innings = g.linescore?.innings;
+  if (!innings?.length) return '';
+  const inn1 = innings.find(i => i.num === 1);
+  if (!inn1) return '';
+  const runs = (inn1.away?.runs ?? 0) + (inn1.home?.runs ?? 0);
+  const currentInn = g.linescore?.currentInning ?? 0;
+  const isFinal = g.status.abstractGameState === 'Final';
+  let cls, sym;
+  if (runs > 0) {
+    cls = 'yes'; sym = '✓';
+  } else if (currentInn > 1 || isFinal) {
+    cls = 'no'; sym = '✗';
+  } else {
+    cls = 'pending'; sym = '…';
+  }
+  return `<div class="fir-badge">
+    <div class="fir-dot ${cls}">${sym}</div>
+    <span>1st Inn</span>
+  </div>`;
+}
+
 function gameCardHTML(g) {
   const {gamePk, teams:{away,home}, status, gameDate, linescore} = g;
   const state = status.abstractGameState; // Preview | Live | Final
@@ -879,6 +917,7 @@ function gameCardHTML(g) {
         <span class="fullnames">${away.team.teamName} @ ${home.team.teamName}</span>
         ${state!=='Preview'?`<span class="game-time">${timeStr}</span>`:''}
       </div>
+      ${firstInningRunHTML(g)}
       <span class="chev">▼</span>
     </div>
     <div class="stats-panel" id="sp-${gamePk}">
