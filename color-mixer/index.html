@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<!--
+  Color Mixer
+  Live at: https://luongtruong77.github.io/color-mixer/
+  Deployed: 2026-05-03
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#fff8e7">
+<title>Color Mixer</title>
+<link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23ff5e7e'/><stop offset='0.5' stop-color='%23ffd166'/><stop offset='1' stop-color='%2306d6a0'/></linearGradient></defs><rect width='180' height='180' rx='40' fill='%23fff8e7'/><circle cx='90' cy='90' r='62' fill='url(%23g)'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-base: #fff8e7;
+    --bg-tint: #fff8e7;
+    --text: #2a2230;
+    --text-soft: #6e6677;
+    --card: #ffffff;
+    --shadow: 0 8px 24px rgba(40, 20, 60, 0.08);
+    --shadow-strong: 0 16px 40px rgba(40, 20, 60, 0.18);
+    --radius: 28px;
+  }
+
+  * {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+
+  body {
+    font-family: 'Fredoka', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text);
+    background: var(--bg-base);
+    background-image: linear-gradient(180deg, var(--bg-tint) 0%, var(--bg-base) 70%);
+    transition: background-image 0.6s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: max(env(safe-area-inset-top), 12px) 16px max(env(safe-area-inset-bottom), 16px);
+    user-select: none;
+    -webkit-user-select: none;
+    height: 100dvh;
+  }
+
+  .app {
+    width: 100%;
+    max-width: 460px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 12px;
+  }
+
+  .header {
+    text-align: center;
+    padding: 4px 0 0;
+  }
+
+  .header h1 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 0.5px;
+    color: var(--text);
+  }
+
+  .header h1 .dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff5e7e, #ffd166, #06d6a0);
+    margin: 0 2px;
+    transform: translateY(-2px);
+  }
+
+  /* Step dots row */
+  .steps {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 6px 8px;
+  }
+
+  .step-empty {
+    color: var(--text-soft);
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.7;
+  }
+
+  .step {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
+    cursor: pointer;
+    touch-action: manipulation;
+    position: relative;
+    transition: transform 0.15s ease;
+    animation: stepPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+  }
+
+  .step:active {
+    transform: scale(0.85);
+  }
+
+  .step::after {
+    content: '×';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    opacity: 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    transition: opacity 0.15s;
+  }
+
+  .step:active::after {
+    opacity: 1;
+  }
+
+  @keyframes stepPop {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+  }
+
+  /* Mixing display */
+  .stage {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    min-height: 0;
+    position: relative;
+  }
+
+  .blob-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .blob {
+    width: clamp(180px, 56vw, 260px);
+    height: clamp(180px, 56vw, 260px);
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow:
+      var(--shadow-strong),
+      inset 0 -10px 30px rgba(0, 0, 0, 0.08),
+      inset 0 10px 24px rgba(255, 255, 255, 0.45);
+    transition: background-color 0.4s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .blob.empty {
+    background: #ffffff;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(0,0,0,0.04) 0 8px, transparent 8px 18px);
+  }
+
+  .blob.pop {
+    animation: blobPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  @keyframes blobPop {
+    0% { transform: scale(1); }
+    35% { transform: scale(1.06); }
+    100% { transform: scale(1); }
+  }
+
+  .sparkles {
+    position: absolute;
+    inset: -30px;
+    pointer-events: none;
+    overflow: visible;
+  }
+
+  .sparkle {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
+
+  .sparkle::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: currentColor;
+    border-radius: 50%;
+    box-shadow: 0 0 8px currentColor;
+  }
+
+  @keyframes sparkleFly {
+    0% {
+      transform: translate(-50%, -50%) scale(0.4);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0);
+      opacity: 0;
+    }
+  }
+
+  .info {
+    text-align: center;
+    min-height: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .name {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--text);
+    letter-spacing: 0.2px;
+    max-width: 90vw;
+  }
+
+  .hex {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-soft);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .name.muted {
+    color: var(--text-soft);
+    font-weight: 500;
+    font-size: 18px;
+  }
+
+  /* Buttons */
+  .actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 0 8px;
+  }
+
+  .btn {
+    appearance: none;
+    border: none;
+    background: var(--card);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 14px 22px;
+    border-radius: 999px;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    touch-action: manipulation;
+    min-height: 48px;
+    min-width: 110px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .btn:active {
+    transform: scale(0.92);
+    box-shadow: 0 4px 10px rgba(40, 20, 60, 0.08);
+  }
+
+  .btn[disabled] {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .btn .ico {
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  /* Palette */
+  .palette {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    padding: 12px 4px 4px;
+  }
+
+  .swatch {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    min-height: 60px;
+    min-width: 60px;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    touch-action: manipulation;
+    box-shadow:
+      var(--shadow),
+      inset 0 -6px 14px rgba(0, 0, 0, 0.12),
+      inset 0 6px 14px rgba(255, 255, 255, 0.35);
+    transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.15s ease;
+    position: relative;
+  }
+
+  .swatch:active {
+    transform: scale(0.88);
+    box-shadow:
+      0 2px 6px rgba(40, 20, 60, 0.12),
+      inset 0 -4px 10px rgba(0, 0, 0, 0.16),
+      inset 0 4px 10px rgba(255, 255, 255, 0.3);
+  }
+
+  .swatch.bounce {
+    animation: swatchBounce 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  @keyframes swatchBounce {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.18); }
+    100% { transform: scale(1); }
+  }
+
+  /* Loading overlay */
+  .loader {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-base);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    z-index: 100;
+    transition: opacity 0.4s ease;
+  }
+
+  .loader.hide {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .spinner {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, #ff5e7e, #ffd166, #06d6a0, #118ab2, #b56cff, #ff5e7e);
+    -webkit-mask: radial-gradient(circle, transparent 24px, #000 25px);
+            mask: radial-gradient(circle, transparent 24px, #000 25px);
+    animation: spin 1.1s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .loader-text {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-soft);
+  }
+
+  /* Tighten on small phones */
+  @media (max-height: 700px) {
+    .header h1 { font-size: 20px; }
+    .blob { width: clamp(150px, 48vw, 220px); height: clamp(150px, 48vw, 220px); }
+    .info { min-height: 54px; }
+    .name { font-size: 19px; }
+    .palette { gap: 10px; padding-top: 8px; }
+    .swatch { min-height: 56px; min-width: 56px; }
+    .btn { padding: 12px 18px; min-height: 46px; }
+  }
+
+  @media (max-height: 600px) {
+    .blob { width: clamp(130px, 40vw, 180px); height: clamp(130px, 40vw, 180px); }
+    .header { display: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="loader" id="loader">
+    <div class="spinner"></div>
+    <div class="loader-text">Mixing up the colors…</div>
+  </div>
+
+  <div class="app">
+    <div class="header">
+      <h1>Color<span class="dot"></span>Mixer</h1>
+    </div>
+
+    <div class="steps" id="steps">
+      <span class="step-empty">Tap a color to start mixing!</span>
+    </div>
+
+    <div class="stage">
+      <div class="blob-wrap">
+        <div class="blob empty" id="blob"></div>
+        <div class="sparkles" id="sparkles"></div>
+      </div>
+      <div class="info">
+        <div class="name muted" id="name">Pick a color</div>
+        <div class="hex" id="hex"></div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn" id="undoBtn" disabled><span class="ico">↶</span><span>Undo</span></button>
+      <button class="btn" id="resetBtn" disabled><span class="ico">✦</span><span>Reset</span></button>
+    </div>
+
+    <div class="palette" id="palette"></div>
+  </div>
+
+<script>
+(function () {
+  'use strict';
+
+  // 12 base colors. Each has a display hex (what the swatch & step dot show)
+  // and a hand-picked RYB triplet used for subtractive-style mixing via
+  // trilinear RYB->RGB interpolation. Mixing two RYB primaries gives proper
+  // artist-wheel results: red+yellow=orange, blue+yellow=green, etc.
+  const PALETTE = [
+    { name: 'Red',    hex: '#FF3B30', ryb: [1.00, 0.00, 0.00] },
+    { name: 'Orange', hex: '#FF9500', ryb: [1.00, 1.00, 0.00] },
+    { name: 'Yellow', hex: '#FFD60A', ryb: [0.00, 1.00, 0.00] },
+    { name: 'Lime',   hex: '#A4E635', ryb: [0.00, 1.00, 0.40] },
+    { name: 'Green',  hex: '#34C759', ryb: [0.00, 1.00, 1.00] },
+    { name: 'Teal',   hex: '#14B8A6', ryb: [0.00, 0.45, 1.00] },
+    { name: 'Cyan',   hex: '#38BDF8', ryb: [0.00, 0.20, 1.00] },
+    { name: 'Blue',   hex: '#2563EB', ryb: [0.00, 0.00, 1.00] },
+    { name: 'Purple', hex: '#8B5CF6', ryb: [0.70, 0.00, 1.00] },
+    { name: 'Magenta',hex: '#EC4899', ryb: [1.00, 0.00, 0.55] },
+    { name: 'Pink',   hex: '#F9A8D4', ryb: [0.40, 0.00, 0.10] },
+    { name: 'Brown',  hex: '#92400E', ryb: [0.95, 0.95, 0.55] }
+  ];
+
+  // RYB cube corners -> RGB (0..1) for trilinear interp.
+  // Source: Gosset & Chen "Paint Inspired Color Mixing".
+  const RYB_CORNERS = {
+    '000': [1.00, 1.00, 1.00],   // white
+    '100': [1.00, 0.00, 0.00],   // red
+    '010': [1.00, 1.00, 0.00],   // yellow
+    '001': [0.163, 0.373, 0.6],  // blue
+    '110': [1.00, 0.50, 0.00],   // orange
+    '101': [0.50, 0.00, 0.50],   // violet
+    '011': [0.00, 0.66, 0.20],   // green
+    '111': [0.20, 0.094, 0.0]    // black
+  };
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function lerp3(a, b, t) {
+    return [lerp(a[0], b[0], t), lerp(a[1], b[1], t), lerp(a[2], b[2], t)];
+  }
+
+  function ryb2rgb(R, Y, B) {
+    const c000 = RYB_CORNERS['000'], c100 = RYB_CORNERS['100'];
+    const c010 = RYB_CORNERS['010'], c110 = RYB_CORNERS['110'];
+    const c001 = RYB_CORNERS['001'], c101 = RYB_CORNERS['101'];
+    const c011 = RYB_CORNERS['011'], c111 = RYB_CORNERS['111'];
+    const x00 = lerp3(c000, c100, R);
+    const x01 = lerp3(c010, c110, R);
+    const x10 = lerp3(c001, c101, R);
+    const x11 = lerp3(c011, c111, R);
+    const y0  = lerp3(x00, x01, Y);
+    const y1  = lerp3(x10, x11, Y);
+    const out = lerp3(y0, y1, B);
+    return [
+      Math.round(Math.max(0, Math.min(1, out[0])) * 255),
+      Math.round(Math.max(0, Math.min(1, out[1])) * 255),
+      Math.round(Math.max(0, Math.min(1, out[2])) * 255)
+    ];
+  }
+
+  function hexToRgb(hex) {
+    const h = hex.replace('#', '');
+    return [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16)];
+  }
+
+  function rgbToHex(rgb) {
+    return '#' + rgb.map(v => {
+      const s = Math.max(0, Math.min(255, Math.round(v))).toString(16);
+      return s.length === 1 ? '0' + s : s;
+    }).join('').toUpperCase();
+  }
+
+  // Compute the mixed RGB from a list of palette indices.
+  // Single color: use the palette's display hex (so a solo tap shows the
+  // exact swatch color the kid expects). Multi: average RYB and convert.
+  function mixIndices(indices) {
+    if (indices.length === 0) return null;
+    if (indices.length === 1) return hexToRgb(PALETTE[indices[0]].hex);
+    let r = 0, y = 0, b = 0;
+    for (const i of indices) {
+      const c = PALETTE[i].ryb;
+      r += c[0]; y += c[1]; b += c[2];
+    }
+    const n = indices.length;
+    return ryb2rgb(r / n, y / n, b / n);
+  }
+
+  // ---------- Color name list ----------
+  const NAMES_KEY = 'colorNames_v1';
+  const NAMES_URL = 'https://unpkg.com/color-name-list/dist/colornames.json';
+  let NAMES = null; // [{name, hex, rgb:[r,g,b]}]
+
+  async function loadNames() {
+    try {
+      const cached = localStorage.getItem(NAMES_KEY);
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed) && parsed.length > 1000) {
+          NAMES = parsed;
+          return;
+        }
+      }
+    } catch (_) { /* ignore */ }
+
+    try {
+      const res = await fetch(NAMES_URL);
+      if (!res.ok) throw new Error('fetch failed: ' + res.status);
+      const data = await res.json();
+      const compact = data.map(c => {
+        const rgb = hexToRgb(c.hex);
+        return { name: c.name, hex: c.hex, rgb };
+      });
+      NAMES = compact;
+      try {
+        localStorage.setItem(NAMES_KEY, JSON.stringify(compact));
+      } catch (_) {
+        // quota exceeded — that's OK, we still have it in memory
+      }
+    } catch (err) {
+      console.warn('Could not load color name list, using fallback', err);
+      NAMES = FALLBACK_NAMES;
+    }
+  }
+
+  // Tiny fallback list — used only if first fetch fails AND nothing cached.
+  const FALLBACK_NAMES = [
+    { name: 'Red', hex: '#FF0000', rgb: [255, 0, 0] },
+    { name: 'Orange', hex: '#FFA500', rgb: [255, 165, 0] },
+    { name: 'Yellow', hex: '#FFFF00', rgb: [255, 255, 0] },
+    { name: 'Lime', hex: '#00FF00', rgb: [0, 255, 0] },
+    { name: 'Green', hex: '#008000', rgb: [0, 128, 0] },
+    { name: 'Teal', hex: '#008080', rgb: [0, 128, 128] },
+    { name: 'Cyan', hex: '#00FFFF', rgb: [0, 255, 255] },
+    { name: 'Blue', hex: '#0000FF', rgb: [0, 0, 255] },
+    { name: 'Purple', hex: '#800080', rgb: [128, 0, 128] },
+    { name: 'Magenta', hex: '#FF00FF', rgb: [255, 0, 255] },
+    { name: 'Pink', hex: '#FFC0CB', rgb: [255, 192, 203] },
+    { name: 'Brown', hex: '#A52A2A', rgb: [165, 42, 42] },
+    { name: 'White', hex: '#FFFFFF', rgb: [255, 255, 255] },
+    { name: 'Black', hex: '#000000', rgb: [0, 0, 0] },
+    { name: 'Gray', hex: '#808080', rgb: [128, 128, 128] }
+  ];
+
+  function nearestName(rgb) {
+    if (!NAMES || NAMES.length === 0) return 'Mystery';
+    let bestD = Infinity;
+    let bestName = NAMES[0].name;
+    const r = rgb[0], g = rgb[1], b = rgb[2];
+    for (let i = 0; i < NAMES.length; i++) {
+      const c = NAMES[i].rgb;
+      const dr = c[0] - r, dg = c[1] - g, db = c[2] - b;
+      const d = dr * dr + dg * dg + db * db;
+      if (d < bestD) {
+        bestD = d;
+        bestName = NAMES[i].name;
+        if (d === 0) break;
+      }
+    }
+    return bestName;
+  }
+
+  // ---------- State ----------
+  // history: array of { idx, rgb } where rgb is the mix snapshot AFTER
+  // adding this step. We store snapshots so revert is just a slice — no
+  // recomputation, which matches the spec.
+  const state = {
+    history: []
+  };
+
+  // ---------- DOM ----------
+  const $palette = document.getElementById('palette');
+  const $steps = document.getElementById('steps');
+  const $blob = document.getElementById('blob');
+  const $name = document.getElementById('name');
+  const $hex = document.getElementById('hex');
+  const $undo = document.getElementById('undoBtn');
+  const $reset = document.getElementById('resetBtn');
+  const $loader = document.getElementById('loader');
+  const $sparkles = document.getElementById('sparkles');
+
+  function renderPalette() {
+    PALETTE.forEach((c, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'swatch';
+      btn.style.background = c.hex;
+      btn.setAttribute('aria-label', c.name);
+      btn.dataset.idx = String(idx);
+      btn.addEventListener('click', () => addColor(idx, btn));
+      $palette.appendChild(btn);
+    });
+  }
+
+  function renderSteps() {
+    $steps.innerHTML = '';
+    if (state.history.length === 0) {
+      const empty = document.createElement('span');
+      empty.className = 'step-empty';
+      empty.textContent = 'Tap a color to start mixing!';
+      $steps.appendChild(empty);
+      return;
+    }
+    state.history.forEach((step, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'step';
+      dot.style.background = PALETTE[step.idx].hex;
+      dot.style.animationDelay = (i * 0.04) + 's';
+      dot.setAttribute('aria-label', 'Remove ' + PALETTE[step.idx].name + ' from mix');
+      dot.addEventListener('click', () => removeStep(i));
+      $steps.appendChild(dot);
+    });
+  }
+
+  function renderMix() {
+    const last = state.history.length > 0 ? state.history[state.history.length - 1] : null;
+
+    if (!last) {
+      $blob.classList.add('empty');
+      $blob.style.backgroundColor = '';
+      $name.textContent = 'Pick a color';
+      $name.classList.add('muted');
+      $hex.textContent = '';
+      document.body.style.setProperty('--bg-tint', 'var(--bg-base)');
+    } else {
+      const hex = rgbToHex(last.rgb);
+      $blob.classList.remove('empty');
+      $blob.style.backgroundColor = hex;
+      $name.classList.remove('muted');
+      $name.textContent = nearestName(last.rgb);
+      $hex.textContent = hex;
+      // Tint page bg toward mix (very light)
+      const tint = mixWithWhite(last.rgb, 0.88);
+      document.body.style.setProperty('--bg-tint', rgbToHex(tint));
+    }
+
+    $undo.disabled = state.history.length === 0;
+    $reset.disabled = state.history.length === 0;
+  }
+
+  function mixWithWhite(rgb, whiteAmount) {
+    return [
+      lerp(rgb[0], 255, whiteAmount),
+      lerp(rgb[1], 255, whiteAmount),
+      lerp(rgb[2], 255, whiteAmount)
+    ];
+  }
+
+  function addColor(idx, btnEl) {
+    const newIndices = state.history.map(s => s.idx).concat(idx);
+    const rgb = mixIndices(newIndices);
+    state.history.push({ idx, rgb });
+    renderSteps();
+    renderMix();
+    bounceSwatch(btnEl);
+    popBlob();
+    sparkleBurst(PALETTE[idx].hex);
+  }
+
+  function removeStep(stepIndex) {
+    // Slice off this step and everything after — no recompute, just revert.
+    state.history = state.history.slice(0, stepIndex);
+    renderSteps();
+    renderMix();
+    popBlob();
+  }
+
+  function undo() {
+    if (state.history.length === 0) return;
+    state.history.pop();
+    renderSteps();
+    renderMix();
+    popBlob();
+  }
+
+  function reset() {
+    if (state.history.length === 0) return;
+    state.history = [];
+    renderSteps();
+    renderMix();
+  }
+
+  function bounceSwatch(el) {
+    if (!el) return;
+    el.classList.remove('bounce');
+    // force reflow so the animation restarts
+    void el.offsetWidth;
+    el.classList.add('bounce');
+  }
+
+  function popBlob() {
+    $blob.classList.remove('pop');
+    void $blob.offsetWidth;
+    $blob.classList.add('pop');
+  }
+
+  function sparkleBurst(color) {
+    const N = 7;
+    for (let i = 0; i < N; i++) {
+      const s = document.createElement('span');
+      s.className = 'sparkle';
+      s.style.color = color;
+      const angle = (Math.PI * 2 * i) / N + (Math.random() - 0.5) * 0.6;
+      const dist = 70 + Math.random() * 40;
+      s.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+      s.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+      s.style.animation = 'sparkleFly ' + (550 + Math.random() * 250) + 'ms ease-out forwards';
+      $sparkles.appendChild(s);
+      setTimeout(() => s.remove(), 900);
+    }
+  }
+
+  $undo.addEventListener('click', undo);
+  $reset.addEventListener('click', reset);
+
+  // Prevent double-tap zoom on iOS for the whole app surface
+  document.addEventListener('gesturestart', e => e.preventDefault());
+
+  // Boot
+  renderPalette();
+  renderSteps();
+  renderMix();
+
+  loadNames().then(() => {
+    renderMix();
+    $loader.classList.add('hide');
+    setTimeout(() => $loader.remove(), 500);
+  });
+})();
+</script>
+</body>
+</html>
