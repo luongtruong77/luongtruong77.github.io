@@ -205,6 +205,25 @@ tr:last-child td { border-bottom: 0; }
 .strong { font-weight: 600; }
 .name { font-weight: 500; }
 .team { font-size: 10px; color: var(--muted); margin-left: 4px; }
+.pick-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  user-select: none;
+}
+.pick-check {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: var(--emerald);
+  flex-shrink: 0;
+}
+.pick-label:has(.pick-check:checked) .name {
+  color: var(--emerald);
+  font-weight: 600;
+}
 .opp-mobile { display: none; }
 .up { color: var(--rose); font-weight: 600; }
 .down { color: var(--sky); font-weight: 600; }
@@ -379,7 +398,7 @@ footer {
       <div class="meta">
         <span class="pill">14 games</span>
         <span class="pill">10,000 sims / game</span>
-        <span>Generated Fri, 08 May 2026 15:33:55 GMT</span>
+        <span>Generated Fri, 08 May 2026 15:52:33 GMT</span>
       </div>
     </div>
     <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
@@ -419,328 +438,403 @@ footer {
         <tbody>
           <tr>
       <td>
-        <span class="name">Sal Stewart</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="682829" aria-label="Mark Elly De La Cruz" />
+          <span class="name">Elly De La Cruz</span>
+        </label>
         <span class="team">CIN</span>
         <span class="opp-mobile">vs Mike Burrows</span>
       </td>
       <td class="muted small vs-col">Mike Burrows</td>
-      <td class="num" data-sort-col="model" data-sort="0.3148">31.5%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.39035200000000003"><span class="up">39.0%</span> <span class="delta up">+7.6%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.2981"><span class="down">29.8%</span> <span class="delta down">-1.7%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="4"><span class="badge badge-stronger">Stronger pick</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-05-01 vs Pittsburgh Pirates — 0 HR, 0/4"></span><span class="last7-cell last7-out" title="2026-05-02 vs Pittsburgh Pirates — 0 HR, 0/5"></span><span class="last7-cell last7-out" title="2026-05-03 vs Pittsburgh Pirates — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-04 vs Chicago Cubs — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-05 vs Chicago Cubs — 0 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-05-06 vs Chicago Cubs — 0 HR, 0/4"></span><span class="last7-cell last7-hr" title="2026-05-07 vs Chicago Cubs — 1 HR, 1/4"></span></div></td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Elly De La Cruz</span>
-        <span class="team">CIN</span>
-        <span class="opp-mobile">vs Mike Burrows</span>
-      </td>
-      <td class="muted small vs-col">Mike Burrows</td>
-      <td class="num" data-sort-col="model" data-sort="0.3106">31.1%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.3106"><span class="">31.1%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.3072"><span class="down">30.7%</span> <span class="delta down">-0.3%</span></td>
+      <td class="num" data-sort-col="model" data-sort="0.3122">31.2%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.3122"><span class="">31.2%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.3152"><span class="up">31.5%</span> <span class="delta up">+0.3%</span></td>
       <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
       <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-05-01 vs Pittsburgh Pirates — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-02 vs Pittsburgh Pirates — 0 HR, 1/2"></span><span class="last7-cell last7-out" title="2026-05-03 vs Pittsburgh Pirates — 0 HR, 0/3"></span><span class="last7-cell last7-hit" title="2026-05-04 vs Chicago Cubs — 0 HR, 3/4"></span><span class="last7-cell last7-out" title="2026-05-05 vs Chicago Cubs — 0 HR, 0/5"></span><span class="last7-cell last7-out" title="2026-05-06 vs Chicago Cubs — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-07 vs Chicago Cubs — 0 HR, 1/5"></span></div></td>
     </tr>
 <tr>
       <td>
-        <span class="name">Matt Olson</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="701398" aria-label="Mark Sal Stewart" />
+          <span class="name">Sal Stewart</span>
+        </label>
+        <span class="team">CIN</span>
+        <span class="opp-mobile">vs Mike Burrows</span>
+      </td>
+      <td class="muted small vs-col">Mike Burrows</td>
+      <td class="num" data-sort-col="model" data-sort="0.3015">30.1%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.37385999999999997"><span class="up">37.4%</span> <span class="delta up">+7.2%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.3015"><span class="">30.1%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="4"><span class="badge badge-stronger">Stronger pick</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-05-01 vs Pittsburgh Pirates — 0 HR, 0/4"></span><span class="last7-cell last7-out" title="2026-05-02 vs Pittsburgh Pirates — 0 HR, 0/5"></span><span class="last7-cell last7-out" title="2026-05-03 vs Pittsburgh Pirates — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-04 vs Chicago Cubs — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-05 vs Chicago Cubs — 0 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-05-06 vs Chicago Cubs — 0 HR, 0/4"></span><span class="last7-cell last7-hr" title="2026-05-07 vs Chicago Cubs — 1 HR, 1/4"></span></div></td>
+    </tr>
+<tr>
+      <td>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="621566" aria-label="Mark Matt Olson" />
+          <span class="name">Matt Olson</span>
+        </label>
         <span class="team">ATL</span>
         <span class="opp-mobile">vs Emmet Sheehan</span>
       </td>
       <td class="muted small vs-col">Emmet Sheehan</td>
-      <td class="num" data-sort-col="model" data-sort="0.2766">27.7%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.2766"><span class="">27.7%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.2656"><span class="down">26.6%</span> <span class="delta down">-1.1%</span></td>
+      <td class="num" data-sort-col="model" data-sort="0.2691">26.9%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.2691"><span class="">26.9%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2488"><span class="down">24.9%</span> <span class="delta down">-2.0%</span></td>
       <td class="center" data-sort-col="verdict" data-sort="3"><span class="badge badge-hold">Hold</span></td>
       <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-04-30 vs Detroit Tigers — 0 HR, 0/4"></span><span class="last7-cell last7-hr" title="2026-05-01 vs Colorado Rockies — 1 HR, 1/3"></span><span class="last7-cell last7-hr" title="2026-05-02 vs Colorado Rockies — 1 HR, 1/5"></span><span class="last7-cell last7-hit" title="2026-05-03 vs Colorado Rockies — 0 HR, 2/4"></span><span class="last7-cell last7-hr" title="2026-05-04 vs Seattle Mariners — 1 HR, 1/3"></span><span class="last7-cell last7-hr" title="2026-05-05 vs Seattle Mariners — 1 HR, 2/3"></span><span class="last7-cell last7-out" title="2026-05-06 vs Seattle Mariners — 0 HR, 0/3"></span></div></td>
     </tr>
 <tr>
       <td>
-        <span class="name">Nathaniel Lowe</span>
-        <span class="team">CIN</span>
-        <span class="opp-mobile">vs Mike Burrows</span>
-      </td>
-      <td class="muted small vs-col">Mike Burrows</td>
-      <td class="num" data-sort-col="model" data-sort="0.2743">27.4%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.2743"><span class="">27.4%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.2688"><span class="down">26.9%</span> <span class="delta down">-0.6%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="2"><span class="badge badge-weaker">Weaker</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-05-01 vs Pittsburgh Pirates — 0 HR, 0/3"></span><span class="last7-cell last7-hit" title="2026-05-02 vs Pittsburgh Pirates — 0 HR, 2/4"></span><span class="last7-cell last7-out" title="2026-05-03 vs Pittsburgh Pirates — 0 HR, 0/3"></span><span class="last7-cell last7-out" title="2026-05-04 vs Chicago Cubs — 0 HR, 0/3"></span><span class="last7-cell last7-hr" title="2026-05-05 vs Chicago Cubs — 1 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-05-06 vs Chicago Cubs — 0 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-05-07 vs Chicago Cubs — 0 HR, 0/1"></span></div></td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Yordan Alvarez</span>
-        <span class="team">HOU</span>
-        <span class="opp-mobile">vs Nick Lodolo</span>
-      </td>
-      <td class="muted small vs-col">Nick Lodolo</td>
-      <td class="num" data-sort-col="model" data-sort="0.2708">27.1%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.2708"><span class="">27.1%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.2635"><span class="down">26.4%</span> <span class="delta down">-0.7%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-04-30 vs Baltimore Orioles — 0 HR, 0/4"></span><span class="last7-cell last7-out" title="2026-05-01 vs Boston Red Sox — 0 HR, 0/5"></span><span class="last7-cell last7-out" title="2026-05-02 vs Boston Red Sox — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-03 vs Boston Red Sox — 0 HR, 1/5"></span><span class="last7-cell last7-hit" title="2026-05-04 vs Los Angeles Dodgers — 0 HR, 2/3"></span><span class="last7-cell last7-out" title="2026-05-05 vs Los Angeles Dodgers — 0 HR, 0/4"></span><span class="last7-cell last7-out" title="2026-05-06 vs Los Angeles Dodgers — 0 HR, 0/2"></span></div></td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Gunnar Henderson</span>
-        <span class="team">BAL</span>
-        <span class="opp-mobile">vs Jacob Lopez</span>
-      </td>
-      <td class="muted small vs-col">Jacob Lopez</td>
-      <td class="num" data-sort-col="model" data-sort="0.2483">24.8%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.2483"><span class="">24.8%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.2098"><span class="down">21.0%</span> <span class="delta down">-3.9%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-30 vs Houston Astros — 0 HR, 1/5"></span><span class="last7-cell last7-out" title="2026-05-01 vs New York Yankees — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-02 vs New York Yankees — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-04 vs New York Yankees — 0 HR, 1/5"></span><span class="last7-cell last7-hit" title="2026-05-05 vs Miami Marlins — 0 HR, 1/5"></span><span class="last7-cell last7-out" title="2026-05-06 vs Miami Marlins — 0 HR, 0/5"></span><span class="last7-cell last7-hit" title="2026-05-07 vs Miami Marlins — 0 HR, 1/5"></span></div></td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Kyle Schwarber</span>
-        <span class="team">PHI</span>
-        <span class="opp-mobile">vs Chase Dollander</span>
-      </td>
-      <td class="muted small vs-col">Chase Dollander</td>
-      <td class="num" data-sort-col="model" data-sort="0.2479">24.8%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.307396"><span class="up">30.7%</span> <span class="delta up">+5.9%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.239"><span class="down">23.9%</span> <span class="delta down">-0.9%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="4"><span class="badge badge-stronger">Stronger pick</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-05-01 vs Miami Marlins — 0 HR, 0/5"></span><span class="last7-cell last7-out" title="2026-05-02 vs Miami Marlins — 0 HR, 0/3"></span><span class="last7-cell last7-hit" title="2026-05-03 vs Miami Marlins — 0 HR, 2/4"></span><span class="last7-cell last7-out" title="2026-05-04 vs Miami Marlins — 0 HR, 0/4"></span><span class="last7-cell last7-out" title="2026-05-05 vs Athletics — 0 HR, 0/5"></span><span class="last7-cell last7-hit" title="2026-05-06 vs Athletics — 0 HR, 1/3"></span><span class="last7-cell last7-hr" title="2026-05-07 vs Athletics — 1 HR, 2/4"></span></div></td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Aaron Judge</span>
-        <span class="team">NYY</span>
-        <span class="opp-mobile">vs Jacob Misiorowski</span>
-      </td>
-      <td class="muted small vs-col">Jacob Misiorowski</td>
-      <td class="num" data-sort-col="model" data-sort="0.2411">24.1%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.2411"><span class="">24.1%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.2164"><span class="down">21.6%</span> <span class="delta down">-2.5%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="3"><span class="badge badge-hold">Hold</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-05-01 vs Baltimore Orioles — 0 HR, 2/3"></span><span class="last7-cell last7-out" title="2026-05-02 vs Baltimore Orioles — 0 HR, 0/3"></span><span class="last7-cell last7-hr" title="2026-05-03 vs Baltimore Orioles — 1 HR, 2/4"></span><span class="last7-cell last7-hr" title="2026-05-04 vs Baltimore Orioles — 1 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-05-05 vs Texas Rangers — 0 HR, 1/3"></span><span class="last7-cell last7-hr" title="2026-05-06 vs Texas Rangers — 1 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-07 vs Texas Rangers — 0 HR, 1/5"></span></div></td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Munetaka Murakami</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="808959" aria-label="Mark Munetaka Murakami" />
+          <span class="name">Munetaka Murakami</span>
+        </label>
         <span class="team">CHW</span>
         <span class="opp-mobile">vs Emerson Hancock</span>
       </td>
       <td class="muted small vs-col">Emerson Hancock</td>
-      <td class="num" data-sort-col="model" data-sort="0.227">22.7%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.227"><span class="">22.7%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.2261"><span class="down">22.6%</span> <span class="delta down">-0.1%</span></td>
+      <td class="num" data-sort-col="model" data-sort="0.267">26.7%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.267"><span class="">26.7%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2775"><span class="up">27.8%</span> <span class="delta up">+1.1%</span></td>
       <td class="center" data-sort-col="verdict" data-sort="3"><span class="badge badge-hold">Hold</span></td>
       <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-04-29 vs Los Angeles Angels — 0 HR, 0/2"></span><span class="last7-cell last7-hr" title="2026-05-01 vs San Diego Padres — 1 HR, 1/3"></span><span class="last7-cell last7-out" title="2026-05-02 vs San Diego Padres — 0 HR, 0/4"></span><span class="last7-cell last7-out" title="2026-05-03 vs San Diego Padres — 0 HR, 0/4"></span><span class="last7-cell last7-hr" title="2026-05-04 vs Los Angeles Angels — 1 HR, 3/4"></span><span class="last7-cell last7-hit" title="2026-05-05 vs Los Angeles Angels — 0 HR, 1/2"></span><span class="last7-cell last7-out" title="2026-05-06 vs Los Angeles Angels — 0 HR, 0/4"></span></div></td>
     </tr>
 <tr>
       <td>
-        <span class="name">Shea Langeliers</span>
-        <span class="team">ATH</span>
-        <span class="opp-mobile">vs Kyle Bradish</span>
-      </td>
-      <td class="muted small vs-col">Kyle Bradish</td>
-      <td class="num" data-sort-col="model" data-sort="0.2256">22.6%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.279744"><span class="up">28.0%</span> <span class="delta up">+5.4%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.2518"><span class="up">25.2%</span> <span class="delta up">+2.6%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="4"><span class="badge badge-stronger">Stronger pick</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-26 vs Texas Rangers — 0 HR, 2/5"></span><span class="last7-cell last7-hit" title="2026-04-28 vs Kansas City Royals — 0 HR, 3/5"></span><span class="last7-cell last7-hit" title="2026-04-29 vs Kansas City Royals — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-04-30 vs Kansas City Royals — 0 HR, 3/4"></span><span class="last7-cell last7-hit" title="2026-05-01 vs Cleveland Guardians — 0 HR, 1/4"></span><span class="last7-cell last7-hr" title="2026-05-02 vs Cleveland Guardians — 2 HR, 3/5"></span><span class="last7-cell last7-hr" title="2026-05-07 vs Philadelphia Phillies — 1 HR, 2/5"></span></div></td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Christian Walker</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="670541" aria-label="Mark Yordan Alvarez" />
+          <span class="name">Yordan Alvarez</span>
+        </label>
         <span class="team">HOU</span>
         <span class="opp-mobile">vs Nick Lodolo</span>
       </td>
       <td class="muted small vs-col">Nick Lodolo</td>
-      <td class="num" data-sort-col="model" data-sort="0.225">22.5%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.225"><span class="">22.5%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.2164"><span class="down">21.6%</span> <span class="delta down">-0.9%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="3"><span class="badge badge-hold">Hold</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-04-30 vs Baltimore Orioles — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-01 vs Boston Red Sox — 0 HR, 1/3"></span><span class="last7-cell last7-hr" title="2026-05-02 vs Boston Red Sox — 1 HR, 3/4"></span><span class="last7-cell last7-hit" title="2026-05-03 vs Boston Red Sox — 0 HR, 2/3"></span><span class="last7-cell last7-out" title="2026-05-04 vs Los Angeles Dodgers — 0 HR, 0/4"></span><span class="last7-cell last7-hr" title="2026-05-05 vs Los Angeles Dodgers — 1 HR, 1/3"></span><span class="last7-cell last7-hit" title="2026-05-06 vs Los Angeles Dodgers — 0 HR, 1/4"></span></div></td>
+      <td class="num" data-sort-col="model" data-sort="0.2655">26.6%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.2655"><span class="">26.6%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2562"><span class="down">25.6%</span> <span class="delta down">-0.9%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-04-30 vs Baltimore Orioles — 0 HR, 0/4"></span><span class="last7-cell last7-out" title="2026-05-01 vs Boston Red Sox — 0 HR, 0/5"></span><span class="last7-cell last7-out" title="2026-05-02 vs Boston Red Sox — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-03 vs Boston Red Sox — 0 HR, 1/5"></span><span class="last7-cell last7-hit" title="2026-05-04 vs Los Angeles Dodgers — 0 HR, 2/3"></span><span class="last7-cell last7-out" title="2026-05-05 vs Los Angeles Dodgers — 0 HR, 0/4"></span><span class="last7-cell last7-out" title="2026-05-06 vs Los Angeles Dodgers — 0 HR, 0/2"></span></div></td>
     </tr>
 <tr>
       <td>
-        <span class="name">Spencer Steer</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="663993" aria-label="Mark Nathaniel Lowe" />
+          <span class="name">Nathaniel Lowe</span>
+        </label>
         <span class="team">CIN</span>
         <span class="opp-mobile">vs Mike Burrows</span>
       </td>
       <td class="muted small vs-col">Mike Burrows</td>
-      <td class="num" data-sort-col="model" data-sort="0.2247">22.5%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.2247"><span class="">22.5%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.2286"><span class="up">22.9%</span> <span class="delta up">+0.4%</span></td>
+      <td class="num" data-sort-col="model" data-sort="0.2623">26.2%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.2623"><span class="">26.2%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2747"><span class="up">27.5%</span> <span class="delta up">+1.2%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="2"><span class="badge badge-weaker">Weaker</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-05-01 vs Pittsburgh Pirates — 0 HR, 0/3"></span><span class="last7-cell last7-hit" title="2026-05-02 vs Pittsburgh Pirates — 0 HR, 2/4"></span><span class="last7-cell last7-out" title="2026-05-03 vs Pittsburgh Pirates — 0 HR, 0/3"></span><span class="last7-cell last7-out" title="2026-05-04 vs Chicago Cubs — 0 HR, 0/3"></span><span class="last7-cell last7-hr" title="2026-05-05 vs Chicago Cubs — 1 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-05-06 vs Chicago Cubs — 0 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-05-07 vs Chicago Cubs — 0 HR, 0/1"></span></div></td>
+    </tr>
+<tr>
+      <td>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="656941" aria-label="Mark Kyle Schwarber" />
+          <span class="name">Kyle Schwarber</span>
+        </label>
+        <span class="team">PHI</span>
+        <span class="opp-mobile">vs Chase Dollander</span>
+      </td>
+      <td class="muted small vs-col">Chase Dollander</td>
+      <td class="num" data-sort-col="model" data-sort="0.2411">24.1%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.298964"><span class="up">29.9%</span> <span class="delta up">+5.8%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2395"><span class="down">23.9%</span> <span class="delta down">-0.2%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="4"><span class="badge badge-stronger">Stronger pick</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-05-01 vs Miami Marlins — 0 HR, 0/5"></span><span class="last7-cell last7-out" title="2026-05-02 vs Miami Marlins — 0 HR, 0/3"></span><span class="last7-cell last7-hit" title="2026-05-03 vs Miami Marlins — 0 HR, 2/4"></span><span class="last7-cell last7-out" title="2026-05-04 vs Miami Marlins — 0 HR, 0/4"></span><span class="last7-cell last7-out" title="2026-05-05 vs Athletics — 0 HR, 0/5"></span><span class="last7-cell last7-hit" title="2026-05-06 vs Athletics — 0 HR, 1/3"></span><span class="last7-cell last7-hr" title="2026-05-07 vs Athletics — 1 HR, 2/4"></span></div></td>
+    </tr>
+<tr>
+      <td>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="683002" aria-label="Mark Gunnar Henderson" />
+          <span class="name">Gunnar Henderson</span>
+        </label>
+        <span class="team">BAL</span>
+        <span class="opp-mobile">vs Jacob Lopez</span>
+      </td>
+      <td class="muted small vs-col">Jacob Lopez</td>
+      <td class="num" data-sort-col="model" data-sort="0.2402">24.0%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.2402"><span class="">24.0%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2076"><span class="down">20.8%</span> <span class="delta down">-3.3%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-30 vs Houston Astros — 0 HR, 1/5"></span><span class="last7-cell last7-out" title="2026-05-01 vs New York Yankees — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-02 vs New York Yankees — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-04 vs New York Yankees — 0 HR, 1/5"></span><span class="last7-cell last7-hit" title="2026-05-05 vs Miami Marlins — 0 HR, 1/5"></span><span class="last7-cell last7-out" title="2026-05-06 vs Miami Marlins — 0 HR, 0/5"></span><span class="last7-cell last7-hit" title="2026-05-07 vs Miami Marlins — 0 HR, 1/5"></span></div></td>
+    </tr>
+<tr>
+      <td>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="668715" aria-label="Mark Spencer Steer" />
+          <span class="name">Spencer Steer</span>
+        </label>
+        <span class="team">CIN</span>
+        <span class="opp-mobile">vs Mike Burrows</span>
+      </td>
+      <td class="muted small vs-col">Mike Burrows</td>
+      <td class="num" data-sort-col="model" data-sort="0.2322">23.2%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.2322"><span class="">23.2%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2298"><span class="down">23.0%</span> <span class="delta down">-0.2%</span></td>
       <td class="center" data-sort-col="verdict" data-sort="2"><span class="badge badge-weaker">Weaker</span></td>
       <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-05-01 vs Pittsburgh Pirates — 0 HR, 1/2"></span><span class="last7-cell last7-hit" title="2026-05-02 vs Pittsburgh Pirates — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-03 vs Pittsburgh Pirates — 0 HR, 1/3"></span><span class="last7-cell last7-hit" title="2026-05-04 vs Chicago Cubs — 0 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-05-05 vs Chicago Cubs — 0 HR, 1/4"></span><span class="last7-cell last7-hr" title="2026-05-06 vs Chicago Cubs — 1 HR, 1/5"></span><span class="last7-cell last7-hit" title="2026-05-07 vs Chicago Cubs — 0 HR, 1/3"></span></div></td>
     </tr>
 <tr>
       <td>
-        <span class="name">Mickey Moniak</span>
-        <span class="team">COL</span>
-        <span class="opp-mobile">vs Jesús Luzardo</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="592450" aria-label="Mark Aaron Judge" />
+          <span class="name">Aaron Judge</span>
+        </label>
+        <span class="team">NYY</span>
+        <span class="opp-mobile">vs Jacob Misiorowski</span>
       </td>
-      <td class="muted small vs-col">Jesús Luzardo</td>
-      <td class="num" data-sort-col="model" data-sort="0.2231">22.3%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.2231"><span class="">22.3%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.2086"><span class="down">20.9%</span> <span class="delta down">-1.4%</span></td>
+      <td class="muted small vs-col">Jacob Misiorowski</td>
+      <td class="num" data-sort-col="model" data-sort="0.2301">23.0%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.2301"><span class="">23.0%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2164"><span class="down">21.6%</span> <span class="delta down">-1.4%</span></td>
       <td class="center" data-sort-col="verdict" data-sort="3"><span class="badge badge-hold">Hold</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-29 vs Cincinnati Reds — 0 HR, 1/3"></span><span class="last7-cell last7-hit" title="2026-04-30 vs Cincinnati Reds — 0 HR, 1/2"></span><span class="last7-cell last7-hr" title="2026-05-01 vs Atlanta Braves — 1 HR, 2/5"></span><span class="last7-cell last7-hr" title="2026-05-03 vs Atlanta Braves — 2 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-05-04 vs New York Mets — 0 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-05-06 vs New York Mets — 0 HR, 1/5"></span><span class="last7-cell last7-out" title="2026-05-07 vs New York Mets — 0 HR, 0/3"></span></div></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-05-01 vs Baltimore Orioles — 0 HR, 2/3"></span><span class="last7-cell last7-out" title="2026-05-02 vs Baltimore Orioles — 0 HR, 0/3"></span><span class="last7-cell last7-hr" title="2026-05-03 vs Baltimore Orioles — 1 HR, 2/4"></span><span class="last7-cell last7-hr" title="2026-05-04 vs Baltimore Orioles — 1 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-05-05 vs Texas Rangers — 0 HR, 1/3"></span><span class="last7-cell last7-hr" title="2026-05-06 vs Texas Rangers — 1 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-07 vs Texas Rangers — 0 HR, 1/5"></span></div></td>
     </tr>
 <tr>
       <td>
-        <span class="name">Drake Baldwin</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="686948" aria-label="Mark Drake Baldwin" />
+          <span class="name">Drake Baldwin</span>
+        </label>
         <span class="team">ATL</span>
         <span class="opp-mobile">vs Emmet Sheehan</span>
       </td>
       <td class="muted small vs-col">Emmet Sheehan</td>
-      <td class="num" data-sort-col="model" data-sort="0.2159">21.6%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.2159"><span class="">21.6%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.2085"><span class="down">20.8%</span> <span class="delta down">-0.7%</span></td>
+      <td class="num" data-sort-col="model" data-sort="0.2241">22.4%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.2241"><span class="">22.4%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2016"><span class="down">20.2%</span> <span class="delta down">-2.2%</span></td>
       <td class="center" data-sort-col="verdict" data-sort="3"><span class="badge badge-hold">Hold</span></td>
       <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-30 vs Detroit Tigers — 0 HR, 1/3"></span><span class="last7-cell last7-out" title="2026-05-01 vs Colorado Rockies — 0 HR, 0/4"></span><span class="last7-cell last7-hr" title="2026-05-02 vs Colorado Rockies — 1 HR, 3/4"></span><span class="last7-cell last7-hit" title="2026-05-03 vs Colorado Rockies — 0 HR, 2/5"></span><span class="last7-cell last7-hr" title="2026-05-04 vs Seattle Mariners — 1 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-05-05 vs Seattle Mariners — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-06 vs Seattle Mariners — 0 HR, 1/4"></span></div></td>
     </tr>
 <tr>
       <td>
-        <span class="name">Jordan Walker</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="666160" aria-label="Mark Mickey Moniak" />
+          <span class="name">Mickey Moniak</span>
+        </label>
+        <span class="team">COL</span>
+        <span class="opp-mobile">vs Jesús Luzardo</span>
+      </td>
+      <td class="muted small vs-col">Jesús Luzardo</td>
+      <td class="num" data-sort-col="model" data-sort="0.2236">22.4%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.2236"><span class="">22.4%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.21"><span class="down">21.0%</span> <span class="delta down">-1.4%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="3"><span class="badge badge-hold">Hold</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-29 vs Cincinnati Reds — 0 HR, 1/3"></span><span class="last7-cell last7-hit" title="2026-04-30 vs Cincinnati Reds — 0 HR, 1/2"></span><span class="last7-cell last7-hr" title="2026-05-01 vs Atlanta Braves — 1 HR, 2/5"></span><span class="last7-cell last7-hr" title="2026-05-03 vs Atlanta Braves — 2 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-05-04 vs New York Mets — 0 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-05-06 vs New York Mets — 0 HR, 1/5"></span><span class="last7-cell last7-out" title="2026-05-07 vs New York Mets — 0 HR, 0/3"></span></div></td>
+    </tr>
+<tr>
+      <td>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="572233" aria-label="Mark Christian Walker" />
+          <span class="name">Christian Walker</span>
+        </label>
+        <span class="team">HOU</span>
+        <span class="opp-mobile">vs Nick Lodolo</span>
+      </td>
+      <td class="muted small vs-col">Nick Lodolo</td>
+      <td class="num" data-sort-col="model" data-sort="0.2214">22.1%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.2214"><span class="">22.1%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2253"><span class="up">22.5%</span> <span class="delta up">+0.4%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="3"><span class="badge badge-hold">Hold</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-04-30 vs Baltimore Orioles — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-01 vs Boston Red Sox — 0 HR, 1/3"></span><span class="last7-cell last7-hr" title="2026-05-02 vs Boston Red Sox — 1 HR, 3/4"></span><span class="last7-cell last7-hit" title="2026-05-03 vs Boston Red Sox — 0 HR, 2/3"></span><span class="last7-cell last7-out" title="2026-05-04 vs Los Angeles Dodgers — 0 HR, 0/4"></span><span class="last7-cell last7-hr" title="2026-05-05 vs Los Angeles Dodgers — 1 HR, 1/3"></span><span class="last7-cell last7-hit" title="2026-05-06 vs Los Angeles Dodgers — 0 HR, 1/4"></span></div></td>
+    </tr>
+<tr>
+      <td>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="669127" aria-label="Mark Shea Langeliers" />
+          <span class="name">Shea Langeliers</span>
+        </label>
+        <span class="team">ATH</span>
+        <span class="opp-mobile">vs Kyle Bradish</span>
+      </td>
+      <td class="muted small vs-col">Kyle Bradish</td>
+      <td class="num" data-sort-col="model" data-sort="0.2204">22.0%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.27329600000000004"><span class="up">27.3%</span> <span class="delta up">+5.3%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2518"><span class="up">25.2%</span> <span class="delta up">+3.1%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="4"><span class="badge badge-stronger">Stronger pick</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-26 vs Texas Rangers — 0 HR, 2/5"></span><span class="last7-cell last7-hit" title="2026-04-28 vs Kansas City Royals — 0 HR, 3/5"></span><span class="last7-cell last7-hit" title="2026-04-29 vs Kansas City Royals — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-04-30 vs Kansas City Royals — 0 HR, 3/4"></span><span class="last7-cell last7-hit" title="2026-05-01 vs Cleveland Guardians — 0 HR, 1/4"></span><span class="last7-cell last7-hr" title="2026-05-02 vs Cleveland Guardians — 2 HR, 3/5"></span><span class="last7-cell last7-hr" title="2026-05-07 vs Philadelphia Phillies — 1 HR, 2/5"></span></div></td>
+    </tr>
+<tr>
+      <td>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="691406" aria-label="Mark Junior Caminero" />
+          <span class="name">Junior Caminero</span>
+        </label>
+        <span class="team">TB</span>
+        <span class="opp-mobile">vs Connelly Early</span>
+      </td>
+      <td class="muted small vs-col">Connelly Early</td>
+      <td class="num" data-sort-col="model" data-sort="0.218">21.8%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.27032"><span class="up">27.0%</span> <span class="delta up">+5.2%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.244"><span class="up">24.4%</span> <span class="delta up">+2.6%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="4"><span class="badge badge-stronger">Stronger pick</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hr" title="2026-05-01 vs San Francisco Giants — 1 HR, 1/3"></span><span class="last7-cell last7-hit" title="2026-05-02 vs San Francisco Giants — 0 HR, 1/3"></span><span class="last7-cell last7-hit" title="2026-05-03 vs San Francisco Giants — 0 HR, 1/2"></span><span class="last7-cell last7-out" title="2026-05-04 vs Toronto Blue Jays — 0 HR, 0/3"></span><span class="last7-cell last7-hit" title="2026-05-05 vs Toronto Blue Jays — 0 HR, 1/3"></span><span class="last7-cell last7-out" title="2026-05-06 vs Toronto Blue Jays — 0 HR, 0/4"></span><span class="last7-cell last7-hr" title="2026-05-07 vs Boston Red Sox — 1 HR, 2/4"></span></div></td>
+    </tr>
+<tr>
+      <td>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="691023" aria-label="Mark Jordan Walker" />
+          <span class="name">Jordan Walker</span>
+        </label>
         <span class="team">STL</span>
         <span class="opp-mobile">vs Griffin Canning</span>
       </td>
       <td class="muted small vs-col">Griffin Canning</td>
-      <td class="num" data-sort-col="model" data-sort="0.2154">21.5%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.2154"><span class="">21.5%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.1908"><span class="down">19.1%</span> <span class="delta down">-2.5%</span></td>
+      <td class="num" data-sort-col="model" data-sort="0.2126">21.3%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.2126"><span class="">21.3%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.1917"><span class="down">19.2%</span> <span class="delta down">-2.1%</span></td>
       <td class="center" data-sort-col="verdict" data-sort="3"><span class="badge badge-hold">Hold</span></td>
       <td class="last7-col"><div class="last7"><span class="last7-cell last7-hr" title="2026-04-30 vs Pittsburgh Pirates — 1 HR, 2/5"></span><span class="last7-cell last7-hit" title="2026-05-01 vs Los Angeles Dodgers — 0 HR, 4/4"></span><span class="last7-cell last7-hr" title="2026-05-02 vs Los Angeles Dodgers — 1 HR, 2/4"></span><span class="last7-cell last7-out" title="2026-05-03 vs Los Angeles Dodgers — 0 HR, 0/3"></span><span class="last7-cell last7-hit" title="2026-05-04 vs Milwaukee Brewers — 0 HR, 1/3"></span><span class="last7-cell last7-out" title="2026-05-06 vs Milwaukee Brewers — 0 HR, 0/2"></span><span class="last7-cell last7-hit" title="2026-05-07 vs San Diego Padres — 0 HR, 2/4"></span></div></td>
     </tr>
 <tr>
       <td>
-        <span class="name">Ozzie Albies</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="645277" aria-label="Mark Ozzie Albies" />
+          <span class="name">Ozzie Albies</span>
+        </label>
         <span class="team">ATL</span>
         <span class="opp-mobile">vs Emmet Sheehan</span>
       </td>
       <td class="muted small vs-col">Emmet Sheehan</td>
-      <td class="num" data-sort-col="model" data-sort="0.2112">21.1%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.2112"><span class="">21.1%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.187"><span class="down">18.7%</span> <span class="delta down">-2.4%</span></td>
+      <td class="num" data-sort-col="model" data-sort="0.2116">21.2%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.2116"><span class="">21.2%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.1867"><span class="down">18.7%</span> <span class="delta down">-2.5%</span></td>
       <td class="center" data-sort-col="verdict" data-sort="2"><span class="badge badge-weaker">Weaker</span></td>
       <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-30 vs Detroit Tigers — 0 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-05-01 vs Colorado Rockies — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-02 vs Colorado Rockies — 0 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-05-03 vs Colorado Rockies — 0 HR, 2/3"></span><span class="last7-cell last7-hr" title="2026-05-04 vs Seattle Mariners — 1 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-05 vs Seattle Mariners — 0 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-05-06 vs Seattle Mariners — 0 HR, 0/3"></span></div></td>
     </tr>
 <tr>
       <td>
-        <span class="name">Ben Rice</span>
-        <span class="team">NYY</span>
-        <span class="opp-mobile">vs Jacob Misiorowski</span>
-      </td>
-      <td class="muted small vs-col">Jacob Misiorowski</td>
-      <td class="num" data-sort-col="model" data-sort="0.2036">20.4%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.252464"><span class="up">25.2%</span> <span class="delta up">+4.9%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.2056"><span class="up">20.6%</span> <span class="delta up">+0.2%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="4"><span class="badge badge-stronger">Stronger pick</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-04-26 vs Houston Astros — 0 HR, 0/3"></span><span class="last7-cell last7-hr" title="2026-04-27 vs Texas Rangers — 1 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-04-28 vs Texas Rangers — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-04-29 vs Texas Rangers — 0 HR, 3/4"></span><span class="last7-cell last7-hr" title="2026-05-01 vs Baltimore Orioles — 1 HR, 2/5"></span><span class="last7-cell last7-hit" title="2026-05-02 vs Baltimore Orioles — 0 HR, 1/3"></span><span class="last7-cell last7-hr" title="2026-05-03 vs Baltimore Orioles — 1 HR, 2/2"></span></div></td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Bryce Harper</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="547180" aria-label="Mark Bryce Harper" />
+          <span class="name">Bryce Harper</span>
+        </label>
         <span class="team">PHI</span>
         <span class="opp-mobile">vs Chase Dollander</span>
       </td>
       <td class="muted small vs-col">Chase Dollander</td>
-      <td class="num" data-sort-col="model" data-sort="0.2033">20.3%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.2033"><span class="">20.3%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.1996"><span class="down">20.0%</span> <span class="delta down">-0.4%</span></td>
+      <td class="num" data-sort-col="model" data-sort="0.2085">20.8%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.2085"><span class="">20.8%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2004"><span class="down">20.0%</span> <span class="delta down">-0.8%</span></td>
       <td class="center" data-sort-col="verdict" data-sort="3"><span class="badge badge-hold">Hold</span></td>
       <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-05-01 vs Miami Marlins — 0 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-05-02 vs Miami Marlins — 0 HR, 0/3"></span><span class="last7-cell last7-hit" title="2026-05-03 vs Miami Marlins — 0 HR, 1/4"></span><span class="last7-cell last7-hr" title="2026-05-04 vs Miami Marlins — 1 HR, 3/4"></span><span class="last7-cell last7-hr" title="2026-05-05 vs Athletics — 2 HR, 3/4"></span><span class="last7-cell last7-out" title="2026-05-06 vs Athletics — 0 HR, 0/4"></span><span class="last7-cell last7-out" title="2026-05-07 vs Athletics — 0 HR, 0/1"></span></div></td>
     </tr>
 <tr>
       <td>
-        <span class="name">Liam Hicks</span>
-        <span class="team">MIA</span>
-        <span class="opp-mobile">vs Foster Griffin</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="695657" aria-label="Mark Colson Montgomery" />
+          <span class="name">Colson Montgomery</span>
+        </label>
+        <span class="team">CHW</span>
+        <span class="opp-mobile">vs Emerson Hancock</span>
       </td>
-      <td class="muted small vs-col">Foster Griffin</td>
-      <td class="num" data-sort-col="model" data-sort="0.1987">19.9%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.246388"><span class="up">24.6%</span> <span class="delta up">+4.8%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.1788"><span class="down">17.9%</span> <span class="delta down">-2.0%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="4"><span class="badge badge-stronger">Stronger pick</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hr" title="2026-04-29 vs Los Angeles Dodgers — 1 HR, 1/2"></span><span class="last7-cell last7-out" title="2026-05-01 vs Philadelphia Phillies — 0 HR, 0/2"></span><span class="last7-cell last7-hit" title="2026-05-02 vs Philadelphia Phillies — 0 HR, 1/3"></span><span class="last7-cell last7-out" title="2026-05-04 vs Philadelphia Phillies — 0 HR, 0/4"></span><span class="last7-cell last7-hr" title="2026-05-05 vs Baltimore Orioles — 1 HR, 4/5"></span><span class="last7-cell last7-hit" title="2026-05-06 vs Baltimore Orioles — 0 HR, 1/3"></span><span class="last7-cell last7-hr" title="2026-05-07 vs Baltimore Orioles — 1 HR, 1/4"></span></div></td>
+      <td class="muted small vs-col">Emerson Hancock</td>
+      <td class="num" data-sort-col="model" data-sort="0.2025">20.3%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.2025"><span class="">20.3%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2079"><span class="up">20.8%</span> <span class="delta up">+0.5%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-29 vs Los Angeles Angels — 0 HR, 1/5"></span><span class="last7-cell last7-hr" title="2026-05-01 vs San Diego Padres — 1 HR, 1/3"></span><span class="last7-cell last7-out" title="2026-05-02 vs San Diego Padres — 0 HR, 0/3"></span><span class="last7-cell last7-out" title="2026-05-03 vs San Diego Padres — 0 HR, 0/2"></span><span class="last7-cell last7-hit" title="2026-05-04 vs Los Angeles Angels — 0 HR, 1/5"></span><span class="last7-cell last7-hit" title="2026-05-05 vs Los Angeles Angels — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-06 vs Los Angeles Angels — 0 HR, 1/4"></span></div></td>
     </tr>
 <tr>
       <td>
-        <span class="name">Michael Harris II</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="700250" aria-label="Mark Ben Rice" />
+          <span class="name">Ben Rice</span>
+        </label>
+        <span class="team">NYY</span>
+        <span class="opp-mobile">vs Jacob Misiorowski</span>
+      </td>
+      <td class="muted small vs-col">Jacob Misiorowski</td>
+      <td class="num" data-sort-col="model" data-sort="0.2023">20.2%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.250852"><span class="up">25.1%</span> <span class="delta up">+4.9%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2063"><span class="up">20.6%</span> <span class="delta up">+0.4%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="4"><span class="badge badge-stronger">Stronger pick</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-04-26 vs Houston Astros — 0 HR, 0/3"></span><span class="last7-cell last7-hr" title="2026-04-27 vs Texas Rangers — 1 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-04-28 vs Texas Rangers — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-04-29 vs Texas Rangers — 0 HR, 3/4"></span><span class="last7-cell last7-hr" title="2026-05-01 vs Baltimore Orioles — 1 HR, 2/5"></span><span class="last7-cell last7-hit" title="2026-05-02 vs Baltimore Orioles — 0 HR, 1/3"></span><span class="last7-cell last7-hr" title="2026-05-03 vs Baltimore Orioles — 1 HR, 2/2"></span></div></td>
+    </tr>
+<tr>
+      <td>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="671739" aria-label="Mark Michael Harris II" />
+          <span class="name">Michael Harris II</span>
+        </label>
         <span class="team">ATL</span>
         <span class="opp-mobile">vs Emmet Sheehan</span>
       </td>
       <td class="muted small vs-col">Emmet Sheehan</td>
-      <td class="num" data-sort-col="model" data-sort="0.1956">19.6%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.1956"><span class="">19.6%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.187"><span class="down">18.7%</span> <span class="delta down">-0.9%</span></td>
+      <td class="num" data-sort-col="model" data-sort="0.2011">20.1%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.2011"><span class="">20.1%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.1868"><span class="down">18.7%</span> <span class="delta down">-1.4%</span></td>
       <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
       <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-29 vs Detroit Tigers — 0 HR, 1/3"></span><span class="last7-cell last7-out" title="2026-04-30 vs Detroit Tigers — 0 HR, 0/1"></span><span class="last7-cell last7-hr" title="2026-05-01 vs Colorado Rockies — 1 HR, 1/1"></span><span class="last7-cell last7-hit" title="2026-05-02 vs Colorado Rockies — 0 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-05-04 vs Seattle Mariners — 0 HR, 0/1"></span><span class="last7-cell last7-out" title="2026-05-05 vs Seattle Mariners — 0 HR, 0/4"></span><span class="last7-cell last7-out" title="2026-05-06 vs Seattle Mariners — 0 HR, 0/4"></span></div></td>
     </tr>
 <tr>
       <td>
-        <span class="name">Samuel Basallo</span>
-        <span class="team">BAL</span>
-        <span class="opp-mobile">vs Jacob Lopez</span>
-      </td>
-      <td class="muted small vs-col">Jacob Lopez</td>
-      <td class="num" data-sort-col="model" data-sort="0.1909">19.1%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.1909"><span class="">19.1%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.1616"><span class="down">16.2%</span> <span class="delta down">-2.9%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-05-01 vs New York Yankees — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-02 vs New York Yankees — 0 HR, 1/2"></span><span class="last7-cell last7-hit" title="2026-05-03 vs New York Yankees — 0 HR, 1/2"></span><span class="last7-cell last7-out" title="2026-05-04 vs New York Yankees — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-05 vs Miami Marlins — 0 HR, 3/4"></span><span class="last7-cell last7-hit" title="2026-05-06 vs Miami Marlins — 0 HR, 1/3"></span><span class="last7-cell last7-hit" title="2026-05-07 vs Miami Marlins — 0 HR, 1/4"></span></div></td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Andy Pages</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="681624" aria-label="Mark Andy Pages" />
+          <span class="name">Andy Pages</span>
+        </label>
         <span class="team">LAD</span>
         <span class="opp-mobile">vs Chris Sale</span>
       </td>
       <td class="muted small vs-col">Chris Sale</td>
-      <td class="num" data-sort-col="model" data-sort="0.1877">18.8%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.232748"><span class="up">23.3%</span> <span class="delta up">+4.5%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.1666"><span class="down">16.7%</span> <span class="delta down">-2.1%</span></td>
+      <td class="num" data-sort-col="model" data-sort="0.1952">19.5%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.242048"><span class="up">24.2%</span> <span class="delta up">+4.7%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.1662"><span class="down">16.6%</span> <span class="delta down">-2.9%</span></td>
       <td class="center" data-sort-col="verdict" data-sort="4"><span class="badge badge-stronger">Stronger pick</span></td>
       <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-29 vs Miami Marlins — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-01 vs St. Louis Cardinals — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-02 vs St. Louis Cardinals — 0 HR, 1/3"></span><span class="last7-cell last7-hit" title="2026-05-03 vs St. Louis Cardinals — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-04 vs Houston Astros — 0 HR, 1/5"></span><span class="last7-cell last7-hit" title="2026-05-05 vs Houston Astros — 0 HR, 3/4"></span><span class="last7-cell last7-hr" title="2026-05-06 vs Houston Astros — 3 HR, 3/5"></span></div></td>
     </tr>
 <tr>
       <td>
-        <span class="name">Jeremiah Jackson</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="694212" aria-label="Mark Samuel Basallo" />
+          <span class="name">Samuel Basallo</span>
+        </label>
         <span class="team">BAL</span>
         <span class="opp-mobile">vs Jacob Lopez</span>
       </td>
       <td class="muted small vs-col">Jacob Lopez</td>
-      <td class="num" data-sort-col="model" data-sort="0.1845">18.4%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.1845"><span class="">18.4%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.2012"><span class="up">20.1%</span> <span class="delta up">+1.7%</span></td>
+      <td class="num" data-sort-col="model" data-sort="0.1946">19.5%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.1946"><span class="">19.5%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.1635"><span class="down">16.4%</span> <span class="delta down">-3.1%</span></td>
       <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-05-01 vs New York Yankees — 0 HR, 0/0"></span><span class="last7-cell last7-out" title="2026-05-02 vs New York Yankees — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-03 vs New York Yankees — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-04 vs New York Yankees — 0 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-05-05 vs Miami Marlins — 0 HR, 0/0"></span><span class="last7-cell last7-out" title="2026-05-06 vs Miami Marlins — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-07 vs Miami Marlins — 0 HR, 1/3"></span></div></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-05-01 vs New York Yankees — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-02 vs New York Yankees — 0 HR, 1/2"></span><span class="last7-cell last7-hit" title="2026-05-03 vs New York Yankees — 0 HR, 1/2"></span><span class="last7-cell last7-out" title="2026-05-04 vs New York Yankees — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-05 vs Miami Marlins — 0 HR, 3/4"></span><span class="last7-cell last7-hit" title="2026-05-06 vs Miami Marlins — 0 HR, 1/3"></span><span class="last7-cell last7-hit" title="2026-05-07 vs Miami Marlins — 0 HR, 1/4"></span></div></td>
     </tr>
 <tr>
       <td>
-        <span class="name">Max Muncy</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="689414" aria-label="Mark Liam Hicks" />
+          <span class="name">Liam Hicks</span>
+        </label>
+        <span class="team">MIA</span>
+        <span class="opp-mobile">vs Foster Griffin</span>
+      </td>
+      <td class="muted small vs-col">Foster Griffin</td>
+      <td class="num" data-sort-col="model" data-sort="0.1938">19.4%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.240312"><span class="up">24.0%</span> <span class="delta up">+4.7%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.1709"><span class="down">17.1%</span> <span class="delta down">-2.3%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="4"><span class="badge badge-stronger">Stronger pick</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hr" title="2026-04-29 vs Los Angeles Dodgers — 1 HR, 1/2"></span><span class="last7-cell last7-out" title="2026-05-01 vs Philadelphia Phillies — 0 HR, 0/2"></span><span class="last7-cell last7-hit" title="2026-05-02 vs Philadelphia Phillies — 0 HR, 1/3"></span><span class="last7-cell last7-out" title="2026-05-04 vs Philadelphia Phillies — 0 HR, 0/4"></span><span class="last7-cell last7-hr" title="2026-05-05 vs Baltimore Orioles — 1 HR, 4/5"></span><span class="last7-cell last7-hit" title="2026-05-06 vs Baltimore Orioles — 0 HR, 1/3"></span><span class="last7-cell last7-hr" title="2026-05-07 vs Baltimore Orioles — 1 HR, 1/4"></span></div></td>
+    </tr>
+<tr>
+      <td>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="571970" aria-label="Mark Max Muncy" />
+          <span class="name">Max Muncy</span>
+        </label>
         <span class="team">LAD</span>
         <span class="opp-mobile">vs Chris Sale</span>
       </td>
       <td class="muted small vs-col">Chris Sale</td>
-      <td class="num" data-sort-col="model" data-sort="0.1779">17.8%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.1779"><span class="">17.8%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.1615"><span class="down">16.2%</span> <span class="delta down">-1.6%</span></td>
+      <td class="num" data-sort-col="model" data-sort="0.1813">18.1%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.1813"><span class="">18.1%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.1521"><span class="down">15.2%</span> <span class="delta down">-2.9%</span></td>
       <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
       <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-29 vs Miami Marlins — 0 HR, 1/3"></span><span class="last7-cell last7-hit" title="2026-05-01 vs St. Louis Cardinals — 0 HR, 1/3"></span><span class="last7-cell last7-hit" title="2026-05-02 vs St. Louis Cardinals — 0 HR, 2/3"></span><span class="last7-cell last7-hit" title="2026-05-03 vs St. Louis Cardinals — 0 HR, 1/3"></span><span class="last7-cell last7-out" title="2026-05-04 vs Houston Astros — 0 HR, 0/3"></span><span class="last7-cell last7-out" title="2026-05-05 vs Houston Astros — 0 HR, 0/3"></span><span class="last7-cell last7-hit" title="2026-05-06 vs Houston Astros — 0 HR, 1/3"></span></div></td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Carlos Cortes</span>
-        <span class="team">ATH</span>
-        <span class="opp-mobile">vs Kyle Bradish</span>
-      </td>
-      <td class="muted small vs-col">Kyle Bradish</td>
-      <td class="num" data-sort-col="model" data-sort="0.1773">17.7%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.1773"><span class="">17.7%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.159"><span class="down">15.9%</span> <span class="delta down">-1.8%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-28 vs Kansas City Royals — 0 HR, 1/1"></span><span class="last7-cell last7-hit" title="2026-04-29 vs Kansas City Royals — 0 HR, 2/3"></span><span class="last7-cell last7-hit" title="2026-04-30 vs Kansas City Royals — 0 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-05-01 vs Cleveland Guardians — 0 HR, 0/1"></span><span class="last7-cell last7-hit" title="2026-05-02 vs Cleveland Guardians — 0 HR, 2/5"></span><span class="last7-cell last7-out" title="2026-05-06 vs Philadelphia Phillies — 0 HR, 0/3"></span><span class="last7-cell last7-hit" title="2026-05-07 vs Philadelphia Phillies — 0 HR, 2/5"></span></div></td>
     </tr>
         </tbody>
       </table>
@@ -774,303 +868,378 @@ footer {
         <tbody>
           <tr>
       <td>
-        <span class="name">Shea Langeliers</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="669127" aria-label="Mark Shea Langeliers" />
+          <span class="name">Shea Langeliers</span>
+        </label>
         <span class="team">ATH</span>
         <span class="opp-mobile">vs Kyle Bradish</span>
       </td>
       <td class="muted small vs-col">Kyle Bradish</td>
-      <td class="num strong">80.6%</td>
-      <td class="num">44.2%</td>
-      <td class="num">15.8%</td>
-      <td class="num">1.45</td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Jacob Wilson</span>
-        <span class="team">ATH</span>
-        <span class="opp-mobile">vs Kyle Bradish</span>
-      </td>
-      <td class="muted small vs-col">Kyle Bradish</td>
-      <td class="num strong">79.9%</td>
+      <td class="num strong">79.8%</td>
       <td class="num">43.6%</td>
-      <td class="num">15.8%</td>
+      <td class="num">15.3%</td>
       <td class="num">1.43</td>
     </tr>
 <tr>
       <td>
-        <span class="name">Carlos Cortes</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="805779" aria-label="Mark Jacob Wilson" />
+          <span class="name">Jacob Wilson</span>
+        </label>
         <span class="team">ATH</span>
         <span class="opp-mobile">vs Kyle Bradish</span>
       </td>
       <td class="muted small vs-col">Kyle Bradish</td>
-      <td class="num strong">78.3%</td>
-      <td class="num">39.6%</td>
-      <td class="num">12.4%</td>
+      <td class="num strong">79.5%</td>
+      <td class="num">43.5%</td>
+      <td class="num">14.9%</td>
+      <td class="num">1.42</td>
+    </tr>
+<tr>
+      <td>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="666126" aria-label="Mark Carlos Cortes" />
+          <span class="name">Carlos Cortes</span>
+        </label>
+        <span class="team">ATH</span>
+        <span class="opp-mobile">vs Kyle Bradish</span>
+      </td>
+      <td class="muted small vs-col">Kyle Bradish</td>
+      <td class="num strong">78.0%</td>
+      <td class="num">40.0%</td>
+      <td class="num">12.6%</td>
       <td class="num">1.33</td>
     </tr>
 <tr>
       <td>
-        <span class="name">Elly De La Cruz</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="682829" aria-label="Mark Elly De La Cruz" />
+          <span class="name">Elly De La Cruz</span>
+        </label>
         <span class="team">CIN</span>
         <span class="opp-mobile">vs Mike Burrows</span>
       </td>
       <td class="muted small vs-col">Mike Burrows</td>
-      <td class="num strong">77.9%</td>
-      <td class="num">39.1%</td>
-      <td class="num">12.1%</td>
-      <td class="num">1.31</td>
+      <td class="num strong">76.9%</td>
+      <td class="num">39.6%</td>
+      <td class="num">12.7%</td>
+      <td class="num">1.32</td>
     </tr>
 <tr>
       <td>
-        <span class="name">Troy Johnston</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="687859" aria-label="Mark Troy Johnston" />
+          <span class="name">Troy Johnston</span>
+        </label>
         <span class="team">COL</span>
         <span class="opp-mobile">vs Jesús Luzardo</span>
       </td>
       <td class="muted small vs-col">Jesús Luzardo</td>
-      <td class="num strong">76.0%</td>
-      <td class="num">37.2%</td>
-      <td class="num">11.7%</td>
-      <td class="num">1.27</td>
+      <td class="num strong">76.5%</td>
+      <td class="num">37.7%</td>
+      <td class="num">11.8%</td>
+      <td class="num">1.29</td>
     </tr>
 <tr>
       <td>
-        <span class="name">Jeff McNeil</span>
-        <span class="team">ATH</span>
-        <span class="opp-mobile">vs Kyle Bradish</span>
-      </td>
-      <td class="muted small vs-col">Kyle Bradish</td>
-      <td class="num strong">75.8%</td>
-      <td class="num">36.9%</td>
-      <td class="num">11.3%</td>
-      <td class="num">1.26</td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Ozzie Albies</span>
-        <span class="team">ATL</span>
-        <span class="opp-mobile">vs Emmet Sheehan</span>
-      </td>
-      <td class="muted small vs-col">Emmet Sheehan</td>
-      <td class="num strong">75.8%</td>
-      <td class="num">36.2%</td>
-      <td class="num">10.5%</td>
-      <td class="num">1.24</td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">TJ Rumfield</span>
-        <span class="team">COL</span>
-        <span class="opp-mobile">vs Jesús Luzardo</span>
-      </td>
-      <td class="muted small vs-col">Jesús Luzardo</td>
-      <td class="num strong">75.6%</td>
-      <td class="num">37.9%</td>
-      <td class="num">11.7%</td>
-      <td class="num">1.28</td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Chandler Simpson</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="802415" aria-label="Mark Chandler Simpson" />
+          <span class="name">Chandler Simpson</span>
+        </label>
         <span class="team">TB</span>
         <span class="opp-mobile">vs Connelly Early</span>
       </td>
       <td class="muted small vs-col">Connelly Early</td>
-      <td class="num strong">75.3%</td>
-      <td class="num">36.9%</td>
-      <td class="num">11.9%</td>
-      <td class="num">1.27</td>
+      <td class="num strong">75.8%</td>
+      <td class="num">37.9%</td>
+      <td class="num">12.4%</td>
+      <td class="num">1.29</td>
     </tr>
 <tr>
       <td>
-        <span class="name">Sal Stewart</span>
-        <span class="team">CIN</span>
-        <span class="opp-mobile">vs Mike Burrows</span>
-      </td>
-      <td class="muted small vs-col">Mike Burrows</td>
-      <td class="num strong">74.6%</td>
-      <td class="num">33.8%</td>
-      <td class="num">9.3%</td>
-      <td class="num">1.19</td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Mickey Moniak</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="681198" aria-label="Mark TJ Rumfield" />
+          <span class="name">TJ Rumfield</span>
+        </label>
         <span class="team">COL</span>
         <span class="opp-mobile">vs Jesús Luzardo</span>
       </td>
       <td class="muted small vs-col">Jesús Luzardo</td>
-      <td class="num strong">74.3%</td>
-      <td class="num">34.7%</td>
-      <td class="num">10.1%</td>
-      <td class="num">1.21</td>
+      <td class="num strong">75.5%</td>
+      <td class="num">38.2%</td>
+      <td class="num">11.8%</td>
+      <td class="num">1.28</td>
     </tr>
 <tr>
       <td>
-        <span class="name">Otto Lopez</span>
-        <span class="team">MIA</span>
-        <span class="opp-mobile">vs Foster Griffin</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="643446" aria-label="Mark Jeff McNeil" />
+          <span class="name">Jeff McNeil</span>
+        </label>
+        <span class="team">ATH</span>
+        <span class="opp-mobile">vs Kyle Bradish</span>
       </td>
-      <td class="muted small vs-col">Foster Griffin</td>
-      <td class="num strong">74.1%</td>
-      <td class="num">34.6%</td>
-      <td class="num">10.0%</td>
-      <td class="num">1.21</td>
+      <td class="muted small vs-col">Kyle Bradish</td>
+      <td class="num strong">75.5%</td>
+      <td class="num">37.0%</td>
+      <td class="num">11.1%</td>
+      <td class="num">1.26</td>
     </tr>
 <tr>
       <td>
-        <span class="name">Yordan Alvarez</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="670541" aria-label="Mark Yordan Alvarez" />
+          <span class="name">Yordan Alvarez</span>
+        </label>
         <span class="team">HOU</span>
         <span class="opp-mobile">vs Nick Lodolo</span>
       </td>
       <td class="muted small vs-col">Nick Lodolo</td>
-      <td class="num strong">74.1%</td>
-      <td class="num">36.5%</td>
-      <td class="num">11.3%</td>
+      <td class="num strong">74.7%</td>
+      <td class="num">36.0%</td>
+      <td class="num">11.1%</td>
       <td class="num">1.24</td>
     </tr>
 <tr>
       <td>
-        <span class="name">Christian Walker</span>
-        <span class="team">HOU</span>
-        <span class="opp-mobile">vs Nick Lodolo</span>
-      </td>
-      <td class="muted small vs-col">Nick Lodolo</td>
-      <td class="num strong">73.9%</td>
-      <td class="num">35.4%</td>
-      <td class="num">10.4%</td>
-      <td class="num">1.22</td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Drake Baldwin</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="645277" aria-label="Mark Ozzie Albies" />
+          <span class="name">Ozzie Albies</span>
+        </label>
         <span class="team">ATL</span>
         <span class="opp-mobile">vs Emmet Sheehan</span>
       </td>
       <td class="muted small vs-col">Emmet Sheehan</td>
-      <td class="num strong">73.3%</td>
-      <td class="num">33.6%</td>
-      <td class="num">9.3%</td>
-      <td class="num">1.18</td>
+      <td class="num strong">74.7%</td>
+      <td class="num">35.6%</td>
+      <td class="num">10.2%</td>
+      <td class="num">1.22</td>
     </tr>
 <tr>
       <td>
-        <span class="name">Ildemaro Vargas</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="572233" aria-label="Mark Christian Walker" />
+          <span class="name">Christian Walker</span>
+        </label>
+        <span class="team">HOU</span>
+        <span class="opp-mobile">vs Nick Lodolo</span>
+      </td>
+      <td class="muted small vs-col">Nick Lodolo</td>
+      <td class="num strong">74.4%</td>
+      <td class="num">35.0%</td>
+      <td class="num">10.6%</td>
+      <td class="num">1.22</td>
+    </tr>
+<tr>
+      <td>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="672640" aria-label="Mark Otto Lopez" />
+          <span class="name">Otto Lopez</span>
+        </label>
+        <span class="team">MIA</span>
+        <span class="opp-mobile">vs Foster Griffin</span>
+      </td>
+      <td class="muted small vs-col">Foster Griffin</td>
+      <td class="num strong">74.4%</td>
+      <td class="num">35.3%</td>
+      <td class="num">10.5%</td>
+      <td class="num">1.22</td>
+    </tr>
+<tr>
+      <td>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="686948" aria-label="Mark Drake Baldwin" />
+          <span class="name">Drake Baldwin</span>
+        </label>
+        <span class="team">ATL</span>
+        <span class="opp-mobile">vs Emmet Sheehan</span>
+      </td>
+      <td class="muted small vs-col">Emmet Sheehan</td>
+      <td class="num strong">73.9%</td>
+      <td class="num">35.2%</td>
+      <td class="num">10.2%</td>
+      <td class="num">1.21</td>
+    </tr>
+<tr>
+      <td>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="666160" aria-label="Mark Mickey Moniak" />
+          <span class="name">Mickey Moniak</span>
+        </label>
+        <span class="team">COL</span>
+        <span class="opp-mobile">vs Jesús Luzardo</span>
+      </td>
+      <td class="muted small vs-col">Jesús Luzardo</td>
+      <td class="num strong">73.8%</td>
+      <td class="num">34.9%</td>
+      <td class="num">10.4%</td>
+      <td class="num">1.21</td>
+    </tr>
+<tr>
+      <td>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="701398" aria-label="Mark Sal Stewart" />
+          <span class="name">Sal Stewart</span>
+        </label>
+        <span class="team">CIN</span>
+        <span class="opp-mobile">vs Mike Burrows</span>
+      </td>
+      <td class="muted small vs-col">Mike Burrows</td>
+      <td class="num strong">73.5%</td>
+      <td class="num">32.8%</td>
+      <td class="num">9.0%</td>
+      <td class="num">1.17</td>
+    </tr>
+<tr>
+      <td>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="545121" aria-label="Mark Ildemaro Vargas" />
+          <span class="name">Ildemaro Vargas</span>
+        </label>
         <span class="team">ARI</span>
         <span class="opp-mobile">vs Nolan McLean</span>
       </td>
       <td class="muted small vs-col">Nolan McLean</td>
-      <td class="num strong">72.1%</td>
-      <td class="num">31.0%</td>
-      <td class="num">8.2%</td>
-      <td class="num">1.13</td>
+      <td class="num strong">72.5%</td>
+      <td class="num">31.8%</td>
+      <td class="num">8.6%</td>
+      <td class="num">1.14</td>
     </tr>
 <tr>
       <td>
-        <span class="name">Ernie Clement</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="676391" aria-label="Mark Ernie Clement" />
+          <span class="name">Ernie Clement</span>
+        </label>
         <span class="team">TOR</span>
         <span class="opp-mobile">vs Reid Detmers</span>
       </td>
       <td class="muted small vs-col">Reid Detmers</td>
       <td class="num strong">72.1%</td>
-      <td class="num">32.1%</td>
+      <td class="num">32.5%</td>
       <td class="num">9.0%</td>
       <td class="num">1.15</td>
     </tr>
 <tr>
       <td>
-        <span class="name">Jeremiah Jackson</span>
-        <span class="team">BAL</span>
-        <span class="opp-mobile">vs Jacob Lopez</span>
-      </td>
-      <td class="muted small vs-col">Jacob Lopez</td>
-      <td class="num strong">71.6%</td>
-      <td class="num">31.5%</td>
-      <td class="num">8.0%</td>
-      <td class="num">1.12</td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Nico Hoerner</span>
-        <span class="team">CHC</span>
-        <span class="opp-mobile">vs Kumar Rocker</span>
-      </td>
-      <td class="muted small vs-col">Kumar Rocker</td>
-      <td class="num strong">71.4%</td>
-      <td class="num">32.6%</td>
-      <td class="num">8.9%</td>
-      <td class="num">1.15</td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Yandy Diaz</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="650490" aria-label="Mark Yandy Diaz" />
+          <span class="name">Yandy Diaz</span>
+        </label>
         <span class="team">TB</span>
         <span class="opp-mobile">vs Connelly Early</span>
       </td>
       <td class="muted small vs-col">Connelly Early</td>
-      <td class="num strong">71.3%</td>
-      <td class="num">31.6%</td>
-      <td class="num">8.4%</td>
+      <td class="num strong">72.1%</td>
+      <td class="num">32.7%</td>
+      <td class="num">9.8%</td>
+      <td class="num">1.16</td>
+    </tr>
+<tr>
+      <td>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="668715" aria-label="Mark Spencer Steer" />
+          <span class="name">Spencer Steer</span>
+        </label>
+        <span class="team">CIN</span>
+        <span class="opp-mobile">vs Mike Burrows</span>
+      </td>
+      <td class="muted small vs-col">Mike Burrows</td>
+      <td class="num strong">72.0%</td>
+      <td class="num">31.7%</td>
+      <td class="num">8.3%</td>
       <td class="num">1.13</td>
     </tr>
 <tr>
       <td>
-        <span class="name">Brandon Marsh</span>
-        <span class="team">PHI</span>
-        <span class="opp-mobile">vs Chase Dollander</span>
-      </td>
-      <td class="muted small vs-col">Chase Dollander</td>
-      <td class="num strong">71.3%</td>
-      <td class="num">30.1%</td>
-      <td class="num">7.0%</td>
-      <td class="num">1.09</td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Vladimir Guerrero Jr.</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="665489" aria-label="Mark Vladimir Guerrero Jr." />
+          <span class="name">Vladimir Guerrero Jr.</span>
+        </label>
         <span class="team">TOR</span>
         <span class="opp-mobile">vs Reid Detmers</span>
       </td>
       <td class="muted small vs-col">Reid Detmers</td>
-      <td class="num strong">71.2%</td>
-      <td class="num">31.8%</td>
-      <td class="num">8.2%</td>
-      <td class="num">1.12</td>
+      <td class="num strong">71.8%</td>
+      <td class="num">32.2%</td>
+      <td class="num">8.8%</td>
+      <td class="num">1.14</td>
     </tr>
 <tr>
       <td>
-        <span class="name">Spencer Steer</span>
-        <span class="team">CIN</span>
-        <span class="opp-mobile">vs Mike Burrows</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="663538" aria-label="Mark Nico Hoerner" />
+          <span class="name">Nico Hoerner</span>
+        </label>
+        <span class="team">CHC</span>
+        <span class="opp-mobile">vs Kumar Rocker</span>
       </td>
-      <td class="muted small vs-col">Mike Burrows</td>
-      <td class="num strong">71.0%</td>
+      <td class="muted small vs-col">Kumar Rocker</td>
+      <td class="num strong">71.5%</td>
+      <td class="num">32.3%</td>
+      <td class="num">9.0%</td>
+      <td class="num">1.15</td>
+    </tr>
+<tr>
+      <td>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="677800" aria-label="Mark Wilyer Abreu" />
+          <span class="name">Wilyer Abreu</span>
+        </label>
+        <span class="team">BOS</span>
+        <span class="opp-mobile">vs Jesse Scholtens</span>
+      </td>
+      <td class="muted small vs-col">Jesse Scholtens</td>
+      <td class="num strong">70.9%</td>
       <td class="num">31.6%</td>
-      <td class="num">7.8%</td>
-      <td class="num">1.12</td>
+      <td class="num">8.7%</td>
+      <td class="num">1.13</td>
     </tr>
 <tr>
       <td>
-        <span class="name">Matt Olson</span>
-        <span class="team">ATL</span>
-        <span class="opp-mobile">vs Emmet Sheehan</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="669016" aria-label="Mark Brandon Marsh" />
+          <span class="name">Brandon Marsh</span>
+        </label>
+        <span class="team">PHI</span>
+        <span class="opp-mobile">vs Chase Dollander</span>
       </td>
-      <td class="muted small vs-col">Emmet Sheehan</td>
-      <td class="num strong">71.0%</td>
-      <td class="num">31.0%</td>
-      <td class="num">7.9%</td>
+      <td class="muted small vs-col">Chase Dollander</td>
+      <td class="num strong">70.8%</td>
+      <td class="num">30.0%</td>
+      <td class="num">7.8%</td>
+      <td class="num">1.10</td>
+    </tr>
+<tr>
+      <td>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="669236" aria-label="Mark Jeremiah Jackson" />
+          <span class="name">Jeremiah Jackson</span>
+        </label>
+        <span class="team">BAL</span>
+        <span class="opp-mobile">vs Jacob Lopez</span>
+      </td>
+      <td class="muted small vs-col">Jacob Lopez</td>
+      <td class="num strong">70.7%</td>
+      <td class="num">31.3%</td>
+      <td class="num">8.2%</td>
       <td class="num">1.11</td>
     </tr>
 <tr>
       <td>
-        <span class="name">Nathaniel Lowe</span>
-        <span class="team">CIN</span>
-        <span class="opp-mobile">vs Mike Burrows</span>
+        <label class="pick-label">
+          <input type="checkbox" class="pick-check" data-player-id="694212" aria-label="Mark Samuel Basallo" />
+          <span class="name">Samuel Basallo</span>
+        </label>
+        <span class="team">BAL</span>
+        <span class="opp-mobile">vs Jacob Lopez</span>
       </td>
-      <td class="muted small vs-col">Mike Burrows</td>
-      <td class="num strong">69.9%</td>
-      <td class="num">28.9%</td>
-      <td class="num">6.7%</td>
-      <td class="num">1.06</td>
+      <td class="muted small vs-col">Jacob Lopez</td>
+      <td class="num strong">70.4%</td>
+      <td class="num">29.8%</td>
+      <td class="num">7.4%</td>
+      <td class="num">1.09</td>
     </tr>
         </tbody>
       </table>
@@ -1091,85 +1260,103 @@ footer {
           <h3>Conviction Parlay</h3>
           <div class="parlay-implied">
             <div class="label">Implied</div>
-            <div class="prob">2.16%</div>
-            <div class="odds">+4525</div>
+            <div class="prob">2.24%</div>
+            <div class="odds">+4358</div>
           </div>
         </div>
         <div class="parlay-blurb">Top 3 by model HR% across distinct games. Every signal — park, platoon, pitcher hr9, weather, season power — already priced in. The safest line.</div>
         <div class="parlay-legs"><div class="parlay-leg">
             <div class="parlay-leg-head">
               <div class="parlay-leg-name">
-                <span class="name">Sal Stewart</span>
+                <label class="pick-label">
+                  <input type="checkbox" class="pick-check" data-player-id="682829" aria-label="Mark Elly De La Cruz" />
+                  <span class="name">Elly De La Cruz</span>
+                </label>
                 <span class="team">CIN</span>
-                <span class="arch-badge arch-hot">Hot</span>
+                <span class="arch-badge arch-raw">Raw</span>
               </div>
-              <span class="parlay-leg-pct">31.5%</span>
+              <span class="parlay-leg-pct">31.2%</span>
             </div>
             <div class="parlay-leg-vs">vs Mike Burrows</div>
-            <div class="parlay-leg-rationale">Homered last game · 1 HR in last 7 — model historically under-predicts this group by ~24%.</div>
+            <div class="parlay-leg-rationale">Elevated model HR% with no momentum lift and no BvP boost — pure season-rate trust.</div>
           </div><div class="parlay-leg">
             <div class="parlay-leg-head">
               <div class="parlay-leg-name">
-                <span class="name">Matt Olson</span>
+                <label class="pick-label">
+                  <input type="checkbox" class="pick-check" data-player-id="621566" aria-label="Mark Matt Olson" />
+                  <span class="name">Matt Olson</span>
+                </label>
                 <span class="team">ATL</span>
                 <span class="arch-badge arch-raw">Raw</span>
               </div>
-              <span class="parlay-leg-pct">27.7%</span>
+              <span class="parlay-leg-pct">26.9%</span>
             </div>
             <div class="parlay-leg-vs">vs Emmet Sheehan</div>
             <div class="parlay-leg-rationale">Elevated model HR% with no momentum lift and no BvP boost — pure season-rate trust.</div>
           </div><div class="parlay-leg">
             <div class="parlay-leg-head">
               <div class="parlay-leg-name">
-                <span class="name">Gunnar Henderson</span>
-                <span class="team">BAL</span>
-                <span class="arch-badge arch-raw">Raw</span>
+                <label class="pick-label">
+                  <input type="checkbox" class="pick-check" data-player-id="808959" aria-label="Mark Munetaka Murakami" />
+                  <span class="name">Munetaka Murakami</span>
+                </label>
+                <span class="team">CHW</span>
+                <span class="arch-badge arch-stacked">Stacked</span>
               </div>
-              <span class="parlay-leg-pct">24.8%</span>
+              <span class="parlay-leg-pct">26.7%</span>
             </div>
-            <div class="parlay-leg-vs">vs Jacob Lopez</div>
-            <div class="parlay-leg-rationale">Elevated model HR% with no momentum lift and no BvP boost — pure season-rate trust.</div>
+            <div class="parlay-leg-vs">vs Emerson Hancock</div>
+            <div class="parlay-leg-rationale">BvP history vs starter lifts the rate +1.1pp on top of an already-elevated model line.</div>
           </div></div>
       </div><div class="parlay-card">
         <div class="parlay-card-head">
           <h3>Hot-Hand Parlay</h3>
           <div class="parlay-implied">
             <div class="label">Implied</div>
-            <div class="prob">1.76%</div>
-            <div class="odds">+5580</div>
+            <div class="prob">1.60%</div>
+            <div class="odds">+6142</div>
           </div>
         </div>
         <div class="parlay-blurb">Boosted by yesterday&#39;s HR — the Schwarber slot. Backtest shows model under-predicts this cohort by ~24%.</div>
         <div class="parlay-legs"><div class="parlay-leg">
             <div class="parlay-leg-head">
               <div class="parlay-leg-name">
-                <span class="name">Sal Stewart</span>
+                <label class="pick-label">
+                  <input type="checkbox" class="pick-check" data-player-id="701398" aria-label="Mark Sal Stewart" />
+                  <span class="name">Sal Stewart</span>
+                </label>
                 <span class="team">CIN</span>
                 <span class="arch-badge arch-hot">Hot</span>
               </div>
-              <span class="parlay-leg-pct">31.5%</span>
+              <span class="parlay-leg-pct">30.1%</span>
             </div>
             <div class="parlay-leg-vs">vs Mike Burrows</div>
             <div class="parlay-leg-rationale">Homered last game · 1 HR in last 7 — model historically under-predicts this group by ~24%.</div>
           </div><div class="parlay-leg">
             <div class="parlay-leg-head">
               <div class="parlay-leg-name">
-                <span class="name">Kyle Schwarber</span>
+                <label class="pick-label">
+                  <input type="checkbox" class="pick-check" data-player-id="656941" aria-label="Mark Kyle Schwarber" />
+                  <span class="name">Kyle Schwarber</span>
+                </label>
                 <span class="team">PHI</span>
                 <span class="arch-badge arch-hot">Hot</span>
               </div>
-              <span class="parlay-leg-pct">24.8%</span>
+              <span class="parlay-leg-pct">24.1%</span>
             </div>
             <div class="parlay-leg-vs">vs Chase Dollander</div>
             <div class="parlay-leg-rationale">Homered last game · 1 HR in last 7 — model historically under-predicts this group by ~24%.</div>
           </div><div class="parlay-leg">
             <div class="parlay-leg-head">
               <div class="parlay-leg-name">
-                <span class="name">Shea Langeliers</span>
+                <label class="pick-label">
+                  <input type="checkbox" class="pick-check" data-player-id="669127" aria-label="Mark Shea Langeliers" />
+                  <span class="name">Shea Langeliers</span>
+                </label>
                 <span class="team">ATH</span>
                 <span class="arch-badge arch-hot">Hot</span>
               </div>
-              <span class="parlay-leg-pct">22.6%</span>
+              <span class="parlay-leg-pct">22.0%</span>
             </div>
             <div class="parlay-leg-vs">vs Kyle Bradish</div>
             <div class="parlay-leg-rationale">Homered last game · 3 HR in last 7 — model historically under-predicts this group by ~24%.</div>
@@ -1179,41 +1366,50 @@ footer {
           <h3>Power-Trust Parlay</h3>
           <div class="parlay-implied">
             <div class="label">Implied</div>
-            <div class="prob">2.13%</div>
-            <div class="odds">+4588</div>
+            <div class="prob">2.02%</div>
+            <div class="odds">+4855</div>
           </div>
         </div>
         <div class="parlay-blurb">Hicks/Caminero archetype — top HR% with no momentum lift and no BvP help. Trusting the raw season rate over short-term context.</div>
         <div class="parlay-legs"><div class="parlay-leg">
             <div class="parlay-leg-head">
               <div class="parlay-leg-name">
-                <span class="name">Elly De La Cruz</span>
+                <label class="pick-label">
+                  <input type="checkbox" class="pick-check" data-player-id="682829" aria-label="Mark Elly De La Cruz" />
+                  <span class="name">Elly De La Cruz</span>
+                </label>
                 <span class="team">CIN</span>
                 <span class="arch-badge arch-raw">Raw</span>
               </div>
-              <span class="parlay-leg-pct">31.1%</span>
+              <span class="parlay-leg-pct">31.2%</span>
             </div>
             <div class="parlay-leg-vs">vs Mike Burrows</div>
             <div class="parlay-leg-rationale">Elevated model HR% with no momentum lift and no BvP boost — pure season-rate trust.</div>
           </div><div class="parlay-leg">
             <div class="parlay-leg-head">
               <div class="parlay-leg-name">
-                <span class="name">Matt Olson</span>
+                <label class="pick-label">
+                  <input type="checkbox" class="pick-check" data-player-id="621566" aria-label="Mark Matt Olson" />
+                  <span class="name">Matt Olson</span>
+                </label>
                 <span class="team">ATL</span>
                 <span class="arch-badge arch-raw">Raw</span>
               </div>
-              <span class="parlay-leg-pct">27.7%</span>
+              <span class="parlay-leg-pct">26.9%</span>
             </div>
             <div class="parlay-leg-vs">vs Emmet Sheehan</div>
             <div class="parlay-leg-rationale">Elevated model HR% with no momentum lift and no BvP boost — pure season-rate trust.</div>
           </div><div class="parlay-leg">
             <div class="parlay-leg-head">
               <div class="parlay-leg-name">
-                <span class="name">Gunnar Henderson</span>
+                <label class="pick-label">
+                  <input type="checkbox" class="pick-check" data-player-id="683002" aria-label="Mark Gunnar Henderson" />
+                  <span class="name">Gunnar Henderson</span>
+                </label>
                 <span class="team">BAL</span>
                 <span class="arch-badge arch-raw">Raw</span>
               </div>
-              <span class="parlay-leg-pct">24.8%</span>
+              <span class="parlay-leg-pct">24.0%</span>
             </div>
             <div class="parlay-leg-vs">vs Jacob Lopez</div>
             <div class="parlay-leg-rationale">Elevated model HR% with no momentum lift and no BvP boost — pure season-rate trust.</div>
@@ -1292,6 +1488,39 @@ footer {
       });
     });
     applySort();
+  });
+})();
+
+// Pick-checkbox persistence — local-only, scoped to today's date so old
+// snapshots don't leak into a fresh day. Toggling any checkbox for a player
+// flips every checkbox with the same player ID (HR table, Hits table, and
+// parlay legs all share the same data-player-id).
+(function () {
+  var KEY = 'picks:' + "2026-05-08";
+  var picked = new Set();
+  try {
+    var raw = localStorage.getItem(KEY);
+    if (raw) JSON.parse(raw).forEach(function (id) { picked.add(String(id)); });
+  } catch (e) { /* storage blocked */ }
+
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(Array.from(picked))); } catch (e) { /* storage blocked */ }
+  }
+
+  function syncAll(playerId, checked) {
+    document.querySelectorAll('.pick-check[data-player-id="' + playerId + '"]').forEach(function (el) {
+      el.checked = checked;
+    });
+  }
+
+  document.querySelectorAll('.pick-check').forEach(function (el) {
+    var id = el.getAttribute('data-player-id');
+    if (picked.has(id)) el.checked = true;
+    el.addEventListener('change', function () {
+      if (el.checked) picked.add(id); else picked.delete(id);
+      syncAll(id, el.checked);
+      save();
+    });
   });
 })();
 </script>
