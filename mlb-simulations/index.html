@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MLB picks · 2026-05-06</title>
-<meta name="description" content="HR + hit picks for 2026-05-06 from a 10k-sim Monte Carlo model with empirical-Bayes BvP shrinkage." />
+<title>MLB picks · 2026-05-08</title>
+<meta name="description" content="HR + hit picks for 2026-05-08 from a 10k-sim Monte Carlo model with empirical-Bayes BvP shrinkage." />
 <style>
 /* Theme is driven by a data-theme attribute on <html>, set by the inline
    script in <head> using either localStorage or the system preference.
@@ -248,6 +248,73 @@ tr:last-child td { border-bottom: 0; }
 }
 .legend .key { display: inline-flex; align-items: center; gap: 5px; }
 .legend .swatch { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.parlay-section { background: var(--card); border-color: var(--amber); }
+.parlay-section header { background: var(--amber-bg); border-bottom-color: var(--amber); }
+.parlay-section h2 { color: var(--amber); }
+.parlay-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  padding: 16px;
+}
+.parlay-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.parlay-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+.parlay-card-head h3 { margin: 0; font-size: 14px; font-weight: 600; }
+.parlay-implied { text-align: right; }
+.parlay-implied .label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+.parlay-implied .prob { font-size: 14px; font-weight: 700; color: var(--amber); font-variant-numeric: tabular-nums; }
+.parlay-implied .odds { font-size: 10px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.parlay-blurb { font-size: 11px; color: var(--muted); line-height: 1.4; }
+.parlay-legs { display: flex; flex-direction: column; gap: 6px; }
+.parlay-leg {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 10px;
+  background: var(--card);
+}
+.parlay-leg-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+.parlay-leg-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+.parlay-leg-name .name { font-size: 13px; }
+.parlay-leg-name .team { font-size: 10px; color: var(--muted); }
+.parlay-leg-vs { font-size: 10px; color: var(--muted); margin-top: 2px; }
+.parlay-leg-pct { font-size: 13px; font-weight: 600; color: var(--rose); font-variant-numeric: tabular-nums; }
+.parlay-leg-rationale { font-size: 10px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+.arch-badge {
+  font-size: 9px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 999px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.arch-hot { background: var(--rose-bg); color: var(--rose); }
+.arch-stacked { background: var(--emerald-bg); color: var(--emerald); }
+.arch-raw { background: transparent; color: var(--muted); border: 1px solid var(--border); }
 footer {
   margin-top: 32px;
   text-align: center;
@@ -308,11 +375,11 @@ footer {
 <div class="container">
   <header class="page-header">
     <div>
-      <h1>MLB picks · 2026-05-06</h1>
+      <h1>MLB picks · 2026-05-08</h1>
       <div class="meta">
-        <span class="pill">4 games</span>
+        <span class="pill">14 games</span>
         <span class="pill">10,000 sims / game</span>
-        <span>Generated Wed, 06 May 2026 00:44:49 GMT</span>
+        <span>Generated Fri, 08 May 2026 15:33:55 GMT</span>
       </div>
     </div>
     <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
@@ -337,7 +404,7 @@ footer {
       </div>
     </header>
     <div class="table-wrap">
-      <table data-sortable data-default-sort="adjusted">
+      <table data-sortable data-default-sort="bvp">
         <thead>
           <tr>
             <th>Batter</th>
@@ -352,328 +419,328 @@ footer {
         <tbody>
           <tr>
       <td>
-        <span class="name">Colson Montgomery</span>
-        <span class="team">CHW</span>
-        <span class="opp-mobile">vs Sam Aldegheri</span>
+        <span class="name">Sal Stewart</span>
+        <span class="team">CIN</span>
+        <span class="opp-mobile">vs Mike Burrows</span>
       </td>
-      <td class="muted small vs-col">Sam Aldegheri</td>
-      <td class="num" data-sort-col="model" data-sort="0.2536">25.4%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.21809599999999998"><span class="down">21.8%</span> <span class="delta down">-3.6%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.249"><span class="down">24.9%</span> <span class="delta down">-0.5%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="3"><span class="badge badge-hold">Hold</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-27 vs Los Angeles Angels — 0 HR, 1/4"></span><span class="last7-cell last7-hr" title="2026-04-28 vs Los Angeles Angels — 1 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-04-29 vs Los Angeles Angels — 0 HR, 1/5"></span><span class="last7-cell last7-hr" title="2026-05-01 vs San Diego Padres — 1 HR, 1/3"></span><span class="last7-cell last7-out" title="2026-05-02 vs San Diego Padres — 0 HR, 0/3"></span><span class="last7-cell last7-out" title="2026-05-03 vs San Diego Padres — 0 HR, 0/2"></span><span class="last7-cell last7-hit" title="2026-05-04 vs Los Angeles Angels — 0 HR, 1/5"></span></div></td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Miguel Vargas</span>
-        <span class="team">CHW</span>
-        <span class="opp-mobile">vs Sam Aldegheri</span>
-      </td>
-      <td class="muted small vs-col">Sam Aldegheri</td>
-      <td class="num" data-sort-col="model" data-sort="0.2396">24.0%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.29710400000000003"><span class="up">29.7%</span> <span class="delta up">+5.8%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.2355"><span class="down">23.5%</span> <span class="delta down">-0.4%</span></td>
+      <td class="muted small vs-col">Mike Burrows</td>
+      <td class="num" data-sort-col="model" data-sort="0.3148">31.5%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.39035200000000003"><span class="up">39.0%</span> <span class="delta up">+7.6%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2981"><span class="down">29.8%</span> <span class="delta down">-1.7%</span></td>
       <td class="center" data-sort-col="verdict" data-sort="4"><span class="badge badge-stronger">Stronger pick</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hr" title="2026-04-27 vs Los Angeles Angels — 1 HR, 1/3"></span><span class="last7-cell last7-hit" title="2026-04-28 vs Los Angeles Angels — 0 HR, 1/2"></span><span class="last7-cell last7-hit" title="2026-04-29 vs Los Angeles Angels — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-01 vs San Diego Padres — 0 HR, 1/5"></span><span class="last7-cell last7-hit" title="2026-05-02 vs San Diego Padres — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-03 vs San Diego Padres — 0 HR, 1/2"></span><span class="last7-cell last7-hr" title="2026-05-04 vs Los Angeles Angels — 1 HR, 2/5"></span></div></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-05-01 vs Pittsburgh Pirates — 0 HR, 0/4"></span><span class="last7-cell last7-out" title="2026-05-02 vs Pittsburgh Pirates — 0 HR, 0/5"></span><span class="last7-cell last7-out" title="2026-05-03 vs Pittsburgh Pirates — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-04 vs Chicago Cubs — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-05 vs Chicago Cubs — 0 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-05-06 vs Chicago Cubs — 0 HR, 0/4"></span><span class="last7-cell last7-hr" title="2026-05-07 vs Chicago Cubs — 1 HR, 1/4"></span></div></td>
     </tr>
 <tr>
       <td>
-        <span class="name">Mike Trout</span>
-        <span class="team">LAA</span>
-        <span class="opp-mobile">vs Erick Fedde</span>
+        <span class="name">Elly De La Cruz</span>
+        <span class="team">CIN</span>
+        <span class="opp-mobile">vs Mike Burrows</span>
       </td>
-      <td class="muted small vs-col">Erick Fedde</td>
-      <td class="num" data-sort-col="model" data-sort="0.2391">23.9%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.205626"><span class="down">20.6%</span> <span class="delta down">-3.3%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.235"><span class="down">23.5%</span> <span class="delta down">-0.4%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="2"><span class="badge badge-weaker">Weaker</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-27 vs Chicago White Sox — 0 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-04-28 vs Chicago White Sox — 0 HR, 1/2"></span><span class="last7-cell last7-hr" title="2026-04-29 vs Chicago White Sox — 1 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-01 vs New York Mets — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-02 vs New York Mets — 0 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-05-03 vs New York Mets — 0 HR, 1/3"></span><span class="last7-cell last7-out" title="2026-05-04 vs Chicago White Sox — 0 HR, 0/4"></span></div></td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Jorge Soler</span>
-        <span class="team">LAA</span>
-        <span class="opp-mobile">vs Erick Fedde</span>
-      </td>
-      <td class="muted small vs-col">Erick Fedde</td>
-      <td class="num" data-sort-col="model" data-sort="0.1968">19.7%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.169248"><span class="down">16.9%</span> <span class="delta down">-2.8%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.2061"><span class="up">20.6%</span> <span class="delta up">+0.9%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="3"><span class="badge badge-hold">Hold</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hr" title="2026-04-27 vs Chicago White Sox — 1 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-04-28 vs Chicago White Sox — 0 HR, 1/3"></span><span class="last7-cell last7-hit" title="2026-04-29 vs Chicago White Sox — 0 HR, 1/4"></span><span class="last7-cell last7-hr" title="2026-05-01 vs New York Mets — 1 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-02 vs New York Mets — 0 HR, 1/3"></span><span class="last7-cell last7-hit" title="2026-05-03 vs New York Mets — 0 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-05-04 vs Chicago White Sox — 0 HR, 0/4"></span></div></td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Derek Hill</span>
-        <span class="team">CHW</span>
-        <span class="opp-mobile">vs Sam Aldegheri</span>
-      </td>
-      <td class="muted small vs-col">Sam Aldegheri</td>
-      <td class="num" data-sort-col="model" data-sort="0.1803">18.0%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.15505799999999997"><span class="down">15.5%</span> <span class="delta down">-2.5%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.1847"><span class="up">18.5%</span> <span class="delta up">+0.4%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="2"><span class="badge badge-weaker">Weaker</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-04-26 vs Washington Nationals — 0 HR, 0/3"></span><span class="last7-cell last7-out" title="2026-04-28 vs Los Angeles Angels — 0 HR, 0/1"></span><span class="last7-cell last7-hit" title="2026-04-29 vs Los Angeles Angels — 0 HR, 1/2"></span><span class="last7-cell last7-out" title="2026-05-01 vs San Diego Padres — 0 HR, 0/0"></span><span class="last7-cell last7-out" title="2026-05-02 vs San Diego Padres — 0 HR, 0/0"></span><span class="last7-cell last7-hr" title="2026-05-03 vs San Diego Padres — 1 HR, 1/1"></span><span class="last7-cell last7-out" title="2026-05-04 vs Los Angeles Angels — 0 HR, 0/1"></span></div></td>
+      <td class="muted small vs-col">Mike Burrows</td>
+      <td class="num" data-sort-col="model" data-sort="0.3106">31.1%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.3106"><span class="">31.1%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.3072"><span class="down">30.7%</span> <span class="delta down">-0.3%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-05-01 vs Pittsburgh Pirates — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-02 vs Pittsburgh Pirates — 0 HR, 1/2"></span><span class="last7-cell last7-out" title="2026-05-03 vs Pittsburgh Pirates — 0 HR, 0/3"></span><span class="last7-cell last7-hit" title="2026-05-04 vs Chicago Cubs — 0 HR, 3/4"></span><span class="last7-cell last7-out" title="2026-05-05 vs Chicago Cubs — 0 HR, 0/5"></span><span class="last7-cell last7-out" title="2026-05-06 vs Chicago Cubs — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-07 vs Chicago Cubs — 0 HR, 1/5"></span></div></td>
     </tr>
 <tr>
       <td>
         <span class="name">Matt Olson</span>
         <span class="team">ATL</span>
-        <span class="opp-mobile">vs George Kirby</span>
+        <span class="opp-mobile">vs Emmet Sheehan</span>
       </td>
-      <td class="muted small vs-col">George Kirby</td>
-      <td class="num" data-sort-col="model" data-sort="0.1748">17.5%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.216752"><span class="up">21.7%</span> <span class="delta up">+4.2%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.1735"><span class="down">17.3%</span> <span class="delta down">-0.1%</span></td>
+      <td class="muted small vs-col">Emmet Sheehan</td>
+      <td class="num" data-sort-col="model" data-sort="0.2766">27.7%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.2766"><span class="">27.7%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2656"><span class="down">26.6%</span> <span class="delta down">-1.1%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="3"><span class="badge badge-hold">Hold</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-04-30 vs Detroit Tigers — 0 HR, 0/4"></span><span class="last7-cell last7-hr" title="2026-05-01 vs Colorado Rockies — 1 HR, 1/3"></span><span class="last7-cell last7-hr" title="2026-05-02 vs Colorado Rockies — 1 HR, 1/5"></span><span class="last7-cell last7-hit" title="2026-05-03 vs Colorado Rockies — 0 HR, 2/4"></span><span class="last7-cell last7-hr" title="2026-05-04 vs Seattle Mariners — 1 HR, 1/3"></span><span class="last7-cell last7-hr" title="2026-05-05 vs Seattle Mariners — 1 HR, 2/3"></span><span class="last7-cell last7-out" title="2026-05-06 vs Seattle Mariners — 0 HR, 0/3"></span></div></td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Nathaniel Lowe</span>
+        <span class="team">CIN</span>
+        <span class="opp-mobile">vs Mike Burrows</span>
+      </td>
+      <td class="muted small vs-col">Mike Burrows</td>
+      <td class="num" data-sort-col="model" data-sort="0.2743">27.4%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.2743"><span class="">27.4%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2688"><span class="down">26.9%</span> <span class="delta down">-0.6%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="2"><span class="badge badge-weaker">Weaker</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-05-01 vs Pittsburgh Pirates — 0 HR, 0/3"></span><span class="last7-cell last7-hit" title="2026-05-02 vs Pittsburgh Pirates — 0 HR, 2/4"></span><span class="last7-cell last7-out" title="2026-05-03 vs Pittsburgh Pirates — 0 HR, 0/3"></span><span class="last7-cell last7-out" title="2026-05-04 vs Chicago Cubs — 0 HR, 0/3"></span><span class="last7-cell last7-hr" title="2026-05-05 vs Chicago Cubs — 1 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-05-06 vs Chicago Cubs — 0 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-05-07 vs Chicago Cubs — 0 HR, 0/1"></span></div></td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Yordan Alvarez</span>
+        <span class="team">HOU</span>
+        <span class="opp-mobile">vs Nick Lodolo</span>
+      </td>
+      <td class="muted small vs-col">Nick Lodolo</td>
+      <td class="num" data-sort-col="model" data-sort="0.2708">27.1%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.2708"><span class="">27.1%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2635"><span class="down">26.4%</span> <span class="delta down">-0.7%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-04-30 vs Baltimore Orioles — 0 HR, 0/4"></span><span class="last7-cell last7-out" title="2026-05-01 vs Boston Red Sox — 0 HR, 0/5"></span><span class="last7-cell last7-out" title="2026-05-02 vs Boston Red Sox — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-03 vs Boston Red Sox — 0 HR, 1/5"></span><span class="last7-cell last7-hit" title="2026-05-04 vs Los Angeles Dodgers — 0 HR, 2/3"></span><span class="last7-cell last7-out" title="2026-05-05 vs Los Angeles Dodgers — 0 HR, 0/4"></span><span class="last7-cell last7-out" title="2026-05-06 vs Los Angeles Dodgers — 0 HR, 0/2"></span></div></td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Gunnar Henderson</span>
+        <span class="team">BAL</span>
+        <span class="opp-mobile">vs Jacob Lopez</span>
+      </td>
+      <td class="muted small vs-col">Jacob Lopez</td>
+      <td class="num" data-sort-col="model" data-sort="0.2483">24.8%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.2483"><span class="">24.8%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2098"><span class="down">21.0%</span> <span class="delta down">-3.9%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-30 vs Houston Astros — 0 HR, 1/5"></span><span class="last7-cell last7-out" title="2026-05-01 vs New York Yankees — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-02 vs New York Yankees — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-04 vs New York Yankees — 0 HR, 1/5"></span><span class="last7-cell last7-hit" title="2026-05-05 vs Miami Marlins — 0 HR, 1/5"></span><span class="last7-cell last7-out" title="2026-05-06 vs Miami Marlins — 0 HR, 0/5"></span><span class="last7-cell last7-hit" title="2026-05-07 vs Miami Marlins — 0 HR, 1/5"></span></div></td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Kyle Schwarber</span>
+        <span class="team">PHI</span>
+        <span class="opp-mobile">vs Chase Dollander</span>
+      </td>
+      <td class="muted small vs-col">Chase Dollander</td>
+      <td class="num" data-sort-col="model" data-sort="0.2479">24.8%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.307396"><span class="up">30.7%</span> <span class="delta up">+5.9%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.239"><span class="down">23.9%</span> <span class="delta down">-0.9%</span></td>
       <td class="center" data-sort-col="verdict" data-sort="4"><span class="badge badge-stronger">Stronger pick</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-28 vs Detroit Tigers — 0 HR, 1/2"></span><span class="last7-cell last7-hr" title="2026-04-29 vs Detroit Tigers — 1 HR, 2/4"></span><span class="last7-cell last7-out" title="2026-04-30 vs Detroit Tigers — 0 HR, 0/4"></span><span class="last7-cell last7-hr" title="2026-05-01 vs Colorado Rockies — 1 HR, 1/3"></span><span class="last7-cell last7-hr" title="2026-05-02 vs Colorado Rockies — 1 HR, 1/5"></span><span class="last7-cell last7-hit" title="2026-05-03 vs Colorado Rockies — 0 HR, 2/4"></span><span class="last7-cell last7-hr" title="2026-05-04 vs Seattle Mariners — 1 HR, 1/3"></span></div></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-05-01 vs Miami Marlins — 0 HR, 0/5"></span><span class="last7-cell last7-out" title="2026-05-02 vs Miami Marlins — 0 HR, 0/3"></span><span class="last7-cell last7-hit" title="2026-05-03 vs Miami Marlins — 0 HR, 2/4"></span><span class="last7-cell last7-out" title="2026-05-04 vs Miami Marlins — 0 HR, 0/4"></span><span class="last7-cell last7-out" title="2026-05-05 vs Athletics — 0 HR, 0/5"></span><span class="last7-cell last7-hit" title="2026-05-06 vs Athletics — 0 HR, 1/3"></span><span class="last7-cell last7-hr" title="2026-05-07 vs Athletics — 1 HR, 2/4"></span></div></td>
     </tr>
 <tr>
       <td>
-        <span class="name">Oneil Cruz</span>
-        <span class="team">PIT</span>
-        <span class="opp-mobile">vs Eduardo Rodriguez</span>
+        <span class="name">Aaron Judge</span>
+        <span class="team">NYY</span>
+        <span class="opp-mobile">vs Jacob Misiorowski</span>
       </td>
-      <td class="muted small vs-col">Eduardo Rodriguez</td>
-      <td class="num" data-sort-col="model" data-sort="0.1698">17.0%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.146028"><span class="down">14.6%</span> <span class="delta down">-2.4%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.1686"><span class="down">16.9%</span> <span class="delta down">-0.1%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-04-25 vs Milwaukee Brewers — 0 HR, 0/5"></span><span class="last7-cell last7-hr" title="2026-04-28 vs St. Louis Cardinals — 1 HR, 2/5"></span><span class="last7-cell last7-out" title="2026-04-29 vs St. Louis Cardinals — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-04-30 vs St. Louis Cardinals — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-01 vs Cincinnati Reds — 0 HR, 1/5"></span><span class="last7-cell last7-hit" title="2026-05-02 vs Cincinnati Reds — 0 HR, 2/6"></span><span class="last7-cell last7-hit" title="2026-05-03 vs Cincinnati Reds — 0 HR, 2/4"></span></div></td>
+      <td class="muted small vs-col">Jacob Misiorowski</td>
+      <td class="num" data-sort-col="model" data-sort="0.2411">24.1%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.2411"><span class="">24.1%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2164"><span class="down">21.6%</span> <span class="delta down">-2.5%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="3"><span class="badge badge-hold">Hold</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-05-01 vs Baltimore Orioles — 0 HR, 2/3"></span><span class="last7-cell last7-out" title="2026-05-02 vs Baltimore Orioles — 0 HR, 0/3"></span><span class="last7-cell last7-hr" title="2026-05-03 vs Baltimore Orioles — 1 HR, 2/4"></span><span class="last7-cell last7-hr" title="2026-05-04 vs Baltimore Orioles — 1 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-05-05 vs Texas Rangers — 0 HR, 1/3"></span><span class="last7-cell last7-hr" title="2026-05-06 vs Texas Rangers — 1 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-07 vs Texas Rangers — 0 HR, 1/5"></span></div></td>
     </tr>
 <tr>
       <td>
-        <span class="name">Zach Neto</span>
-        <span class="team">LAA</span>
-        <span class="opp-mobile">vs Erick Fedde</span>
+        <span class="name">Munetaka Murakami</span>
+        <span class="team">CHW</span>
+        <span class="opp-mobile">vs Emerson Hancock</span>
       </td>
-      <td class="muted small vs-col">Erick Fedde</td>
-      <td class="num" data-sort-col="model" data-sort="0.1531">15.3%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.131666"><span class="down">13.2%</span> <span class="delta down">-2.1%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.1531"><span class="">15.3%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-27 vs Chicago White Sox — 0 HR, 1/5"></span><span class="last7-cell last7-hit" title="2026-04-28 vs Chicago White Sox — 0 HR, 1/5"></span><span class="last7-cell last7-out" title="2026-04-29 vs Chicago White Sox — 0 HR, 0/4"></span><span class="last7-cell last7-out" title="2026-05-01 vs New York Mets — 0 HR, 0/3"></span><span class="last7-cell last7-out" title="2026-05-02 vs New York Mets — 0 HR, 0/4"></span><span class="last7-cell last7-out" title="2026-05-03 vs New York Mets — 0 HR, 0/3"></span><span class="last7-cell last7-out" title="2026-05-04 vs Chicago White Sox — 0 HR, 0/4"></span></div></td>
+      <td class="muted small vs-col">Emerson Hancock</td>
+      <td class="num" data-sort-col="model" data-sort="0.227">22.7%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.227"><span class="">22.7%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2261"><span class="down">22.6%</span> <span class="delta down">-0.1%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="3"><span class="badge badge-hold">Hold</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-04-29 vs Los Angeles Angels — 0 HR, 0/2"></span><span class="last7-cell last7-hr" title="2026-05-01 vs San Diego Padres — 1 HR, 1/3"></span><span class="last7-cell last7-out" title="2026-05-02 vs San Diego Padres — 0 HR, 0/4"></span><span class="last7-cell last7-out" title="2026-05-03 vs San Diego Padres — 0 HR, 0/4"></span><span class="last7-cell last7-hr" title="2026-05-04 vs Los Angeles Angels — 1 HR, 3/4"></span><span class="last7-cell last7-hit" title="2026-05-05 vs Los Angeles Angels — 0 HR, 1/2"></span><span class="last7-cell last7-out" title="2026-05-06 vs Los Angeles Angels — 0 HR, 0/4"></span></div></td>
     </tr>
 <tr>
       <td>
-        <span class="name">Ildemaro Vargas</span>
-        <span class="team">ARI</span>
-        <span class="opp-mobile">vs Bubba Chandler</span>
+        <span class="name">Shea Langeliers</span>
+        <span class="team">ATH</span>
+        <span class="opp-mobile">vs Kyle Bradish</span>
       </td>
-      <td class="muted small vs-col">Bubba Chandler</td>
-      <td class="num" data-sort-col="model" data-sort="0.1526">15.3%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.13123600000000002"><span class="down">13.1%</span> <span class="delta down">-2.1%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.1574"><span class="up">15.7%</span> <span class="delta up">+0.5%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hr" title="2026-04-26 vs San Diego Padres — 1 HR, 3/5"></span><span class="last7-cell last7-hit" title="2026-04-28 vs Milwaukee Brewers — 0 HR, 1/2"></span><span class="last7-cell last7-hit" title="2026-04-29 vs Milwaukee Brewers — 0 HR, 2/5"></span><span class="last7-cell last7-hit" title="2026-04-30 vs Milwaukee Brewers — 0 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-05-01 vs Chicago Cubs — 0 HR, 4/4"></span><span class="last7-cell last7-out" title="2026-05-02 vs Chicago Cubs — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-03 vs Chicago Cubs — 0 HR, 1/4"></span></div></td>
+      <td class="muted small vs-col">Kyle Bradish</td>
+      <td class="num" data-sort-col="model" data-sort="0.2256">22.6%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.279744"><span class="up">28.0%</span> <span class="delta up">+5.4%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2518"><span class="up">25.2%</span> <span class="delta up">+2.6%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="4"><span class="badge badge-stronger">Stronger pick</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-26 vs Texas Rangers — 0 HR, 2/5"></span><span class="last7-cell last7-hit" title="2026-04-28 vs Kansas City Royals — 0 HR, 3/5"></span><span class="last7-cell last7-hit" title="2026-04-29 vs Kansas City Royals — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-04-30 vs Kansas City Royals — 0 HR, 3/4"></span><span class="last7-cell last7-hit" title="2026-05-01 vs Cleveland Guardians — 0 HR, 1/4"></span><span class="last7-cell last7-hr" title="2026-05-02 vs Cleveland Guardians — 2 HR, 3/5"></span><span class="last7-cell last7-hr" title="2026-05-07 vs Philadelphia Phillies — 1 HR, 2/5"></span></div></td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Christian Walker</span>
+        <span class="team">HOU</span>
+        <span class="opp-mobile">vs Nick Lodolo</span>
+      </td>
+      <td class="muted small vs-col">Nick Lodolo</td>
+      <td class="num" data-sort-col="model" data-sort="0.225">22.5%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.225"><span class="">22.5%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2164"><span class="down">21.6%</span> <span class="delta down">-0.9%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="3"><span class="badge badge-hold">Hold</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-04-30 vs Baltimore Orioles — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-01 vs Boston Red Sox — 0 HR, 1/3"></span><span class="last7-cell last7-hr" title="2026-05-02 vs Boston Red Sox — 1 HR, 3/4"></span><span class="last7-cell last7-hit" title="2026-05-03 vs Boston Red Sox — 0 HR, 2/3"></span><span class="last7-cell last7-out" title="2026-05-04 vs Los Angeles Dodgers — 0 HR, 0/4"></span><span class="last7-cell last7-hr" title="2026-05-05 vs Los Angeles Dodgers — 1 HR, 1/3"></span><span class="last7-cell last7-hit" title="2026-05-06 vs Los Angeles Dodgers — 0 HR, 1/4"></span></div></td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Spencer Steer</span>
+        <span class="team">CIN</span>
+        <span class="opp-mobile">vs Mike Burrows</span>
+      </td>
+      <td class="muted small vs-col">Mike Burrows</td>
+      <td class="num" data-sort-col="model" data-sort="0.2247">22.5%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.2247"><span class="">22.5%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2286"><span class="up">22.9%</span> <span class="delta up">+0.4%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="2"><span class="badge badge-weaker">Weaker</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-05-01 vs Pittsburgh Pirates — 0 HR, 1/2"></span><span class="last7-cell last7-hit" title="2026-05-02 vs Pittsburgh Pirates — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-03 vs Pittsburgh Pirates — 0 HR, 1/3"></span><span class="last7-cell last7-hit" title="2026-05-04 vs Chicago Cubs — 0 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-05-05 vs Chicago Cubs — 0 HR, 1/4"></span><span class="last7-cell last7-hr" title="2026-05-06 vs Chicago Cubs — 1 HR, 1/5"></span><span class="last7-cell last7-hit" title="2026-05-07 vs Chicago Cubs — 0 HR, 1/3"></span></div></td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Mickey Moniak</span>
+        <span class="team">COL</span>
+        <span class="opp-mobile">vs Jesús Luzardo</span>
+      </td>
+      <td class="muted small vs-col">Jesús Luzardo</td>
+      <td class="num" data-sort-col="model" data-sort="0.2231">22.3%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.2231"><span class="">22.3%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2086"><span class="down">20.9%</span> <span class="delta down">-1.4%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="3"><span class="badge badge-hold">Hold</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-29 vs Cincinnati Reds — 0 HR, 1/3"></span><span class="last7-cell last7-hit" title="2026-04-30 vs Cincinnati Reds — 0 HR, 1/2"></span><span class="last7-cell last7-hr" title="2026-05-01 vs Atlanta Braves — 1 HR, 2/5"></span><span class="last7-cell last7-hr" title="2026-05-03 vs Atlanta Braves — 2 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-05-04 vs New York Mets — 0 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-05-06 vs New York Mets — 0 HR, 1/5"></span><span class="last7-cell last7-out" title="2026-05-07 vs New York Mets — 0 HR, 0/3"></span></div></td>
     </tr>
 <tr>
       <td>
         <span class="name">Drake Baldwin</span>
         <span class="team">ATL</span>
-        <span class="opp-mobile">vs George Kirby</span>
+        <span class="opp-mobile">vs Emmet Sheehan</span>
       </td>
-      <td class="muted small vs-col">George Kirby</td>
-      <td class="num" data-sort-col="model" data-sort="0.1438">14.4%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.17831200000000003"><span class="up">17.8%</span> <span class="delta up">+3.5%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.1446"><span class="up">14.5%</span> <span class="delta up">+0.1%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="4"><span class="badge badge-stronger">Stronger pick</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-04-28 vs Detroit Tigers — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-04-29 vs Detroit Tigers — 0 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-04-30 vs Detroit Tigers — 0 HR, 1/3"></span><span class="last7-cell last7-out" title="2026-05-01 vs Colorado Rockies — 0 HR, 0/4"></span><span class="last7-cell last7-hr" title="2026-05-02 vs Colorado Rockies — 1 HR, 3/4"></span><span class="last7-cell last7-hit" title="2026-05-03 vs Colorado Rockies — 0 HR, 2/5"></span><span class="last7-cell last7-hr" title="2026-05-04 vs Seattle Mariners — 1 HR, 1/4"></span></div></td>
+      <td class="muted small vs-col">Emmet Sheehan</td>
+      <td class="num" data-sort-col="model" data-sort="0.2159">21.6%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.2159"><span class="">21.6%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2085"><span class="down">20.8%</span> <span class="delta down">-0.7%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="3"><span class="badge badge-hold">Hold</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-30 vs Detroit Tigers — 0 HR, 1/3"></span><span class="last7-cell last7-out" title="2026-05-01 vs Colorado Rockies — 0 HR, 0/4"></span><span class="last7-cell last7-hr" title="2026-05-02 vs Colorado Rockies — 1 HR, 3/4"></span><span class="last7-cell last7-hit" title="2026-05-03 vs Colorado Rockies — 0 HR, 2/5"></span><span class="last7-cell last7-hr" title="2026-05-04 vs Seattle Mariners — 1 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-05-05 vs Seattle Mariners — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-06 vs Seattle Mariners — 0 HR, 1/4"></span></div></td>
     </tr>
 <tr>
       <td>
-        <span class="name">Josh Lowe</span>
-        <span class="team">LAA</span>
-        <span class="opp-mobile">vs Erick Fedde</span>
+        <span class="name">Jordan Walker</span>
+        <span class="team">STL</span>
+        <span class="opp-mobile">vs Griffin Canning</span>
       </td>
-      <td class="muted small vs-col">Erick Fedde</td>
-      <td class="num" data-sort-col="model" data-sort="0.1389">13.9%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.11945399999999999"><span class="down">11.9%</span> <span class="delta down">-1.9%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.1492"><span class="up">14.9%</span> <span class="delta up">+1.0%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-04-27 vs Chicago White Sox — 0 HR, 0/0"></span><span class="last7-cell last7-hr" title="2026-04-28 vs Chicago White Sox — 1 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-04-29 vs Chicago White Sox — 0 HR, 0/4"></span><span class="last7-cell last7-out" title="2026-05-01 vs New York Mets — 0 HR, 0/2"></span><span class="last7-cell last7-out" title="2026-05-02 vs New York Mets — 0 HR, 0/5"></span><span class="last7-cell last7-out" title="2026-05-03 vs New York Mets — 0 HR, 0/4"></span><span class="last7-cell last7-out" title="2026-05-04 vs Chicago White Sox — 0 HR, 0/3"></span></div></td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Randal Grichuk</span>
-        <span class="team">CHW</span>
-        <span class="opp-mobile">vs Sam Aldegheri</span>
-      </td>
-      <td class="muted small vs-col">Sam Aldegheri</td>
-      <td class="num" data-sort-col="model" data-sort="0.1378">13.8%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.118508"><span class="down">11.9%</span> <span class="delta down">-1.9%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.1325"><span class="down">13.3%</span> <span class="delta down">-0.5%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-04-15 vs Los Angeles Angels — 0 HR, 0/0"></span><span class="last7-cell last7-hit" title="2026-04-18 vs Kansas City Royals — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-04-21 vs Boston Red Sox — 0 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-04-22 vs Boston Red Sox — 0 HR, 1/2"></span><span class="last7-cell last7-out" title="2026-04-23 vs Boston Red Sox — 0 HR, 0/3"></span><span class="last7-cell last7-hit" title="2026-04-24 vs Houston Astros — 0 HR, 1/2"></span><span class="last7-cell last7-out" title="2026-05-04 vs Los Angeles Angels — 0 HR, 0/1"></span></div></td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Jo Adell</span>
-        <span class="team">LAA</span>
-        <span class="opp-mobile">vs Erick Fedde</span>
-      </td>
-      <td class="muted small vs-col">Erick Fedde</td>
-      <td class="num" data-sort-col="model" data-sort="0.1313">13.1%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.112918"><span class="down">11.3%</span> <span class="delta down">-1.8%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.1317"><span class="up">13.2%</span> <span class="delta up">+0.0%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-27 vs Chicago White Sox — 0 HR, 1/5"></span><span class="last7-cell last7-hit" title="2026-04-28 vs Chicago White Sox — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-04-29 vs Chicago White Sox — 0 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-05-01 vs New York Mets — 0 HR, 0/3"></span><span class="last7-cell last7-hit" title="2026-05-02 vs New York Mets — 0 HR, 3/5"></span><span class="last7-cell last7-hit" title="2026-05-03 vs New York Mets — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-04 vs Chicago White Sox — 0 HR, 1/3"></span></div></td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Yoán Moncada</span>
-        <span class="team">LAA</span>
-        <span class="opp-mobile">vs Erick Fedde</span>
-      </td>
-      <td class="muted small vs-col">Erick Fedde</td>
-      <td class="num" data-sort-col="model" data-sort="0.1313">13.1%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.112918"><span class="down">11.3%</span> <span class="delta down">-1.8%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.1311"><span class="down">13.1%</span> <span class="delta down">-0.0%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-04-27 vs Chicago White Sox — 0 HR, 0/1"></span><span class="last7-cell last7-out" title="2026-04-28 vs Chicago White Sox — 0 HR, 0/3"></span><span class="last7-cell last7-out" title="2026-04-29 vs Chicago White Sox — 0 HR, 0/3"></span><span class="last7-cell last7-out" title="2026-05-01 vs New York Mets — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-02 vs New York Mets — 0 HR, 1/1"></span><span class="last7-cell last7-out" title="2026-05-03 vs New York Mets — 0 HR, 0/1"></span><span class="last7-cell last7-out" title="2026-05-04 vs Chicago White Sox — 0 HR, 0/3"></span></div></td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Michael Harris II</span>
-        <span class="team">ATL</span>
-        <span class="opp-mobile">vs George Kirby</span>
-      </td>
-      <td class="muted small vs-col">George Kirby</td>
-      <td class="num" data-sort-col="model" data-sort="0.131">13.1%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.11266"><span class="down">11.3%</span> <span class="delta down">-1.8%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.1373"><span class="up">13.7%</span> <span class="delta up">+0.6%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="2"><span class="badge badge-weaker">Weaker</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-04-26 vs Philadelphia Phillies — 0 HR, 0/3"></span><span class="last7-cell last7-hit" title="2026-04-28 vs Detroit Tigers — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-04-29 vs Detroit Tigers — 0 HR, 1/3"></span><span class="last7-cell last7-out" title="2026-04-30 vs Detroit Tigers — 0 HR, 0/1"></span><span class="last7-cell last7-hr" title="2026-05-01 vs Colorado Rockies — 1 HR, 1/1"></span><span class="last7-cell last7-hit" title="2026-05-02 vs Colorado Rockies — 0 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-05-04 vs Seattle Mariners — 0 HR, 0/1"></span></div></td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Ketel Marte</span>
-        <span class="team">ARI</span>
-        <span class="opp-mobile">vs Bubba Chandler</span>
-      </td>
-      <td class="muted small vs-col">Bubba Chandler</td>
-      <td class="num" data-sort-col="model" data-sort="0.1304">13.0%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.112144"><span class="down">11.2%</span> <span class="delta down">-1.8%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.1286"><span class="down">12.9%</span> <span class="delta down">-0.2%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="2"><span class="badge badge-weaker">Weaker</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-26 vs San Diego Padres — 0 HR, 1/5"></span><span class="last7-cell last7-out" title="2026-04-28 vs Milwaukee Brewers — 0 HR, 0/3"></span><span class="last7-cell last7-hr" title="2026-04-29 vs Milwaukee Brewers — 1 HR, 2/5"></span><span class="last7-cell last7-out" title="2026-04-30 vs Milwaukee Brewers — 0 HR, 0/3"></span><span class="last7-cell last7-out" title="2026-05-01 vs Chicago Cubs — 0 HR, 0/1"></span><span class="last7-cell last7-out" title="2026-05-02 vs Chicago Cubs — 0 HR, 0/4"></span><span class="last7-cell last7-out" title="2026-05-03 vs Chicago Cubs — 0 HR, 0/5"></span></div></td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Nolan Arenado</span>
-        <span class="team">ARI</span>
-        <span class="opp-mobile">vs Bubba Chandler</span>
-      </td>
-      <td class="muted small vs-col">Bubba Chandler</td>
-      <td class="num" data-sort-col="model" data-sort="0.1292">12.9%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.111112"><span class="down">11.1%</span> <span class="delta down">-1.8%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.139"><span class="up">13.9%</span> <span class="delta up">+1.0%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="2"><span class="badge badge-weaker">Weaker</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-26 vs San Diego Padres — 0 HR, 2/3"></span><span class="last7-cell last7-out" title="2026-04-28 vs Milwaukee Brewers — 0 HR, 0/1"></span><span class="last7-cell last7-hr" title="2026-04-29 vs Milwaukee Brewers — 1 HR, 1/3"></span><span class="last7-cell last7-out" title="2026-04-30 vs Milwaukee Brewers — 0 HR, 0/3"></span><span class="last7-cell last7-hit" title="2026-05-01 vs Chicago Cubs — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-02 vs Chicago Cubs — 0 HR, 1/3"></span><span class="last7-cell last7-hit" title="2026-05-03 vs Chicago Cubs — 0 HR, 1/4"></span></div></td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Adrian Del Castillo</span>
-        <span class="team">ARI</span>
-        <span class="opp-mobile">vs Bubba Chandler</span>
-      </td>
-      <td class="muted small vs-col">Bubba Chandler</td>
-      <td class="num" data-sort-col="model" data-sort="0.1233">12.3%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.152892"><span class="up">15.3%</span> <span class="delta up">+3.0%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.1252"><span class="up">12.5%</span> <span class="delta up">+0.2%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="4"><span class="badge badge-stronger">Stronger pick</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-04-25 vs San Diego Padres — 0 HR, 0/4"></span><span class="last7-cell last7-out" title="2026-04-26 vs San Diego Padres — 0 HR, 0/1"></span><span class="last7-cell last7-out" title="2026-04-28 vs Milwaukee Brewers — 0 HR, 0/2"></span><span class="last7-cell last7-hr" title="2026-04-29 vs Milwaukee Brewers — 1 HR, 1/5"></span><span class="last7-cell last7-out" title="2026-04-30 vs Milwaukee Brewers — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-01 vs Chicago Cubs — 0 HR, 1/4"></span><span class="last7-cell last7-hr" title="2026-05-03 vs Chicago Cubs — 1 HR, 1/1"></span></div></td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Marcell Ozuna</span>
-        <span class="team">PIT</span>
-        <span class="opp-mobile">vs Eduardo Rodriguez</span>
-      </td>
-      <td class="muted small vs-col">Eduardo Rodriguez</td>
-      <td class="num" data-sort-col="model" data-sort="0.1209">12.1%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.103974"><span class="down">10.4%</span> <span class="delta down">-1.7%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.1163"><span class="down">11.6%</span> <span class="delta down">-0.5%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="2"><span class="badge badge-weaker">Weaker</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-26 vs Milwaukee Brewers — 0 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-04-27 vs St. Louis Cardinals — 0 HR, 0/4"></span><span class="last7-cell last7-out" title="2026-04-28 vs St. Louis Cardinals — 0 HR, 0/1"></span><span class="last7-cell last7-hit" title="2026-04-29 vs St. Louis Cardinals — 0 HR, 1/5"></span><span class="last7-cell last7-hr" title="2026-05-01 vs Cincinnati Reds — 1 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-02 vs Cincinnati Reds — 0 HR, 3/5"></span><span class="last7-cell last7-hit" title="2026-05-03 vs Cincinnati Reds — 0 HR, 1/3"></span></div></td>
+      <td class="muted small vs-col">Griffin Canning</td>
+      <td class="num" data-sort-col="model" data-sort="0.2154">21.5%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.2154"><span class="">21.5%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.1908"><span class="down">19.1%</span> <span class="delta down">-2.5%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="3"><span class="badge badge-hold">Hold</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hr" title="2026-04-30 vs Pittsburgh Pirates — 1 HR, 2/5"></span><span class="last7-cell last7-hit" title="2026-05-01 vs Los Angeles Dodgers — 0 HR, 4/4"></span><span class="last7-cell last7-hr" title="2026-05-02 vs Los Angeles Dodgers — 1 HR, 2/4"></span><span class="last7-cell last7-out" title="2026-05-03 vs Los Angeles Dodgers — 0 HR, 0/3"></span><span class="last7-cell last7-hit" title="2026-05-04 vs Milwaukee Brewers — 0 HR, 1/3"></span><span class="last7-cell last7-out" title="2026-05-06 vs Milwaukee Brewers — 0 HR, 0/2"></span><span class="last7-cell last7-hit" title="2026-05-07 vs San Diego Padres — 0 HR, 2/4"></span></div></td>
     </tr>
 <tr>
       <td>
         <span class="name">Ozzie Albies</span>
         <span class="team">ATL</span>
-        <span class="opp-mobile">vs George Kirby</span>
+        <span class="opp-mobile">vs Emmet Sheehan</span>
       </td>
-      <td class="muted small vs-col">George Kirby</td>
-      <td class="num" data-sort-col="model" data-sort="0.1202">12.0%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.149048"><span class="up">14.9%</span> <span class="delta up">+2.9%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.1222"><span class="up">12.2%</span> <span class="delta up">+0.2%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="4"><span class="badge badge-stronger">Stronger pick</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hr" title="2026-04-28 vs Detroit Tigers — 1 HR, 1/3"></span><span class="last7-cell last7-hr" title="2026-04-29 vs Detroit Tigers — 1 HR, 1/3"></span><span class="last7-cell last7-hit" title="2026-04-30 vs Detroit Tigers — 0 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-05-01 vs Colorado Rockies — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-02 vs Colorado Rockies — 0 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-05-03 vs Colorado Rockies — 0 HR, 2/3"></span><span class="last7-cell last7-hr" title="2026-05-04 vs Seattle Mariners — 1 HR, 1/4"></span></div></td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Nolan Schanuel</span>
-        <span class="team">LAA</span>
-        <span class="opp-mobile">vs Erick Fedde</span>
-      </td>
-      <td class="muted small vs-col">Erick Fedde</td>
-      <td class="num" data-sort-col="model" data-sort="0.119">11.9%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.10234"><span class="down">10.2%</span> <span class="delta down">-1.7%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.1364"><span class="up">13.6%</span> <span class="delta up">+1.7%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-27 vs Chicago White Sox — 0 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-04-28 vs Chicago White Sox — 0 HR, 2/4"></span><span class="last7-cell last7-out" title="2026-04-29 vs Chicago White Sox — 0 HR, 0/1"></span><span class="last7-cell last7-hit" title="2026-05-01 vs New York Mets — 0 HR, 1/3"></span><span class="last7-cell last7-hit" title="2026-05-02 vs New York Mets — 0 HR, 1/5"></span><span class="last7-cell last7-hit" title="2026-05-03 vs New York Mets — 0 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-05-04 vs Chicago White Sox — 0 HR, 2/4"></span></div></td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Andrew Benintendi</span>
-        <span class="team">CHW</span>
-        <span class="opp-mobile">vs Sam Aldegheri</span>
-      </td>
-      <td class="muted small vs-col">Sam Aldegheri</td>
-      <td class="num" data-sort-col="model" data-sort="0.1166">11.7%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.10027599999999999"><span class="down">10.0%</span> <span class="delta down">-1.6%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.1192"><span class="up">11.9%</span> <span class="delta up">+0.3%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-27 vs Los Angeles Angels — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-04-28 vs Los Angeles Angels — 0 HR, 1/3"></span><span class="last7-cell last7-out" title="2026-04-29 vs Los Angeles Angels — 0 HR, 0/1"></span><span class="last7-cell last7-out" title="2026-05-01 vs San Diego Padres — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-02 vs San Diego Padres — 0 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-05-03 vs San Diego Padres — 0 HR, 0/2"></span><span class="last7-cell last7-hit" title="2026-05-04 vs Los Angeles Angels — 0 HR, 4/5"></span></div></td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Dominic Smith</span>
-        <span class="team">ATL</span>
-        <span class="opp-mobile">vs George Kirby</span>
-      </td>
-      <td class="muted small vs-col">George Kirby</td>
-      <td class="num" data-sort-col="model" data-sort="0.1152">11.5%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.099072"><span class="down">9.9%</span> <span class="delta down">-1.6%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.1065"><span class="down">10.7%</span> <span class="delta down">-0.9%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-24 vs Philadelphia Phillies — 0 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-04-25 vs Philadelphia Phillies — 0 HR, 0/1"></span><span class="last7-cell last7-out" title="2026-04-28 vs Detroit Tigers — 0 HR, 0/1"></span><span class="last7-cell last7-out" title="2026-04-29 vs Detroit Tigers — 0 HR, 0/0"></span><span class="last7-cell last7-out" title="2026-04-30 vs Detroit Tigers — 0 HR, 0/1"></span><span class="last7-cell last7-out" title="2026-05-02 vs Colorado Rockies — 0 HR, 0/1"></span><span class="last7-cell last7-hit" title="2026-05-04 vs Seattle Mariners — 0 HR, 1/1"></span></div></td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Sebastián Rivero</span>
-        <span class="team">LAA</span>
-        <span class="opp-mobile">vs Erick Fedde</span>
-      </td>
-      <td class="muted small vs-col">Erick Fedde</td>
-      <td class="num" data-sort-col="model" data-sort="0.1139">11.4%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.097954"><span class="down">9.8%</span> <span class="delta down">-1.6%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.1213"><span class="up">12.1%</span> <span class="delta up">+0.7%</span></td>
-      <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-04-27 vs Chicago White Sox — 0 HR, 0/0"></span><span class="last7-cell last7-hit" title="2026-04-28 vs Chicago White Sox — 0 HR, 2/4"></span><span class="last7-cell last7-out" title="2026-04-29 vs Chicago White Sox — 0 HR, 0/0"></span><span class="last7-cell last7-out" title="2026-05-01 vs New York Mets — 0 HR, 0/0"></span><span class="last7-cell last7-out" title="2026-05-02 vs New York Mets — 0 HR, 0/0"></span><span class="last7-cell last7-hit" title="2026-05-03 vs New York Mets — 0 HR, 1/2"></span></div></td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Vaughn Grissom</span>
-        <span class="team">LAA</span>
-        <span class="opp-mobile">vs Erick Fedde</span>
-      </td>
-      <td class="muted small vs-col">Erick Fedde</td>
-      <td class="num" data-sort-col="model" data-sort="0.1129">11.3%</td>
-      <td class="num" data-sort-col="adjusted" data-sort="0.097094"><span class="down">9.7%</span> <span class="delta down">-1.6%</span></td>
-      <td class="num" data-sort-col="bvp" data-sort="0.1157"><span class="up">11.6%</span> <span class="delta up">+0.3%</span></td>
+      <td class="muted small vs-col">Emmet Sheehan</td>
+      <td class="num" data-sort-col="model" data-sort="0.2112">21.1%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.2112"><span class="">21.1%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.187"><span class="down">18.7%</span> <span class="delta down">-2.4%</span></td>
       <td class="center" data-sort-col="verdict" data-sort="2"><span class="badge badge-weaker">Weaker</span></td>
-      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-25 vs Kansas City Royals — 0 HR, 3/4"></span><span class="last7-cell last7-hit" title="2026-04-27 vs Chicago White Sox — 0 HR, 2/4"></span><span class="last7-cell last7-out" title="2026-04-28 vs Chicago White Sox — 0 HR, 0/2"></span><span class="last7-cell last7-hr" title="2026-04-29 vs Chicago White Sox — 1 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-05-01 vs New York Mets — 0 HR, 0/1"></span><span class="last7-cell last7-hit" title="2026-05-02 vs New York Mets — 0 HR, 1/5"></span><span class="last7-cell last7-out" title="2026-05-03 vs New York Mets — 0 HR, 0/3"></span></div></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-30 vs Detroit Tigers — 0 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-05-01 vs Colorado Rockies — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-02 vs Colorado Rockies — 0 HR, 2/4"></span><span class="last7-cell last7-hit" title="2026-05-03 vs Colorado Rockies — 0 HR, 2/3"></span><span class="last7-cell last7-hr" title="2026-05-04 vs Seattle Mariners — 1 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-05 vs Seattle Mariners — 0 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-05-06 vs Seattle Mariners — 0 HR, 0/3"></span></div></td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Ben Rice</span>
+        <span class="team">NYY</span>
+        <span class="opp-mobile">vs Jacob Misiorowski</span>
+      </td>
+      <td class="muted small vs-col">Jacob Misiorowski</td>
+      <td class="num" data-sort-col="model" data-sort="0.2036">20.4%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.252464"><span class="up">25.2%</span> <span class="delta up">+4.9%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2056"><span class="up">20.6%</span> <span class="delta up">+0.2%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="4"><span class="badge badge-stronger">Stronger pick</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-04-26 vs Houston Astros — 0 HR, 0/3"></span><span class="last7-cell last7-hr" title="2026-04-27 vs Texas Rangers — 1 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-04-28 vs Texas Rangers — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-04-29 vs Texas Rangers — 0 HR, 3/4"></span><span class="last7-cell last7-hr" title="2026-05-01 vs Baltimore Orioles — 1 HR, 2/5"></span><span class="last7-cell last7-hit" title="2026-05-02 vs Baltimore Orioles — 0 HR, 1/3"></span><span class="last7-cell last7-hr" title="2026-05-03 vs Baltimore Orioles — 1 HR, 2/2"></span></div></td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Bryce Harper</span>
+        <span class="team">PHI</span>
+        <span class="opp-mobile">vs Chase Dollander</span>
+      </td>
+      <td class="muted small vs-col">Chase Dollander</td>
+      <td class="num" data-sort-col="model" data-sort="0.2033">20.3%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.2033"><span class="">20.3%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.1996"><span class="down">20.0%</span> <span class="delta down">-0.4%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="3"><span class="badge badge-hold">Hold</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-05-01 vs Miami Marlins — 0 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-05-02 vs Miami Marlins — 0 HR, 0/3"></span><span class="last7-cell last7-hit" title="2026-05-03 vs Miami Marlins — 0 HR, 1/4"></span><span class="last7-cell last7-hr" title="2026-05-04 vs Miami Marlins — 1 HR, 3/4"></span><span class="last7-cell last7-hr" title="2026-05-05 vs Athletics — 2 HR, 3/4"></span><span class="last7-cell last7-out" title="2026-05-06 vs Athletics — 0 HR, 0/4"></span><span class="last7-cell last7-out" title="2026-05-07 vs Athletics — 0 HR, 0/1"></span></div></td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Liam Hicks</span>
+        <span class="team">MIA</span>
+        <span class="opp-mobile">vs Foster Griffin</span>
+      </td>
+      <td class="muted small vs-col">Foster Griffin</td>
+      <td class="num" data-sort-col="model" data-sort="0.1987">19.9%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.246388"><span class="up">24.6%</span> <span class="delta up">+4.8%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.1788"><span class="down">17.9%</span> <span class="delta down">-2.0%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="4"><span class="badge badge-stronger">Stronger pick</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hr" title="2026-04-29 vs Los Angeles Dodgers — 1 HR, 1/2"></span><span class="last7-cell last7-out" title="2026-05-01 vs Philadelphia Phillies — 0 HR, 0/2"></span><span class="last7-cell last7-hit" title="2026-05-02 vs Philadelphia Phillies — 0 HR, 1/3"></span><span class="last7-cell last7-out" title="2026-05-04 vs Philadelphia Phillies — 0 HR, 0/4"></span><span class="last7-cell last7-hr" title="2026-05-05 vs Baltimore Orioles — 1 HR, 4/5"></span><span class="last7-cell last7-hit" title="2026-05-06 vs Baltimore Orioles — 0 HR, 1/3"></span><span class="last7-cell last7-hr" title="2026-05-07 vs Baltimore Orioles — 1 HR, 1/4"></span></div></td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Michael Harris II</span>
+        <span class="team">ATL</span>
+        <span class="opp-mobile">vs Emmet Sheehan</span>
+      </td>
+      <td class="muted small vs-col">Emmet Sheehan</td>
+      <td class="num" data-sort-col="model" data-sort="0.1956">19.6%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.1956"><span class="">19.6%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.187"><span class="down">18.7%</span> <span class="delta down">-0.9%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-29 vs Detroit Tigers — 0 HR, 1/3"></span><span class="last7-cell last7-out" title="2026-04-30 vs Detroit Tigers — 0 HR, 0/1"></span><span class="last7-cell last7-hr" title="2026-05-01 vs Colorado Rockies — 1 HR, 1/1"></span><span class="last7-cell last7-hit" title="2026-05-02 vs Colorado Rockies — 0 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-05-04 vs Seattle Mariners — 0 HR, 0/1"></span><span class="last7-cell last7-out" title="2026-05-05 vs Seattle Mariners — 0 HR, 0/4"></span><span class="last7-cell last7-out" title="2026-05-06 vs Seattle Mariners — 0 HR, 0/4"></span></div></td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Samuel Basallo</span>
+        <span class="team">BAL</span>
+        <span class="opp-mobile">vs Jacob Lopez</span>
+      </td>
+      <td class="muted small vs-col">Jacob Lopez</td>
+      <td class="num" data-sort-col="model" data-sort="0.1909">19.1%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.1909"><span class="">19.1%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.1616"><span class="down">16.2%</span> <span class="delta down">-2.9%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-05-01 vs New York Yankees — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-02 vs New York Yankees — 0 HR, 1/2"></span><span class="last7-cell last7-hit" title="2026-05-03 vs New York Yankees — 0 HR, 1/2"></span><span class="last7-cell last7-out" title="2026-05-04 vs New York Yankees — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-05 vs Miami Marlins — 0 HR, 3/4"></span><span class="last7-cell last7-hit" title="2026-05-06 vs Miami Marlins — 0 HR, 1/3"></span><span class="last7-cell last7-hit" title="2026-05-07 vs Miami Marlins — 0 HR, 1/4"></span></div></td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Andy Pages</span>
+        <span class="team">LAD</span>
+        <span class="opp-mobile">vs Chris Sale</span>
+      </td>
+      <td class="muted small vs-col">Chris Sale</td>
+      <td class="num" data-sort-col="model" data-sort="0.1877">18.8%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.232748"><span class="up">23.3%</span> <span class="delta up">+4.5%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.1666"><span class="down">16.7%</span> <span class="delta down">-2.1%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="4"><span class="badge badge-stronger">Stronger pick</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-29 vs Miami Marlins — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-01 vs St. Louis Cardinals — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-02 vs St. Louis Cardinals — 0 HR, 1/3"></span><span class="last7-cell last7-hit" title="2026-05-03 vs St. Louis Cardinals — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-04 vs Houston Astros — 0 HR, 1/5"></span><span class="last7-cell last7-hit" title="2026-05-05 vs Houston Astros — 0 HR, 3/4"></span><span class="last7-cell last7-hr" title="2026-05-06 vs Houston Astros — 3 HR, 3/5"></span></div></td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Jeremiah Jackson</span>
+        <span class="team">BAL</span>
+        <span class="opp-mobile">vs Jacob Lopez</span>
+      </td>
+      <td class="muted small vs-col">Jacob Lopez</td>
+      <td class="num" data-sort-col="model" data-sort="0.1845">18.4%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.1845"><span class="">18.4%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.2012"><span class="up">20.1%</span> <span class="delta up">+1.7%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-out" title="2026-05-01 vs New York Yankees — 0 HR, 0/0"></span><span class="last7-cell last7-out" title="2026-05-02 vs New York Yankees — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-03 vs New York Yankees — 0 HR, 1/4"></span><span class="last7-cell last7-hit" title="2026-05-04 vs New York Yankees — 0 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-05-05 vs Miami Marlins — 0 HR, 0/0"></span><span class="last7-cell last7-out" title="2026-05-06 vs Miami Marlins — 0 HR, 0/4"></span><span class="last7-cell last7-hit" title="2026-05-07 vs Miami Marlins — 0 HR, 1/3"></span></div></td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Max Muncy</span>
+        <span class="team">LAD</span>
+        <span class="opp-mobile">vs Chris Sale</span>
+      </td>
+      <td class="muted small vs-col">Chris Sale</td>
+      <td class="num" data-sort-col="model" data-sort="0.1779">17.8%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.1779"><span class="">17.8%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.1615"><span class="down">16.2%</span> <span class="delta down">-1.6%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-29 vs Miami Marlins — 0 HR, 1/3"></span><span class="last7-cell last7-hit" title="2026-05-01 vs St. Louis Cardinals — 0 HR, 1/3"></span><span class="last7-cell last7-hit" title="2026-05-02 vs St. Louis Cardinals — 0 HR, 2/3"></span><span class="last7-cell last7-hit" title="2026-05-03 vs St. Louis Cardinals — 0 HR, 1/3"></span><span class="last7-cell last7-out" title="2026-05-04 vs Houston Astros — 0 HR, 0/3"></span><span class="last7-cell last7-out" title="2026-05-05 vs Houston Astros — 0 HR, 0/3"></span><span class="last7-cell last7-hit" title="2026-05-06 vs Houston Astros — 0 HR, 1/3"></span></div></td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Carlos Cortes</span>
+        <span class="team">ATH</span>
+        <span class="opp-mobile">vs Kyle Bradish</span>
+      </td>
+      <td class="muted small vs-col">Kyle Bradish</td>
+      <td class="num" data-sort-col="model" data-sort="0.1773">17.7%</td>
+      <td class="num" data-sort-col="adjusted" data-sort="0.1773"><span class="">17.7%</span></td>
+      <td class="num" data-sort-col="bvp" data-sort="0.159"><span class="down">15.9%</span> <span class="delta down">-1.8%</span></td>
+      <td class="center" data-sort-col="verdict" data-sort="1"><span class="badge badge-cold-fade">Cold — fade</span></td>
+      <td class="last7-col"><div class="last7"><span class="last7-cell last7-hit" title="2026-04-28 vs Kansas City Royals — 0 HR, 1/1"></span><span class="last7-cell last7-hit" title="2026-04-29 vs Kansas City Royals — 0 HR, 2/3"></span><span class="last7-cell last7-hit" title="2026-04-30 vs Kansas City Royals — 0 HR, 1/4"></span><span class="last7-cell last7-out" title="2026-05-01 vs Cleveland Guardians — 0 HR, 0/1"></span><span class="last7-cell last7-hit" title="2026-05-02 vs Cleveland Guardians — 0 HR, 2/5"></span><span class="last7-cell last7-out" title="2026-05-06 vs Philadelphia Phillies — 0 HR, 0/3"></span><span class="last7-cell last7-hit" title="2026-05-07 vs Philadelphia Phillies — 0 HR, 2/5"></span></div></td>
     </tr>
         </tbody>
       </table>
@@ -707,307 +774,451 @@ footer {
         <tbody>
           <tr>
       <td>
-        <span class="name">Nick Gonzales</span>
-        <span class="team">PIT</span>
-        <span class="opp-mobile">vs Eduardo Rodriguez</span>
+        <span class="name">Shea Langeliers</span>
+        <span class="team">ATH</span>
+        <span class="opp-mobile">vs Kyle Bradish</span>
       </td>
-      <td class="muted small vs-col">Eduardo Rodriguez</td>
-      <td class="num strong">76.4%</td>
-      <td class="num">37.8%</td>
-      <td class="num">11.9%</td>
-      <td class="num">1.29</td>
+      <td class="muted small vs-col">Kyle Bradish</td>
+      <td class="num strong">80.6%</td>
+      <td class="num">44.2%</td>
+      <td class="num">15.8%</td>
+      <td class="num">1.45</td>
     </tr>
 <tr>
       <td>
-        <span class="name">Casey Schmitt</span>
-        <span class="team">SF</span>
-        <span class="opp-mobile">vs Walker Buehler</span>
+        <span class="name">Jacob Wilson</span>
+        <span class="team">ATH</span>
+        <span class="opp-mobile">vs Kyle Bradish</span>
       </td>
-      <td class="muted small vs-col">Walker Buehler</td>
-      <td class="num strong">73.1%</td>
-      <td class="num">33.2%</td>
-      <td class="num">9.7%</td>
-      <td class="num">1.18</td>
+      <td class="muted small vs-col">Kyle Bradish</td>
+      <td class="num strong">79.9%</td>
+      <td class="num">43.6%</td>
+      <td class="num">15.8%</td>
+      <td class="num">1.43</td>
     </tr>
 <tr>
       <td>
-        <span class="name">Miguel Andujar</span>
-        <span class="team">SD</span>
-        <span class="opp-mobile">vs Logan Webb</span>
+        <span class="name">Carlos Cortes</span>
+        <span class="team">ATH</span>
+        <span class="opp-mobile">vs Kyle Bradish</span>
       </td>
-      <td class="muted small vs-col">Logan Webb</td>
-      <td class="num strong">73.0%</td>
-      <td class="num">33.3%</td>
-      <td class="num">9.6%</td>
-      <td class="num">1.18</td>
+      <td class="muted small vs-col">Kyle Bradish</td>
+      <td class="num strong">78.3%</td>
+      <td class="num">39.6%</td>
+      <td class="num">12.4%</td>
+      <td class="num">1.33</td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Elly De La Cruz</span>
+        <span class="team">CIN</span>
+        <span class="opp-mobile">vs Mike Burrows</span>
+      </td>
+      <td class="muted small vs-col">Mike Burrows</td>
+      <td class="num strong">77.9%</td>
+      <td class="num">39.1%</td>
+      <td class="num">12.1%</td>
+      <td class="num">1.31</td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Troy Johnston</span>
+        <span class="team">COL</span>
+        <span class="opp-mobile">vs Jesús Luzardo</span>
+      </td>
+      <td class="muted small vs-col">Jesús Luzardo</td>
+      <td class="num strong">76.0%</td>
+      <td class="num">37.2%</td>
+      <td class="num">11.7%</td>
+      <td class="num">1.27</td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Jeff McNeil</span>
+        <span class="team">ATH</span>
+        <span class="opp-mobile">vs Kyle Bradish</span>
+      </td>
+      <td class="muted small vs-col">Kyle Bradish</td>
+      <td class="num strong">75.8%</td>
+      <td class="num">36.9%</td>
+      <td class="num">11.3%</td>
+      <td class="num">1.26</td>
     </tr>
 <tr>
       <td>
         <span class="name">Ozzie Albies</span>
         <span class="team">ATL</span>
-        <span class="opp-mobile">vs George Kirby</span>
+        <span class="opp-mobile">vs Emmet Sheehan</span>
       </td>
-      <td class="muted small vs-col">George Kirby</td>
-      <td class="num strong">72.6%</td>
-      <td class="num">32.2%</td>
-      <td class="num">9.2%</td>
-      <td class="num">1.16</td>
+      <td class="muted small vs-col">Emmet Sheehan</td>
+      <td class="num strong">75.8%</td>
+      <td class="num">36.2%</td>
+      <td class="num">10.5%</td>
+      <td class="num">1.24</td>
     </tr>
 <tr>
       <td>
-        <span class="name">Ildemaro Vargas</span>
-        <span class="team">ARI</span>
-        <span class="opp-mobile">vs Bubba Chandler</span>
+        <span class="name">TJ Rumfield</span>
+        <span class="team">COL</span>
+        <span class="opp-mobile">vs Jesús Luzardo</span>
       </td>
-      <td class="muted small vs-col">Bubba Chandler</td>
-      <td class="num strong">72.4%</td>
-      <td class="num">32.8%</td>
-      <td class="num">8.7%</td>
-      <td class="num">1.15</td>
+      <td class="muted small vs-col">Jesús Luzardo</td>
+      <td class="num strong">75.6%</td>
+      <td class="num">37.9%</td>
+      <td class="num">11.7%</td>
+      <td class="num">1.28</td>
     </tr>
 <tr>
       <td>
-        <span class="name">Jung Hoo Lee</span>
-        <span class="team">SF</span>
-        <span class="opp-mobile">vs Walker Buehler</span>
+        <span class="name">Chandler Simpson</span>
+        <span class="team">TB</span>
+        <span class="opp-mobile">vs Connelly Early</span>
       </td>
-      <td class="muted small vs-col">Walker Buehler</td>
-      <td class="num strong">72.4%</td>
-      <td class="num">32.6%</td>
-      <td class="num">9.0%</td>
-      <td class="num">1.16</td>
+      <td class="muted small vs-col">Connelly Early</td>
+      <td class="num strong">75.3%</td>
+      <td class="num">36.9%</td>
+      <td class="num">11.9%</td>
+      <td class="num">1.27</td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Sal Stewart</span>
+        <span class="team">CIN</span>
+        <span class="opp-mobile">vs Mike Burrows</span>
+      </td>
+      <td class="muted small vs-col">Mike Burrows</td>
+      <td class="num strong">74.6%</td>
+      <td class="num">33.8%</td>
+      <td class="num">9.3%</td>
+      <td class="num">1.19</td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Mickey Moniak</span>
+        <span class="team">COL</span>
+        <span class="opp-mobile">vs Jesús Luzardo</span>
+      </td>
+      <td class="muted small vs-col">Jesús Luzardo</td>
+      <td class="num strong">74.3%</td>
+      <td class="num">34.7%</td>
+      <td class="num">10.1%</td>
+      <td class="num">1.21</td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Otto Lopez</span>
+        <span class="team">MIA</span>
+        <span class="opp-mobile">vs Foster Griffin</span>
+      </td>
+      <td class="muted small vs-col">Foster Griffin</td>
+      <td class="num strong">74.1%</td>
+      <td class="num">34.6%</td>
+      <td class="num">10.0%</td>
+      <td class="num">1.21</td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Yordan Alvarez</span>
+        <span class="team">HOU</span>
+        <span class="opp-mobile">vs Nick Lodolo</span>
+      </td>
+      <td class="muted small vs-col">Nick Lodolo</td>
+      <td class="num strong">74.1%</td>
+      <td class="num">36.5%</td>
+      <td class="num">11.3%</td>
+      <td class="num">1.24</td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Christian Walker</span>
+        <span class="team">HOU</span>
+        <span class="opp-mobile">vs Nick Lodolo</span>
+      </td>
+      <td class="muted small vs-col">Nick Lodolo</td>
+      <td class="num strong">73.9%</td>
+      <td class="num">35.4%</td>
+      <td class="num">10.4%</td>
+      <td class="num">1.22</td>
     </tr>
 <tr>
       <td>
         <span class="name">Drake Baldwin</span>
         <span class="team">ATL</span>
-        <span class="opp-mobile">vs George Kirby</span>
+        <span class="opp-mobile">vs Emmet Sheehan</span>
       </td>
-      <td class="muted small vs-col">George Kirby</td>
-      <td class="num strong">72.3%</td>
-      <td class="num">33.5%</td>
+      <td class="muted small vs-col">Emmet Sheehan</td>
+      <td class="num strong">73.3%</td>
+      <td class="num">33.6%</td>
       <td class="num">9.3%</td>
-      <td class="num">1.17</td>
+      <td class="num">1.18</td>
     </tr>
 <tr>
       <td>
-        <span class="name">Ryan O&#39;Hearn</span>
-        <span class="team">PIT</span>
-        <span class="opp-mobile">vs Eduardo Rodriguez</span>
+        <span class="name">Ildemaro Vargas</span>
+        <span class="team">ARI</span>
+        <span class="opp-mobile">vs Nolan McLean</span>
       </td>
-      <td class="muted small vs-col">Eduardo Rodriguez</td>
-      <td class="num strong">71.1%</td>
-      <td class="num">30.3%</td>
+      <td class="muted small vs-col">Nolan McLean</td>
+      <td class="num strong">72.1%</td>
+      <td class="num">31.0%</td>
+      <td class="num">8.2%</td>
+      <td class="num">1.13</td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Ernie Clement</span>
+        <span class="team">TOR</span>
+        <span class="opp-mobile">vs Reid Detmers</span>
+      </td>
+      <td class="muted small vs-col">Reid Detmers</td>
+      <td class="num strong">72.1%</td>
+      <td class="num">32.1%</td>
+      <td class="num">9.0%</td>
+      <td class="num">1.15</td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Jeremiah Jackson</span>
+        <span class="team">BAL</span>
+        <span class="opp-mobile">vs Jacob Lopez</span>
+      </td>
+      <td class="muted small vs-col">Jacob Lopez</td>
+      <td class="num strong">71.6%</td>
+      <td class="num">31.5%</td>
+      <td class="num">8.0%</td>
+      <td class="num">1.12</td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Nico Hoerner</span>
+        <span class="team">CHC</span>
+        <span class="opp-mobile">vs Kumar Rocker</span>
+      </td>
+      <td class="muted small vs-col">Kumar Rocker</td>
+      <td class="num strong">71.4%</td>
+      <td class="num">32.6%</td>
+      <td class="num">8.9%</td>
+      <td class="num">1.15</td>
+    </tr>
+<tr>
+      <td>
+        <span class="name">Yandy Diaz</span>
+        <span class="team">TB</span>
+        <span class="opp-mobile">vs Connelly Early</span>
+      </td>
+      <td class="muted small vs-col">Connelly Early</td>
+      <td class="num strong">71.3%</td>
+      <td class="num">31.6%</td>
       <td class="num">8.4%</td>
-      <td class="num">1.11</td>
+      <td class="num">1.13</td>
     </tr>
 <tr>
       <td>
-        <span class="name">Oneil Cruz</span>
-        <span class="team">PIT</span>
-        <span class="opp-mobile">vs Eduardo Rodriguez</span>
+        <span class="name">Brandon Marsh</span>
+        <span class="team">PHI</span>
+        <span class="opp-mobile">vs Chase Dollander</span>
       </td>
-      <td class="muted small vs-col">Eduardo Rodriguez</td>
-      <td class="num strong">70.3%</td>
-      <td class="num">30.6%</td>
-      <td class="num">8.1%</td>
-      <td class="num">1.11</td>
+      <td class="muted small vs-col">Chase Dollander</td>
+      <td class="num strong">71.3%</td>
+      <td class="num">30.1%</td>
+      <td class="num">7.0%</td>
+      <td class="num">1.09</td>
     </tr>
 <tr>
       <td>
-        <span class="name">Chase Meidroth</span>
-        <span class="team">CHW</span>
-        <span class="opp-mobile">vs Sam Aldegheri</span>
+        <span class="name">Vladimir Guerrero Jr.</span>
+        <span class="team">TOR</span>
+        <span class="opp-mobile">vs Reid Detmers</span>
       </td>
-      <td class="muted small vs-col">Sam Aldegheri</td>
-      <td class="num strong">70.3%</td>
-      <td class="num">30.4%</td>
-      <td class="num">8.5%</td>
-      <td class="num">1.11</td>
+      <td class="muted small vs-col">Reid Detmers</td>
+      <td class="num strong">71.2%</td>
+      <td class="num">31.8%</td>
+      <td class="num">8.2%</td>
+      <td class="num">1.12</td>
     </tr>
 <tr>
       <td>
-        <span class="name">Michael Harris II</span>
-        <span class="team">ATL</span>
-        <span class="opp-mobile">vs George Kirby</span>
+        <span class="name">Spencer Steer</span>
+        <span class="team">CIN</span>
+        <span class="opp-mobile">vs Mike Burrows</span>
       </td>
-      <td class="muted small vs-col">George Kirby</td>
-      <td class="num strong">70.1%</td>
-      <td class="num">29.8%</td>
-      <td class="num">8.4%</td>
-      <td class="num">1.10</td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Heliot Ramos</span>
-        <span class="team">SF</span>
-        <span class="opp-mobile">vs Walker Buehler</span>
-      </td>
-      <td class="muted small vs-col">Walker Buehler</td>
-      <td class="num strong">69.6%</td>
-      <td class="num">28.9%</td>
-      <td class="num">7.2%</td>
-      <td class="num">1.07</td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Konnor Griffin</span>
-        <span class="team">PIT</span>
-        <span class="opp-mobile">vs Eduardo Rodriguez</span>
-      </td>
-      <td class="muted small vs-col">Eduardo Rodriguez</td>
-      <td class="num strong">68.1%</td>
-      <td class="num">27.0%</td>
-      <td class="num">6.6%</td>
-      <td class="num">1.03</td>
+      <td class="muted small vs-col">Mike Burrows</td>
+      <td class="num strong">71.0%</td>
+      <td class="num">31.6%</td>
+      <td class="num">7.8%</td>
+      <td class="num">1.12</td>
     </tr>
 <tr>
       <td>
         <span class="name">Matt Olson</span>
         <span class="team">ATL</span>
-        <span class="opp-mobile">vs George Kirby</span>
+        <span class="opp-mobile">vs Emmet Sheehan</span>
       </td>
-      <td class="muted small vs-col">George Kirby</td>
-      <td class="num strong">67.9%</td>
-      <td class="num">27.5%</td>
-      <td class="num">6.9%</td>
-      <td class="num">1.03</td>
+      <td class="muted small vs-col">Emmet Sheehan</td>
+      <td class="num strong">71.0%</td>
+      <td class="num">31.0%</td>
+      <td class="num">7.9%</td>
+      <td class="num">1.11</td>
     </tr>
 <tr>
       <td>
-        <span class="name">Dominic Smith</span>
-        <span class="team">ATL</span>
-        <span class="opp-mobile">vs George Kirby</span>
+        <span class="name">Nathaniel Lowe</span>
+        <span class="team">CIN</span>
+        <span class="opp-mobile">vs Mike Burrows</span>
       </td>
-      <td class="muted small vs-col">George Kirby</td>
-      <td class="num strong">67.2%</td>
-      <td class="num">28.3%</td>
-      <td class="num">6.5%</td>
-      <td class="num">1.03</td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Jackson Merrill</span>
-        <span class="team">SD</span>
-        <span class="opp-mobile">vs Logan Webb</span>
-      </td>
-      <td class="muted small vs-col">Logan Webb</td>
-      <td class="num strong">66.7%</td>
-      <td class="num">26.1%</td>
-      <td class="num">6.3%</td>
-      <td class="num">1.00</td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Miguel Vargas</span>
-        <span class="team">CHW</span>
-        <span class="opp-mobile">vs Sam Aldegheri</span>
-      </td>
-      <td class="muted small vs-col">Sam Aldegheri</td>
-      <td class="num strong">66.5%</td>
-      <td class="num">25.9%</td>
-      <td class="num">6.2%</td>
-      <td class="num">1.00</td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Bryan Reynolds</span>
-        <span class="team">PIT</span>
-        <span class="opp-mobile">vs Eduardo Rodriguez</span>
-      </td>
-      <td class="muted small vs-col">Eduardo Rodriguez</td>
-      <td class="num strong">66.3%</td>
-      <td class="num">26.1%</td>
-      <td class="num">6.2%</td>
-      <td class="num">1.00</td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Jake Mangum</span>
-        <span class="team">PIT</span>
-        <span class="opp-mobile">vs Eduardo Rodriguez</span>
-      </td>
-      <td class="muted small vs-col">Eduardo Rodriguez</td>
-      <td class="num strong">66.1%</td>
-      <td class="num">25.3%</td>
-      <td class="num">5.6%</td>
-      <td class="num">0.98</td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Fernando Tatis Jr.</span>
-        <span class="team">SD</span>
-        <span class="opp-mobile">vs Logan Webb</span>
-      </td>
-      <td class="muted small vs-col">Logan Webb</td>
-      <td class="num strong">65.8%</td>
-      <td class="num">25.8%</td>
-      <td class="num">5.5%</td>
-      <td class="num">0.98</td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Matt Chapman</span>
-        <span class="team">SF</span>
-        <span class="opp-mobile">vs Walker Buehler</span>
-      </td>
-      <td class="muted small vs-col">Walker Buehler</td>
-      <td class="num strong">65.4%</td>
-      <td class="num">24.3%</td>
-      <td class="num">5.0%</td>
-      <td class="num">0.95</td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Xander Bogaerts</span>
-        <span class="team">SD</span>
-        <span class="opp-mobile">vs Logan Webb</span>
-      </td>
-      <td class="muted small vs-col">Logan Webb</td>
-      <td class="num strong">65.3%</td>
-      <td class="num">24.4%</td>
-      <td class="num">5.5%</td>
-      <td class="num">0.96</td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Jo Adell</span>
-        <span class="team">LAA</span>
-        <span class="opp-mobile">vs Erick Fedde</span>
-      </td>
-      <td class="muted small vs-col">Erick Fedde</td>
-      <td class="num strong">65.3%</td>
-      <td class="num">24.6%</td>
-      <td class="num">5.0%</td>
-      <td class="num">0.96</td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Colson Montgomery</span>
-        <span class="team">CHW</span>
-        <span class="opp-mobile">vs Sam Aldegheri</span>
-      </td>
-      <td class="muted small vs-col">Sam Aldegheri</td>
-      <td class="num strong">65.2%</td>
-      <td class="num">25.4%</td>
-      <td class="num">6.4%</td>
-      <td class="num">0.98</td>
-    </tr>
-<tr>
-      <td>
-        <span class="name">Mauricio Dubón</span>
-        <span class="team">ATL</span>
-        <span class="opp-mobile">vs George Kirby</span>
-      </td>
-      <td class="muted small vs-col">George Kirby</td>
-      <td class="num strong">65.1%</td>
-      <td class="num">25.0%</td>
-      <td class="num">5.3%</td>
-      <td class="num">0.96</td>
+      <td class="muted small vs-col">Mike Burrows</td>
+      <td class="num strong">69.9%</td>
+      <td class="num">28.9%</td>
+      <td class="num">6.7%</td>
+      <td class="num">1.06</td>
     </tr>
         </tbody>
       </table>
     </div>
+  </section>
+
+  <section class="parlay-section">
+    <header>
+      <h2>Parlay Advisor</h2>
+      <div class="sub">
+        Three 3-leg HR parlays modeled after the 2026-05-07 Schwarber + Hicks + Caminero hit
+        (1.08% implied, ≈+9200). Each parlay assumes independence across games.
+        <em>For advisement only — model output, not guidance.</em>
+      </div>
+    </header>
+    <div class="parlay-grid"><div class="parlay-card">
+        <div class="parlay-card-head">
+          <h3>Conviction Parlay</h3>
+          <div class="parlay-implied">
+            <div class="label">Implied</div>
+            <div class="prob">2.16%</div>
+            <div class="odds">+4525</div>
+          </div>
+        </div>
+        <div class="parlay-blurb">Top 3 by model HR% across distinct games. Every signal — park, platoon, pitcher hr9, weather, season power — already priced in. The safest line.</div>
+        <div class="parlay-legs"><div class="parlay-leg">
+            <div class="parlay-leg-head">
+              <div class="parlay-leg-name">
+                <span class="name">Sal Stewart</span>
+                <span class="team">CIN</span>
+                <span class="arch-badge arch-hot">Hot</span>
+              </div>
+              <span class="parlay-leg-pct">31.5%</span>
+            </div>
+            <div class="parlay-leg-vs">vs Mike Burrows</div>
+            <div class="parlay-leg-rationale">Homered last game · 1 HR in last 7 — model historically under-predicts this group by ~24%.</div>
+          </div><div class="parlay-leg">
+            <div class="parlay-leg-head">
+              <div class="parlay-leg-name">
+                <span class="name">Matt Olson</span>
+                <span class="team">ATL</span>
+                <span class="arch-badge arch-raw">Raw</span>
+              </div>
+              <span class="parlay-leg-pct">27.7%</span>
+            </div>
+            <div class="parlay-leg-vs">vs Emmet Sheehan</div>
+            <div class="parlay-leg-rationale">Elevated model HR% with no momentum lift and no BvP boost — pure season-rate trust.</div>
+          </div><div class="parlay-leg">
+            <div class="parlay-leg-head">
+              <div class="parlay-leg-name">
+                <span class="name">Gunnar Henderson</span>
+                <span class="team">BAL</span>
+                <span class="arch-badge arch-raw">Raw</span>
+              </div>
+              <span class="parlay-leg-pct">24.8%</span>
+            </div>
+            <div class="parlay-leg-vs">vs Jacob Lopez</div>
+            <div class="parlay-leg-rationale">Elevated model HR% with no momentum lift and no BvP boost — pure season-rate trust.</div>
+          </div></div>
+      </div><div class="parlay-card">
+        <div class="parlay-card-head">
+          <h3>Hot-Hand Parlay</h3>
+          <div class="parlay-implied">
+            <div class="label">Implied</div>
+            <div class="prob">1.76%</div>
+            <div class="odds">+5580</div>
+          </div>
+        </div>
+        <div class="parlay-blurb">Boosted by yesterday&#39;s HR — the Schwarber slot. Backtest shows model under-predicts this cohort by ~24%.</div>
+        <div class="parlay-legs"><div class="parlay-leg">
+            <div class="parlay-leg-head">
+              <div class="parlay-leg-name">
+                <span class="name">Sal Stewart</span>
+                <span class="team">CIN</span>
+                <span class="arch-badge arch-hot">Hot</span>
+              </div>
+              <span class="parlay-leg-pct">31.5%</span>
+            </div>
+            <div class="parlay-leg-vs">vs Mike Burrows</div>
+            <div class="parlay-leg-rationale">Homered last game · 1 HR in last 7 — model historically under-predicts this group by ~24%.</div>
+          </div><div class="parlay-leg">
+            <div class="parlay-leg-head">
+              <div class="parlay-leg-name">
+                <span class="name">Kyle Schwarber</span>
+                <span class="team">PHI</span>
+                <span class="arch-badge arch-hot">Hot</span>
+              </div>
+              <span class="parlay-leg-pct">24.8%</span>
+            </div>
+            <div class="parlay-leg-vs">vs Chase Dollander</div>
+            <div class="parlay-leg-rationale">Homered last game · 1 HR in last 7 — model historically under-predicts this group by ~24%.</div>
+          </div><div class="parlay-leg">
+            <div class="parlay-leg-head">
+              <div class="parlay-leg-name">
+                <span class="name">Shea Langeliers</span>
+                <span class="team">ATH</span>
+                <span class="arch-badge arch-hot">Hot</span>
+              </div>
+              <span class="parlay-leg-pct">22.6%</span>
+            </div>
+            <div class="parlay-leg-vs">vs Kyle Bradish</div>
+            <div class="parlay-leg-rationale">Homered last game · 3 HR in last 7 — model historically under-predicts this group by ~24%.</div>
+          </div></div>
+      </div><div class="parlay-card">
+        <div class="parlay-card-head">
+          <h3>Power-Trust Parlay</h3>
+          <div class="parlay-implied">
+            <div class="label">Implied</div>
+            <div class="prob">2.13%</div>
+            <div class="odds">+4588</div>
+          </div>
+        </div>
+        <div class="parlay-blurb">Hicks/Caminero archetype — top HR% with no momentum lift and no BvP help. Trusting the raw season rate over short-term context.</div>
+        <div class="parlay-legs"><div class="parlay-leg">
+            <div class="parlay-leg-head">
+              <div class="parlay-leg-name">
+                <span class="name">Elly De La Cruz</span>
+                <span class="team">CIN</span>
+                <span class="arch-badge arch-raw">Raw</span>
+              </div>
+              <span class="parlay-leg-pct">31.1%</span>
+            </div>
+            <div class="parlay-leg-vs">vs Mike Burrows</div>
+            <div class="parlay-leg-rationale">Elevated model HR% with no momentum lift and no BvP boost — pure season-rate trust.</div>
+          </div><div class="parlay-leg">
+            <div class="parlay-leg-head">
+              <div class="parlay-leg-name">
+                <span class="name">Matt Olson</span>
+                <span class="team">ATL</span>
+                <span class="arch-badge arch-raw">Raw</span>
+              </div>
+              <span class="parlay-leg-pct">27.7%</span>
+            </div>
+            <div class="parlay-leg-vs">vs Emmet Sheehan</div>
+            <div class="parlay-leg-rationale">Elevated model HR% with no momentum lift and no BvP boost — pure season-rate trust.</div>
+          </div><div class="parlay-leg">
+            <div class="parlay-leg-head">
+              <div class="parlay-leg-name">
+                <span class="name">Gunnar Henderson</span>
+                <span class="team">BAL</span>
+                <span class="arch-badge arch-raw">Raw</span>
+              </div>
+              <span class="parlay-leg-pct">24.8%</span>
+            </div>
+            <div class="parlay-leg-vs">vs Jacob Lopez</div>
+            <div class="parlay-leg-rationale">Elevated model HR% with no momentum lift and no BvP boost — pure season-rate trust.</div>
+          </div></div>
+      </div></div>
   </section>
 
   <footer>
