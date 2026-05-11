@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>kalshi-15 analysis</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23ec4899'/><text x='16' y='22' font-family='Inter,sans-serif' font-size='14' font-weight='800' fill='white' text-anchor='middle'>K</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Apply mode immediately to avoid FOUC. Default = dark; user toggle persisted.
+    (function () {
+      const saved = localStorage.getItem("k15-mode");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const dark = saved ? saved === "dark" : prefersDark || true;
+      document.documentElement.classList.toggle("dark", dark);
+    })();
+    tailwind.config = { darkMode: "class" };
+  </script>
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    .mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
+    /* Smooth scroll for in-page jumps */
+    html { scroll-behavior: smooth; }
+    /* Hide inactive tab content */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    /* Sticky table headers on horizontal scroll */
+    .data-table thead th { position: sticky; top: 0; }
+    /* Compact W/L chip */
+    .chip-w { background-color: rgb(16 185 129 / 0.15); color: rgb(110 231 183); border-color: rgb(16 185 129 / 0.4); }
+    .chip-l { background-color: rgb(244 63 94 / 0.15); color: rgb(253 164 175); border-color: rgb(244 63 94 / 0.4); }
+    :root.dark .light-only { display: none; }
+    :root:not(.dark) .dark-only { display: none; }
+  </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors min-h-screen">
+
+  <!-- ───────── Header ───────── -->
+  <header class="sticky top-0 z-20 backdrop-blur bg-white/85 dark:bg-slate-950/85 border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-[1100px] mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3 min-w-0">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-fuchsia-500 to-pink-500 flex items-center justify-center text-white font-bold text-sm shadow-sm">K</div>
+        <div class="min-w-0">
+          <h1 class="text-base sm:text-lg font-bold tracking-tight">kalshi-15 analysis</h1>
+          <p class="text-[11px] text-slate-500 mono truncate">paper-sim findings & live-bot decision log</p>
+        </div>
+      </div>
+      <button id="mode-toggle" type="button"
+        class="shrink-0 p-2 rounded-md border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+        aria-label="Toggle dark mode">
+        <svg class="dark-only w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>
+        <svg class="light-only w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>
+      </button>
+    </div>
+
+    <!-- Day tabs -->
+    <nav class="border-t border-slate-200 dark:border-slate-800">
+      <div class="max-w-[1100px] mx-auto px-2 sm:px-4 overflow-x-auto">
+        <div id="tabs" class="flex items-center gap-1 py-1 whitespace-nowrap mono text-xs">
+          <button data-tab="may-11" class="tab-btn tab-active px-3 py-1.5 rounded-md font-semibold transition-colors">May 11, 2026</button>
+          <span class="px-3 py-1.5 text-slate-400 dark:text-slate-600 italic font-normal">May 12 — coming tomorrow</span>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="max-w-[1100px] mx-auto px-4 sm:px-6 py-6 sm:py-10">
+
+    <!-- ───────── May 11 tab ───────── -->
+    <section id="tab-may-11" class="tab-content active">
+
+      <!-- Day intro -->
+      <div class="mb-8">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="text-[10px] mono uppercase tracking-widest text-fuchsia-500">Day 1</span>
+          <span class="h-px flex-1 bg-slate-200 dark:bg-slate-800"></span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">May 11, 2026 — migration, sim20 cohort, on/off rule</h2>
+        <p class="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl">
+          Live v2 moved from a momentum-gamble strategy to <span class="mono text-pink-600 dark:text-pink-400">cheap_contract</span>, calibrated against the best-performing paper sim from a 58-sim parameter sweep. First real session netted <span class="mono font-semibold text-emerald-600 dark:text-emerald-400">+$21.58</span> in 15 minutes; analysis below documents the decisions, the sequence patterns we found, and what's still open.
+        </p>
+      </div>
+
+      <!-- Top-line KPIs -->
+      <section class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10">
+        <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 p-3 sm:p-4">
+          <div class="text-[10px] uppercase tracking-widest text-slate-500 mono">First session P&amp;L</div>
+          <div class="mt-1 text-xl sm:text-2xl font-bold mono text-emerald-600 dark:text-emerald-400">+$21.58</div>
+          <div class="text-[10px] text-slate-500 mono">4W / 3L · 7 trades · 15 min</div>
+        </div>
+        <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 p-3 sm:p-4">
+          <div class="text-[10px] uppercase tracking-widest text-slate-500 mono">Bankroll</div>
+          <div class="mt-1 text-xl sm:text-2xl font-bold mono">$187.97</div>
+          <div class="text-[10px] text-slate-500 mono">from $165.99 (+13.2%)</div>
+        </div>
+        <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 p-3 sm:p-4">
+          <div class="text-[10px] uppercase tracking-widest text-slate-500 mono">Rule backtest</div>
+          <div class="mt-1 text-xl sm:text-2xl font-bold mono text-fuchsia-600 dark:text-fuchsia-400">1.8×</div>
+          <div class="text-[10px] text-slate-500 mono">$113 vs $57 baseline · $2 bets</div>
+        </div>
+        <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 p-3 sm:p-4">
+          <div class="text-[10px] uppercase tracking-widest text-slate-500 mono">Sim cohort</div>
+          <div class="mt-1 text-xl sm:text-2xl font-bold mono">61</div>
+          <div class="text-[10px] text-slate-500 mono">paper-sims · 9,861 trades</div>
+        </div>
+      </section>
+
+      <!-- Strategy config -->
+      <section class="mb-12">
+        <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+          <span class="w-1 h-5 rounded bg-fuchsia-500"></span>
+          Live v2 strategy (locked in code, restart to change)
+        </h3>
+        <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 p-4 sm:p-5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-sm mono">
+            <div class="flex justify-between sm:block sm:space-y-0.5">
+              <span class="text-slate-500 text-xs uppercase tracking-wider">Strategy mode</span>
+              <span class="font-semibold sm:block text-pink-600 dark:text-pink-400">cheap_contract</span>
+            </div>
+            <div class="flex justify-between sm:block sm:space-y-0.5">
+              <span class="text-slate-500 text-xs uppercase tracking-wider">Side pick</span>
+              <span class="font-semibold sm:block">lower (cheaper)</span>
+            </div>
+            <div class="flex justify-between sm:block sm:space-y-0.5">
+              <span class="text-slate-500 text-xs uppercase tracking-wider">Entry band</span>
+              <span class="font-semibold sm:block">[0.05, 0.40]</span>
+            </div>
+            <div class="flex justify-between sm:block sm:space-y-0.5">
+              <span class="text-slate-500 text-xs uppercase tracking-wider">Trigger</span>
+              <span class="font-semibold sm:block">price ≤ $0.25 @ 10–12m left</span>
+            </div>
+            <div class="flex justify-between sm:block sm:space-y-0.5">
+              <span class="text-slate-500 text-xs uppercase tracking-wider">Exit</span>
+              <span class="font-semibold sm:block">ride to settlement</span>
+            </div>
+            <div class="flex justify-between sm:block sm:space-y-0.5">
+              <span class="text-slate-500 text-xs uppercase tracking-wider">Bet size</span>
+              <span class="font-semibold sm:block">$2 (mutable in UI)</span>
+            </div>
+            <div class="flex justify-between sm:block sm:space-y-0.5">
+              <span class="text-slate-500 text-xs uppercase tracking-wider">Assets</span>
+              <span class="font-semibold sm:block">BTC, ETH, XRP, DOGE <span class="text-rose-500 dark:text-rose-400">(SOL off)</span></span>
+            </div>
+            <div class="flex justify-between sm:block sm:space-y-0.5">
+              <span class="text-slate-500 text-xs uppercase tracking-wider">Hour gate</span>
+              <span class="font-semibold sm:block">none (all 24h)</span>
+            </div>
+          </div>
+          <p class="mt-4 text-[11px] text-slate-500 italic">
+            Picked from a 58-sim cohort: the threshold=0.25 / lower / band [0.05, 0.40] / ride-to-settle config was the highest-EV cell at +$0.86/trade across 168 trades on the day.
+          </p>
+        </div>
+      </section>
+
+      <!-- Per-asset findings -->
+      <section class="mb-12">
+        <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+          <span class="w-1 h-5 rounded bg-fuchsia-500"></span>
+          Per-asset EV (threshold=0.25 cohort, 844 trades)
+        </h3>
+        <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="data-table w-full text-sm">
+              <thead class="bg-slate-50 dark:bg-slate-800/50 text-xs uppercase tracking-wider text-slate-500">
+                <tr>
+                  <th class="text-left px-4 py-2 font-semibold">Asset</th>
+                  <th class="text-right px-4 py-2 font-semibold">Trades</th>
+                  <th class="text-right px-4 py-2 font-semibold">Win rate</th>
+                  <th class="text-right px-4 py-2 font-semibold">$/trade</th>
+                  <th class="text-right px-4 py-2 font-semibold">Realized P&amp;L</th>
+                </tr>
+              </thead>
+              <tbody class="mono divide-y divide-slate-200 dark:divide-slate-800">
+                <tr><td class="px-4 py-2 font-bold text-emerald-600 dark:text-emerald-400">XRP</td><td class="px-4 py-2 text-right">182</td><td class="px-4 py-2 text-right">37.9%</td><td class="px-4 py-2 text-right text-emerald-600 dark:text-emerald-400">+$1.44</td><td class="px-4 py-2 text-right text-emerald-600 dark:text-emerald-400 font-semibold">+$261.77</td></tr>
+                <tr><td class="px-4 py-2 font-bold text-emerald-600 dark:text-emerald-400">DOGE</td><td class="px-4 py-2 text-right">170</td><td class="px-4 py-2 text-right">33.3%</td><td class="px-4 py-2 text-right text-emerald-600 dark:text-emerald-400">+$0.76</td><td class="px-4 py-2 text-right text-emerald-600 dark:text-emerald-400 font-semibold">+$128.84</td></tr>
+                <tr><td class="px-4 py-2 font-bold text-sky-600 dark:text-sky-400">BTC</td><td class="px-4 py-2 text-right">141</td><td class="px-4 py-2 text-right">30.1%</td><td class="px-4 py-2 text-right text-sky-600 dark:text-sky-400">+$0.43</td><td class="px-4 py-2 text-right text-sky-600 dark:text-sky-400">+$61.09</td></tr>
+                <tr><td class="px-4 py-2 font-bold text-sky-600 dark:text-sky-400">ETH</td><td class="px-4 py-2 text-right">165</td><td class="px-4 py-2 text-right">30.0%</td><td class="px-4 py-2 text-right text-sky-600 dark:text-sky-400">+$0.29</td><td class="px-4 py-2 text-right text-sky-600 dark:text-sky-400">+$48.02</td></tr>
+                <tr class="bg-rose-50/40 dark:bg-rose-950/20"><td class="px-4 py-2 font-bold text-rose-600 dark:text-rose-400">SOL</td><td class="px-4 py-2 text-right">186</td><td class="px-4 py-2 text-right">25.4%</td><td class="px-4 py-2 text-right text-rose-600 dark:text-rose-400">−$0.47</td><td class="px-4 py-2 text-right text-rose-600 dark:text-rose-400 font-semibold">−$86.78</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="px-4 py-3 text-xs text-slate-500 border-t border-slate-200 dark:border-slate-800">
+            <span class="font-semibold text-slate-700 dark:text-slate-300">Decision:</span> SOL disabled on the live bot. Keeping the other 4 assets gives ~$500 cumulative P&amp;L across the cohort vs. SOL's individual drag.
+          </p>
+        </div>
+      </section>
+
+      <!-- Hour-of-day findings -->
+      <section class="mb-12">
+        <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+          <span class="w-1 h-5 rounded bg-fuchsia-500"></span>
+          Hour-of-day spread (Pacific Time)
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="rounded-lg border border-emerald-300 dark:border-emerald-500/30 bg-emerald-50/40 dark:bg-emerald-950/20 p-4">
+            <div class="text-[10px] uppercase tracking-widest font-semibold text-emerald-600 dark:text-emerald-400 mb-2">Best hours (cohort P&amp;L)</div>
+            <ul class="text-sm mono space-y-1">
+              <li class="flex justify-between"><span class="font-bold">11pm</span> <span class="text-slate-600 dark:text-slate-400">72.7% WR · +$8.52/tr · <span class="text-emerald-600 dark:text-emerald-400 font-semibold">+$468</span></span></li>
+              <li class="flex justify-between"><span class="font-bold">8pm</span>  <span class="text-slate-600 dark:text-slate-400">60.5% WR · +$6.06/tr · <span class="text-emerald-600 dark:text-emerald-400 font-semibold">+$230</span></span></li>
+              <li class="flex justify-between"><span class="font-bold">6am</span>  <span class="text-slate-600 dark:text-slate-400">36.2% WR · +$1.28/tr · <span class="text-emerald-600 dark:text-emerald-400 font-semibold">+$103</span></span></li>
+              <li class="flex justify-between"><span class="font-bold">8am</span>  <span class="text-slate-600 dark:text-slate-400">41.9% WR · +$2.06/tr · <span class="text-emerald-600 dark:text-emerald-400 font-semibold">+$89</span></span></li>
+            </ul>
+          </div>
+          <div class="rounded-lg border border-rose-300 dark:border-rose-500/30 bg-rose-50/40 dark:bg-rose-950/20 p-4">
+            <div class="text-[10px] uppercase tracking-widest font-semibold text-rose-600 dark:text-rose-400 mb-2">Worst hours (cohort P&amp;L)</div>
+            <ul class="text-sm mono space-y-1">
+              <li class="flex justify-between"><span class="font-bold">7pm</span> <span class="text-slate-600 dark:text-slate-400">11.1% WR · −$3.36/tr · <span class="text-rose-600 dark:text-rose-400 font-semibold">−$151</span></span></li>
+              <li class="flex justify-between"><span class="font-bold">2am</span> <span class="text-slate-600 dark:text-slate-400">17.9% WR · −$2.14/tr · <span class="text-rose-600 dark:text-rose-400 font-semibold">−$143</span></span></li>
+              <li class="flex justify-between"><span class="font-bold">3am</span> <span class="text-slate-600 dark:text-slate-400">16.7% WR · −$2.34/tr · <span class="text-rose-600 dark:text-rose-400 font-semibold">−$126</span></span></li>
+              <li class="flex justify-between"><span class="font-bold">9pm</span> <span class="text-slate-600 dark:text-slate-400">17.7% WR · −$1.68/tr · <span class="text-rose-600 dark:text-rose-400 font-semibold">−$104</span></span></li>
+            </ul>
+          </div>
+        </div>
+        <p class="mt-3 text-xs text-slate-500">
+          <span class="font-semibold text-slate-700 dark:text-slate-300">In-sample counterfactual:</span>
+          skipping the 6 worst UTC hours would lift cohort P&amp;L from $281 → $980. Single-day sample though — the <span class="mono text-pink-600 dark:text-pink-400">cheap_ct_sim20_hourgated</span> sim is running specifically to validate this out-of-sample before we touch the live bot.
+        </p>
+      </section>
+
+      <!-- Streak / regime structure -->
+      <section class="mb-12">
+        <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+          <span class="w-1 h-5 rounded bg-fuchsia-500"></span>
+          Streak structure (sim20, 171 trades)
+        </h3>
+        <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 p-4 sm:p-5">
+          <p class="text-sm text-slate-700 dark:text-slate-300 mb-4">
+            Sim20's wins and losses don't behave like independent flips. The conditional probabilities tell the story:
+          </p>
+          <div class="grid grid-cols-3 gap-2 sm:gap-4 mb-4 mono">
+            <div class="text-center p-3 rounded bg-slate-100 dark:bg-slate-800/60">
+              <div class="text-[10px] uppercase tracking-widest text-slate-500">Base</div>
+              <div class="text-xl sm:text-2xl font-bold">29.2%</div>
+              <div class="text-[10px] text-slate-500">P(W) overall</div>
+            </div>
+            <div class="text-center p-3 rounded bg-emerald-100 dark:bg-emerald-950/30">
+              <div class="text-[10px] uppercase tracking-widest text-emerald-600 dark:text-emerald-400">After W</div>
+              <div class="text-xl sm:text-2xl font-bold text-emerald-600 dark:text-emerald-400">53.1%</div>
+              <div class="text-[10px] text-slate-500">P(W | prev W)</div>
+            </div>
+            <div class="text-center p-3 rounded bg-rose-100 dark:bg-rose-950/30">
+              <div class="text-[10px] uppercase tracking-widest text-rose-600 dark:text-rose-400">After L</div>
+              <div class="text-xl sm:text-2xl font-bold text-rose-600 dark:text-rose-400">19.0%</div>
+              <div class="text-[10px] text-slate-500">P(W | prev L)</div>
+            </div>
+          </div>
+          <p class="text-sm text-slate-700 dark:text-slate-300 mb-3">
+            That's a <span class="font-semibold">−34pp anti-streak gap</span> — but in the opposite direction from what most intuition suggests. Wins cluster with wins; losses cluster with losses. The mechanism is intra-window correlation: the bot trades 5 assets in parallel, and when crypto is broadly stable the cheap side hits everywhere, when crypto is trending hard the cheap side misses everywhere.
+          </p>
+          <div class="text-xs mono space-y-2 mt-4">
+            <div><span class="text-slate-500">Longest win streak:</span>  <span class="font-semibold">6</span>  <span class="text-slate-500">(independence baseline ≈ 1.4)</span></div>
+            <div><span class="text-slate-500">Longest loss streak:</span> <span class="font-semibold">12</span> <span class="text-slate-500">(independence baseline ≈ 3.4)</span></div>
+            <div><span class="text-slate-500">Total flips (W↔L):</span>   <span class="font-semibold">46</span> <span class="text-slate-500">over 170 adjacent pairs (27%)</span></div>
+            <div><span class="text-slate-500">Average flip cadence:</span> <span class="font-semibold">3.1/hour</span> <span class="text-slate-500">— one flip every ~20 min</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Streak predecessors -->
+      <section class="mb-12">
+        <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+          <span class="w-1 h-5 rounded bg-fuchsia-500"></span>
+          What precedes each streak (the asymmetry)
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 p-4">
+            <h4 class="font-bold text-rose-600 dark:text-rose-400 mb-2">Loss streaks → head-fakes</h4>
+            <p class="text-sm text-slate-700 dark:text-slate-300 mb-3">
+              <span class="font-semibold">14 of 23 (61%)</span> of all loss streaks follow exactly <span class="font-semibold">one</span> isolated win. Long loss streaks (≥5) are even more lopsided: <span class="font-semibold">9 of 12</span> follow a single W.
+            </p>
+            <div class="mono text-xs text-slate-500 bg-slate-100 dark:bg-slate-800/60 rounded p-2 leading-relaxed">
+              ...LLLLLLLW <span class="text-rose-500 font-bold">| LLLLLLLLLL</span>  ← 9-L streak after 1 W<br>
+              ...LLLLLLLW <span class="text-rose-500 font-bold">| LLLLLLLLL</span>  ← head-fake pattern repeats
+            </div>
+          </div>
+          <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 p-4">
+            <h4 class="font-bold text-emerald-600 dark:text-emerald-400 mb-2">Win streaks → droughts</h4>
+            <p class="text-sm text-slate-700 dark:text-slate-300 mb-3">
+              <span class="font-semibold">6 of 8</span> win streaks of length ≥3 emerge from a <span class="font-semibold">long loss streak (≥4)</span>. Wins need momentum to build — the regime change is preceded by a longer drought.
+            </p>
+            <div class="mono text-xs text-slate-500 bg-slate-100 dark:bg-slate-800/60 rounded p-2 leading-relaxed">
+              ...LLLLLLLLL <span class="text-emerald-500 font-bold">| WWWWWW</span>   ← W×6 after 9-L<br>
+              ...LLLLLLLLLLL <span class="text-emerald-500 font-bold">| WWWW</span>   ← W×4 after 11-L
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- On/off rule backtest -->
+      <section class="mb-12">
+        <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+          <span class="w-1 h-5 rounded bg-fuchsia-500"></span>
+          On/off rule backtest
+        </h3>
+        <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 overflow-hidden">
+          <div class="p-4 sm:p-5 border-b border-slate-200 dark:border-slate-800">
+            <p class="text-sm text-slate-700 dark:text-slate-300">
+              Rule: <span class="mono text-pink-600 dark:text-pink-400">flip v2 ON after a sim20 W, flip OFF after a sim20 L</span>. Manual operation via the Sim20 Signal panel in the v2 dashboard.
+            </p>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="data-table w-full text-sm">
+              <thead class="bg-slate-50 dark:bg-slate-800/50 text-xs uppercase tracking-wider text-slate-500">
+                <tr>
+                  <th class="text-left px-4 py-2 font-semibold">Rule variant</th>
+                  <th class="text-right px-4 py-2 font-semibold">Trades taken</th>
+                  <th class="text-right px-4 py-2 font-semibold">WR</th>
+                  <th class="text-right px-4 py-2 font-semibold">P&amp;L ($5 bets)</th>
+                  <th class="text-right px-4 py-2 font-semibold">P&amp;L ($2 bets)</th>
+                </tr>
+              </thead>
+              <tbody class="mono divide-y divide-slate-200 dark:divide-slate-800">
+                <tr><td class="px-4 py-2">Always trade (baseline)</td><td class="px-4 py-2 text-right">171</td><td class="px-4 py-2 text-right">29.2%</td><td class="px-4 py-2 text-right">+$142.18</td><td class="px-4 py-2 text-right text-slate-500">+$56.87</td></tr>
+                <tr class="bg-fuchsia-50/40 dark:bg-fuchsia-950/20"><td class="px-4 py-2 font-bold text-fuchsia-600 dark:text-fuchsia-400">Flip ON after 1 W</td><td class="px-4 py-2 text-right">49</td><td class="px-4 py-2 text-right">53.1%</td><td class="px-4 py-2 text-right text-emerald-600 dark:text-emerald-400 font-semibold">+$282.96</td><td class="px-4 py-2 text-right text-emerald-600 dark:text-emerald-400 font-semibold">+$113.18</td></tr>
+                <tr><td class="px-4 py-2">Flip ON after 2 W</td><td class="px-4 py-2 text-right">25</td><td class="px-4 py-2 text-right">56.0%</td><td class="px-4 py-2 text-right">+$156.13</td><td class="px-4 py-2 text-right text-slate-500">+$62.45</td></tr>
+                <tr><td class="px-4 py-2">Flip ON after 3 W</td><td class="px-4 py-2 text-right">14</td><td class="px-4 py-2 text-right">42.9%</td><td class="px-4 py-2 text-right">+$47.83</td><td class="px-4 py-2 text-right text-slate-500">+$19.13</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="p-4 sm:p-5 border-t border-slate-200 dark:border-slate-800 text-xs space-y-2 text-slate-600 dark:text-slate-400">
+            <p>
+              <span class="font-semibold text-slate-800 dark:text-slate-200">Why the 1-W variant wins:</span>
+              waiting for 2 wins skips legitimate gains from 2-streaks (4 of 24 W-streaks are length 2). The extra wins from those streaks outweigh the head-fake losses you eat with the 1-W rule.
+            </p>
+            <p>
+              <span class="font-semibold text-slate-800 dark:text-slate-200">SOL handling:</span>
+              SOL stays in sim20's signal feed even though it's disabled in v2 trades — its W/L votes help regime detection on the other 4 assets. Excluding SOL from the signal entirely would cost ~$26 at $2 bets.
+            </p>
+            <p>
+              <span class="font-semibold text-amber-600 dark:text-amber-400">⚠ Caveat:</span>
+              this is in-sample on a single 15-hour day. Out-of-sample performance will be smaller; how much is the open question for May 12+.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Live first session -->
+      <section class="mb-12">
+        <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+          <span class="w-1 h-5 rounded bg-fuchsia-500"></span>
+          Live first session (real money)
+        </h3>
+        <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 overflow-hidden">
+          <div class="p-4 sm:p-5 grid grid-cols-2 sm:grid-cols-4 gap-3 border-b border-slate-200 dark:border-slate-800">
+            <div><div class="text-[10px] uppercase tracking-widest text-slate-500 mono">Window 1</div><div class="text-sm font-bold mono text-emerald-600 dark:text-emerald-400">3W / 0L · +$20.72</div></div>
+            <div><div class="text-[10px] uppercase tracking-widest text-slate-500 mono">Window 2</div><div class="text-sm font-bold mono text-rose-600 dark:text-rose-400">1W / 3L · +$0.86</div></div>
+            <div><div class="text-[10px] uppercase tracking-widest text-slate-500 mono">Total</div><div class="text-sm font-bold mono text-emerald-600 dark:text-emerald-400">+$21.58</div></div>
+            <div><div class="text-[10px] uppercase tracking-widest text-slate-500 mono">Win rate</div><div class="text-sm font-bold mono">57.1%</div></div>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="data-table w-full text-sm">
+              <thead class="bg-slate-50 dark:bg-slate-800/50 text-xs uppercase tracking-wider text-slate-500">
+                <tr>
+                  <th class="text-left px-4 py-2">Window</th>
+                  <th class="text-left px-4 py-2">Asset</th>
+                  <th class="text-left px-4 py-2">Side</th>
+                  <th class="text-right px-4 py-2">Entry</th>
+                  <th class="text-left px-4 py-2">Result</th>
+                  <th class="text-right px-4 py-2">P&amp;L</th>
+                </tr>
+              </thead>
+              <tbody class="mono divide-y divide-slate-200 dark:divide-slate-800">
+                <tr><td class="px-4 py-2 text-slate-500">16:30</td><td class="px-4 py-2 font-bold">BTC</td><td class="px-4 py-2">DOWN</td><td class="px-4 py-2 text-right">$0.18</td><td class="px-4 py-2 text-emerald-600 dark:text-emerald-400 font-semibold">WON</td><td class="px-4 py-2 text-right text-emerald-600 dark:text-emerald-400 font-semibold">+$8.80</td></tr>
+                <tr><td class="px-4 py-2 text-slate-500">16:30</td><td class="px-4 py-2 font-bold">ETH</td><td class="px-4 py-2">DOWN</td><td class="px-4 py-2 text-right">$0.23</td><td class="px-4 py-2 text-emerald-600 dark:text-emerald-400 font-semibold">WON</td><td class="px-4 py-2 text-right text-emerald-600 dark:text-emerald-400 font-semibold">+$6.00</td></tr>
+                <tr><td class="px-4 py-2 text-slate-500">16:30</td><td class="px-4 py-2 font-bold">XRP</td><td class="px-4 py-2">DOWN</td><td class="px-4 py-2 text-right">$0.24</td><td class="px-4 py-2 text-emerald-600 dark:text-emerald-400 font-semibold">WON</td><td class="px-4 py-2 text-right text-emerald-600 dark:text-emerald-400 font-semibold">+$5.92</td></tr>
+                <tr class="bg-slate-50 dark:bg-slate-800/20"><td class="px-4 py-2 text-slate-500">16:45</td><td class="px-4 py-2 font-bold">BTC</td><td class="px-4 py-2">DOWN</td><td class="px-4 py-2 text-right">$0.21</td><td class="px-4 py-2 text-emerald-600 dark:text-emerald-400 font-semibold">WON</td><td class="px-4 py-2 text-right text-emerald-600 dark:text-emerald-400 font-semibold">+$6.93</td></tr>
+                <tr class="bg-slate-50 dark:bg-slate-800/20"><td class="px-4 py-2 text-slate-500">16:45</td><td class="px-4 py-2 font-bold">DOGE</td><td class="px-4 py-2">DOWN</td><td class="px-4 py-2 text-right">$0.23</td><td class="px-4 py-2 text-rose-600 dark:text-rose-400">LOST</td><td class="px-4 py-2 text-right text-rose-600 dark:text-rose-400">−$2.00</td></tr>
+                <tr class="bg-slate-50 dark:bg-slate-800/20"><td class="px-4 py-2 text-slate-500">16:45</td><td class="px-4 py-2 font-bold">XRP</td><td class="px-4 py-2">DOWN</td><td class="px-4 py-2 text-right">$0.23</td><td class="px-4 py-2 text-rose-600 dark:text-rose-400">LOST</td><td class="px-4 py-2 text-right text-rose-600 dark:text-rose-400">−$2.00</td></tr>
+                <tr class="bg-slate-50 dark:bg-slate-800/20"><td class="px-4 py-2 text-slate-500">16:45</td><td class="px-4 py-2 font-bold">ETH</td><td class="px-4 py-2">DOWN</td><td class="px-4 py-2 text-right">$0.21</td><td class="px-4 py-2 text-rose-600 dark:text-rose-400">LOST</td><td class="px-4 py-2 text-right text-rose-600 dark:text-rose-400">−$2.07</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="px-4 py-3 text-xs text-slate-500 border-t border-slate-200 dark:border-slate-800">
+            Two consecutive 15-min windows. First window: 3 of 3 winning cheap-side bets. Second window: 1 of 4 — exactly the regime-clustering pattern sim20 had predicted. DOGE finally fired in window 2 (its cheap side first dropped into the band) and lost.
+          </p>
+        </div>
+      </section>
+
+      <!-- Running experiments -->
+      <section class="mb-12">
+        <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+          <span class="w-1 h-5 rounded bg-fuchsia-500"></span>
+          Running validation experiments
+        </h3>
+        <div class="space-y-3">
+          <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 p-4">
+            <div class="flex items-start justify-between gap-3 mb-1">
+              <span class="font-bold mono text-pink-600 dark:text-pink-400">cheap_ct_xrp_only</span>
+              <span class="text-[10px] mono px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-500/30">running</span>
+            </div>
+            <p class="text-sm text-slate-700 dark:text-slate-300">XRP-only sim, sim20 config otherwise. Tests whether XRP's +$1.44/trade holds at single-asset cadence (fewer windows but no other-asset noise).</p>
+          </div>
+          <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 p-4">
+            <div class="flex items-start justify-between gap-3 mb-1">
+              <span class="font-bold mono text-pink-600 dark:text-pink-400">cheap_ct_no_sol</span>
+              <span class="text-[10px] mono px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-500/30">running</span>
+            </div>
+            <p class="text-sm text-slate-700 dark:text-slate-300">BTC/ETH/XRP/DOGE only — same asset list as the live v2 bot. Baseline reference for "what's the headline P&amp;L expectation at this config".</p>
+          </div>
+          <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 p-4">
+            <div class="flex items-start justify-between gap-3 mb-1">
+              <span class="font-bold mono text-pink-600 dark:text-pink-400">cheap_ct_sim20_hourgated</span>
+              <span class="text-[10px] mono px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-500/30">running</span>
+            </div>
+            <p class="text-sm text-slate-700 dark:text-slate-300">Same as sim20 but skips UTC hours 2/4/9/10/11/12 (the cohort's losing hours from today's data). Direct out-of-sample test of the hour-gate hypothesis.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tomorrow's checklist -->
+      <section class="mb-8">
+        <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+          <span class="w-1 h-5 rounded bg-fuchsia-500"></span>
+          Open questions for May 12
+        </h3>
+        <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 p-4 sm:p-5">
+          <ol class="space-y-2 text-sm text-slate-700 dark:text-slate-300 list-decimal list-inside marker:text-fuchsia-500 marker:font-bold">
+            <li>Does <span class="mono text-pink-600 dark:text-pink-400">cheap_ct_sim20_hourgated</span> beat plain sim20 with another 24h of data? → if yes, enable hour gate on live.</li>
+            <li>Does XRP's +$1.44/trade hold in <span class="mono text-pink-600 dark:text-pink-400">cheap_ct_xrp_only</span>?</li>
+            <li>Does SOL's structural drain persist on multi-day data, or was today an outlier?</li>
+            <li>Did the on/off rule actually deliver out-of-sample? Compare live v2 trades against sim20's signal sequence.</li>
+            <li>Does the head-fake pattern (61% of L-streaks after 1 W) repeat in tomorrow's session, or is it a one-day artifact?</li>
+          </ol>
+        </div>
+      </section>
+
+    </section>
+
+  </main>
+
+  <footer class="border-t border-slate-200 dark:border-slate-800 mt-16">
+    <div class="max-w-[1100px] mx-auto px-4 sm:px-6 py-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-500">
+      <span class="mono">kalshi-15 analysis · live bot &amp; sim findings</span>
+      <span>by <a href="../" class="hover:text-slate-700 dark:hover:text-slate-300 underline-offset-2 hover:underline">Steven Truong</a></span>
+    </div>
+  </footer>
+
+  <script>
+    // Tab switching
+    const tabsRoot = document.getElementById("tabs");
+    const tabButtons = tabsRoot.querySelectorAll(".tab-btn");
+    const tabContents = document.querySelectorAll(".tab-content");
+    function setTabStyle() {
+      for (const btn of tabButtons) {
+        const active = btn.classList.contains("tab-active");
+        btn.className = "tab-btn px-3 py-1.5 rounded-md font-semibold transition-colors " + (
+          active
+            ? "bg-fuchsia-100 dark:bg-fuchsia-500/15 text-fuchsia-700 dark:text-fuchsia-300 border border-fuchsia-300 dark:border-fuchsia-500/40"
+            : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 border border-transparent"
+        ) + (active ? " tab-active" : "");
+      }
+    }
+    setTabStyle();
+    for (const btn of tabButtons) {
+      btn.addEventListener("click", () => {
+        for (const b of tabButtons) b.classList.remove("tab-active");
+        btn.classList.add("tab-active");
+        const tab = btn.dataset.tab;
+        for (const c of tabContents) c.classList.toggle("active", c.id === `tab-${tab}`);
+        setTabStyle();
+      });
+    }
+
+    // Dark/light toggle
+    const modeBtn = document.getElementById("mode-toggle");
+    modeBtn.addEventListener("click", () => {
+      const isDark = document.documentElement.classList.toggle("dark");
+      localStorage.setItem("k15-mode", isDark ? "dark" : "light");
+    });
+  </script>
+</body>
+</html>
