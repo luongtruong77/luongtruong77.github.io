@@ -60,8 +60,8 @@
     <nav class="border-t border-slate-200 dark:border-slate-800">
       <div class="max-w-[1100px] mx-auto px-2 sm:px-4 overflow-x-auto">
         <div id="tabs" class="flex items-center gap-1 py-1 whitespace-nowrap mono text-xs">
-          <button data-tab="may-11" class="tab-btn tab-active px-3 py-1.5 rounded-md font-semibold transition-colors">May 11, 2026</button>
-          <span class="px-3 py-1.5 text-slate-400 dark:text-slate-600 italic font-normal">May 12 — coming tomorrow</span>
+          <button data-tab="may-11" class="tab-btn px-3 py-1.5 rounded-md font-semibold transition-colors">May 11, 2026</button>
+          <button data-tab="may-12" class="tab-btn tab-active px-3 py-1.5 rounded-md font-semibold transition-colors">May 12, 2026</button>
         </div>
       </div>
     </nav>
@@ -70,7 +70,7 @@
   <main class="max-w-[1100px] mx-auto px-4 sm:px-6 py-6 sm:py-10">
 
     <!-- ───────── May 11 tab ───────── -->
-    <section id="tab-may-11" class="tab-content active">
+    <section id="tab-may-11" class="tab-content">
 
       <!-- Day intro -->
       <div class="mb-8">
@@ -506,6 +506,236 @@
             <li>The rule multiplier compressed from 2.0× → 1.30× as the afternoon's favorable regime extended. Does it widen again tomorrow if conditions return to mixed?</li>
             <li>Did the head-fake pattern (61% of L-streaks after 1 W) repeat, or was it a one-day artifact?</li>
           </ol>
+        </div>
+      </section>
+
+    </section>
+
+    <!-- ───────── May 12 tab ───────── -->
+    <section id="tab-may-12" class="tab-content active">
+
+      <!-- Day intro -->
+      <div class="mb-8">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="text-[10px] mono uppercase tracking-widest text-fuchsia-500">Day 2</span>
+          <span class="h-px flex-1 bg-slate-200 dark:bg-slate-800"></span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">May 12, 2026 — overnight read, sim55 emerges, sim61–64 spawned</h2>
+        <p class="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl">
+          Overnight data answered all six of yesterday's open questions. Headline: the auto-rule <span class="font-semibold">gave back $93</span> against scaled-unfiltered sim20 — still net-positive lifetime, but the multiplier never crossed back above 1.0×. The actual promote candidate is <span class="mono text-pink-600 dark:text-pink-400">sim55_hg_v2</span> (refined hour gate, <span class="text-emerald-600 dark:text-emerald-400 font-semibold">+$1.76/t edge</span>) — not the original hourgated sim, which is now tied with baseline.
+        </p>
+      </div>
+
+      <!-- Top-line KPIs -->
+      <section class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10">
+        <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 p-3 sm:p-4">
+          <div class="text-[10px] uppercase tracking-widest text-slate-500 mono">Auto-rule overnight</div>
+          <div class="mt-1 text-xl sm:text-2xl font-bold mono text-rose-600 dark:text-rose-400">−$41.46</div>
+          <div class="text-[10px] text-slate-500 mono">53 trades · 18.9% WR · vs +$51 scaled-sim20</div>
+        </div>
+        <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 p-3 sm:p-4">
+          <div class="text-[10px] uppercase tracking-widest text-slate-500 mono">Auto-rule lifetime</div>
+          <div class="mt-1 text-xl sm:text-2xl font-bold mono text-emerald-600 dark:text-emerald-400">+$128.77</div>
+          <div class="text-[10px] text-slate-500 mono">115 trades · 28.7% WR · still ahead</div>
+        </div>
+        <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 p-3 sm:p-4">
+          <div class="text-[10px] uppercase tracking-widest text-slate-500 mono">sim55_hg_v2 edge</div>
+          <div class="mt-1 text-xl sm:text-2xl font-bold mono text-emerald-600 dark:text-emerald-400">+$1.76/t</div>
+          <div class="text-[10px] text-slate-500 mono">80 trades · +$115 vs sim20 same span</div>
+        </div>
+        <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 p-3 sm:p-4">
+          <div class="text-[10px] uppercase tracking-widest text-slate-500 mono">Cohort size</div>
+          <div class="mt-1 text-xl sm:text-2xl font-bold mono">60</div>
+          <div class="text-[10px] text-slate-500 mono">+4 (sim61–64) spawned today</div>
+        </div>
+      </section>
+
+      <!-- Answers to May 11's open questions -->
+      <section class="mb-12">
+        <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+          <span class="w-1 h-5 rounded bg-fuchsia-500"></span>
+          Answers to May 11's six open questions
+        </h3>
+        <div class="space-y-3">
+          <div class="rounded-lg border border-rose-300 dark:border-rose-500/30 bg-rose-50/40 dark:bg-rose-950/15 p-4">
+            <div class="flex items-start justify-between gap-3 mb-1">
+              <span class="font-bold text-sm">Q1 · Auto-rule edge overnight</span>
+              <span class="text-[10px] mono px-2 py-0.5 rounded-full bg-rose-100 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 border border-rose-300 dark:border-rose-500/30">eroding</span>
+            </div>
+            <p class="text-sm text-slate-700 dark:text-slate-300 mb-2">
+              v2-with-rule: <span class="mono text-rose-600 dark:text-rose-400 font-semibold">−$41.46</span> over 53 trades (WR 18.9%). Sim20 unfiltered same span: +$128.53 / 129 trades, <span class="mono">+$51 scaled to $2 bets</span>. Rule under-performed unfiltered by <span class="font-semibold">$93</span> overnight. Lifetime since migration still positive (rule +$129 vs scaled-sim20 +$75) — entire edge was earned May 11 afternoon.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-rose-300 dark:border-rose-500/30 bg-rose-50/40 dark:bg-rose-950/15 p-4">
+            <div class="flex items-start justify-between gap-3 mb-1">
+              <span class="font-bold text-sm">Q2 · sim20_hourgated lead</span>
+              <span class="text-[10px] mono px-2 py-0.5 rounded-full bg-rose-100 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 border border-rose-300 dark:border-rose-500/30">evaporated · don't ship</span>
+            </div>
+            <p class="text-sm text-slate-700 dark:text-slate-300 mb-2">
+              First 46 trades: +$317 @ 54% WR (the snapshot). Trades 47–199 (overnight): <span class="mono text-rose-600 dark:text-rose-400 font-semibold">−$93.82</span>, $−0.61/t, WR 21.6%. Lifetime now $+1.12/t vs sim20 baseline $+1.04/t — essentially tied. The "+$235 lead" was a 46-trade hot run on the <em>old</em> bad-hour set (2/4/9/10/11/12). <span class="font-semibold text-amber-600 dark:text-amber-400">Don't ship this hour gate.</span>
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 p-4">
+            <div class="flex items-start justify-between gap-3 mb-1">
+              <span class="font-bold text-sm">Q3 · cheap_ct_no_sol per-trade</span>
+              <span class="text-[10px] mono px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800/60 text-slate-500 border border-slate-300 dark:border-slate-700">roughly tied</span>
+            </div>
+            <p class="text-sm text-slate-700 dark:text-slate-300 mb-2">
+              Lifetime (200 trades): no_sol $+0.97/t vs sim20 $+1.02/t (all assets) or $+0.77/t (ex-SOL). Overnight: no_sol $+1.22/t vs sim20-ex-SOL $+0.68/t. No_sol pulls ahead of the ex-SOL comparator by $0.21/t lifetime / $0.54/t overnight, but loses to sim20-all-assets on the period because <strong>SOL was net break-even on the overlap window</strong>.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 p-4">
+            <div class="flex items-start justify-between gap-3 mb-1">
+              <span class="font-bold text-sm">Q4 · SOL multi-day EV</span>
+              <span class="text-[10px] mono px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800/60 text-slate-500 border border-slate-300 dark:border-slate-700">noise — hour-of-day matters</span>
+            </div>
+            <p class="text-sm text-slate-700 dark:text-slate-300 mb-2">
+              4,295 SOL trades cohort-wide: $+0.19/t. Cross-sim mean <span class="mono">$+0.09/t · 95% CI [−$0.12, +$0.31]</span> straddles zero. May-11: +$0.51/t, May-12: <span class="text-rose-600 dark:text-rose-400">−$0.32/t</span> — sharp regime flip. Hours 2/4/9/10/11/22/23 are catastrophic (WR 0–20%); hours 12/18/20 are excellent (WR 67–89%). The −$0.47 → +$1.37 swing yesterday was the bad/good-hours mix shifting. <span class="font-semibold">SOL is not structurally positive or negative.</span>
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-amber-300 dark:border-amber-500/30 bg-amber-50/40 dark:bg-amber-950/15 p-4">
+            <div class="flex items-start justify-between gap-3 mb-1">
+              <span class="font-bold text-sm">Q5 · Rule multiplier</span>
+              <span class="text-[10px] mono px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 border border-amber-300 dark:border-amber-500/30">partial recovery · still &lt;1.0×</span>
+            </div>
+            <p class="text-sm text-slate-700 dark:text-slate-300 mb-2">
+              Yesterday afternoon: rule× compressed to <span class="mono">+0.09×</span> (15:00 UTC window). Overnight: rebounded to <span class="mono">+0.59×</span> → <span class="mono">+0.71×</span>. Still below 1.0× the whole time — the rule kept 45–71% of baseline P&amp;L but never amplified it.
+            </p>
+            <div class="text-xs mono space-y-0.5 mt-3 text-slate-600 dark:text-slate-400">
+              <div class="grid grid-cols-4 gap-2 text-[10px] uppercase tracking-wider text-slate-500 pb-1 border-b border-slate-200 dark:border-slate-800">
+                <span>6h window UTC</span><span class="text-right">base $/t</span><span class="text-right">rule $/t</span><span class="text-right">rule×</span>
+              </div>
+              <div class="grid grid-cols-4 gap-2"><span>05-11 00:00</span><span class="text-right">+0.23</span><span class="text-right">+0.92</span><span class="text-right text-emerald-600 dark:text-emerald-400 font-semibold">+2.98×</span></div>
+              <div class="grid grid-cols-4 gap-2"><span>05-11 18:00</span><span class="text-right">+3.33</span><span class="text-right">+0.48</span><span class="text-right text-rose-600 dark:text-rose-400 font-semibold">+0.09×</span></div>
+              <div class="grid grid-cols-4 gap-2"><span>05-12 00:00</span><span class="text-right">−0.84</span><span class="text-right">−0.60</span><span class="text-right">+0.59×</span></div>
+              <div class="grid grid-cols-4 gap-2"><span>05-12 06:00</span><span class="text-right">−1.26</span><span class="text-right">−1.06</span><span class="text-right">+0.71×</span></div>
+              <div class="grid grid-cols-4 gap-2"><span>05-12 12:00</span><span class="text-right">+4.94</span><span class="text-right">+4.46</span><span class="text-right">+0.66×</span></div>
+            </div>
+          </div>
+
+          <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 p-4">
+            <div class="flex items-start justify-between gap-3 mb-1">
+              <span class="font-bold text-sm">Q6 · Head-fake pattern</span>
+              <span class="text-[10px] mono px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800/60 text-slate-500 border border-slate-300 dark:border-slate-700">repeated · framing misleading</span>
+            </div>
+            <p class="text-sm text-slate-700 dark:text-slate-300 mb-2">
+              L-streaks preceded by exactly 1 W: lifetime 51.7% · yesterday afternoon 28.6% · <span class="font-semibold">overnight 66.7% · last-100 69.2%</span>. The 61% pattern repeated and intensified. <span class="font-semibold text-amber-600 dark:text-amber-400">But:</span> P(L | prev=W) overnight = 65.6% vs base P(L) = 75.6% — prev-W still <em>reduces</em> loss probability by ~10pp. "Most L-streaks start with 1 W" is true but doesn't mean "after 1 W you're more likely to lose." A skip-after-W rule remains subtractive.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Forward-validated sim ranking -->
+      <section class="mb-12">
+        <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+          <span class="w-1 h-5 rounded bg-fuchsia-500"></span>
+          Forward-validation: edge over sim20 contemporaneous
+        </h3>
+        <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="data-table w-full text-sm">
+              <thead class="bg-slate-50 dark:bg-slate-800/50 text-xs uppercase tracking-wider text-slate-500">
+                <tr>
+                  <th class="text-left px-4 py-2 font-semibold">Sim</th>
+                  <th class="text-right px-4 py-2 font-semibold">n</th>
+                  <th class="text-right px-4 py-2 font-semibold">$/t</th>
+                  <th class="text-right px-4 py-2 font-semibold">WR</th>
+                  <th class="text-right px-4 py-2 font-semibold">vs sim20 (per-trade)</th>
+                  <th class="text-right px-4 py-2 font-semibold">vs sim20 (total)</th>
+                </tr>
+              </thead>
+              <tbody class="mono divide-y divide-slate-200 dark:divide-slate-800">
+                <tr class="bg-emerald-50/40 dark:bg-emerald-950/20">
+                  <td class="px-4 py-2 font-bold text-pink-600 dark:text-pink-400">sim55_hg_v2 <span class="text-[10px] font-normal text-emerald-600 dark:text-emerald-400">· promote candidate</span></td>
+                  <td class="px-4 py-2 text-right">80</td>
+                  <td class="px-4 py-2 text-right text-emerald-600 dark:text-emerald-400 font-semibold">+$2.35</td>
+                  <td class="px-4 py-2 text-right">30.0%</td>
+                  <td class="px-4 py-2 text-right text-emerald-600 dark:text-emerald-400 font-semibold">+$1.76</td>
+                  <td class="px-4 py-2 text-right text-emerald-600 dark:text-emerald-400 font-semibold">+$115.81</td>
+                </tr>
+                <tr><td class="px-4 py-2 font-bold text-pink-600 dark:text-pink-400">sim56_stacked</td><td class="px-4 py-2 text-right">61</td><td class="px-4 py-2 text-right text-emerald-600 dark:text-emerald-400">+$1.94</td><td class="px-4 py-2 text-right">34.4%</td><td class="px-4 py-2 text-right text-emerald-600 dark:text-emerald-400">+$1.25</td><td class="px-4 py-2 text-right text-emerald-600 dark:text-emerald-400">+$35.81</td></tr>
+                <tr><td class="px-4 py-2 font-bold text-pink-600 dark:text-pink-400">sim60_bookfilt_stack</td><td class="px-4 py-2 text-right">50</td><td class="px-4 py-2 text-right text-emerald-600 dark:text-emerald-400">+$1.72</td><td class="px-4 py-2 text-right">34.0%</td><td class="px-4 py-2 text-right text-emerald-600 dark:text-emerald-400">+$1.13</td><td class="px-4 py-2 text-right text-emerald-600 dark:text-emerald-400">+$13.78</td></tr>
+                <tr><td class="px-4 py-2 font-bold text-pink-600 dark:text-pink-400">sim57_btc_only <span class="text-[10px] font-normal text-slate-500">· small n</span></td><td class="px-4 py-2 text-right text-slate-500">18</td><td class="px-4 py-2 text-right text-emerald-600 dark:text-emerald-400">+$2.93</td><td class="px-4 py-2 text-right">33.3%</td><td class="px-4 py-2 text-right text-emerald-600 dark:text-emerald-400">+$2.32</td><td class="px-4 py-2 text-right text-rose-600 dark:text-rose-400">−$23.23</td></tr>
+                <tr><td class="px-4 py-2 font-bold text-pink-600 dark:text-pink-400">sim59_bookfilt</td><td class="px-4 py-2 text-right">113</td><td class="px-4 py-2 text-right">+$1.12</td><td class="px-4 py-2 text-right">25.7%</td><td class="px-4 py-2 text-right text-slate-500">+$0.17</td><td class="px-4 py-2 text-right text-slate-500">+$2.97</td></tr>
+                <tr><td class="px-4 py-2 font-bold text-pink-600 dark:text-pink-400">sim54_floor20</td><td class="px-4 py-2 text-right">119</td><td class="px-4 py-2 text-right">+$0.48</td><td class="px-4 py-2 text-right">27.7%</td><td class="px-4 py-2 text-right text-rose-600 dark:text-rose-400">−$0.57</td><td class="px-4 py-2 text-right text-rose-600 dark:text-rose-400">−$76.97</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="px-4 py-3 text-xs text-slate-500 border-t border-slate-200 dark:border-slate-800 leading-relaxed">
+            <span class="font-semibold text-slate-700 dark:text-slate-300">sim55_hg_v2</span> uses the re-derived bad-hour set <span class="mono">(0, 2, 4, 9, 10, 11, 17, 22, 23)</span> from sim20's full 306-trade lifetime — not yesterday's smaller-sample <span class="mono">(2, 4, 9, 10, 11, 12)</span>. Book-imbalance filter is noise on fresh data; entry_lo=0.20 floor actively hurts.
+          </p>
+        </div>
+      </section>
+
+      <!-- Sims spawned today -->
+      <section class="mb-12">
+        <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+          <span class="w-1 h-5 rounded bg-fuchsia-500"></span>
+          New sims spawned — price-trigger window sweep
+        </h3>
+        <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 p-4 sm:p-5">
+          <p class="text-sm text-slate-700 dark:text-slate-300 mb-3">
+            Added a <span class="mono text-pink-600 dark:text-pink-400">entry_threshold_window</span> field to <span class="mono">SimSpec</span> (default <span class="mono">[10, 12]</span>) so different sims can fire their price triggers at different points in the window clock. Spawned a fresh cohort to compare:
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mono text-xs">
+            <div class="rounded border border-slate-200 dark:border-slate-800 p-3">
+              <div class="text-pink-600 dark:text-pink-400 font-bold mb-1">cheap_ct_sim61_t30</div>
+              <div class="text-slate-600 dark:text-slate-400">thresh=0.30 · window [10, 12]m</div>
+            </div>
+            <div class="rounded border border-slate-200 dark:border-slate-800 p-3">
+              <div class="text-pink-600 dark:text-pink-400 font-bold mb-1">cheap_ct_sim62_t25</div>
+              <div class="text-slate-600 dark:text-slate-400">thresh=0.25 · window [10, 12]m</div>
+            </div>
+            <div class="rounded border border-fuchsia-300 dark:border-fuchsia-500/30 bg-fuchsia-50/30 dark:bg-fuchsia-950/15 p-3">
+              <div class="text-pink-600 dark:text-pink-400 font-bold mb-1">cheap_ct_sim63_t30_w810</div>
+              <div class="text-slate-600 dark:text-slate-400">thresh=0.30 · <span class="text-fuchsia-600 dark:text-fuchsia-400 font-semibold">window [8, 10]m</span></div>
+            </div>
+            <div class="rounded border border-fuchsia-300 dark:border-fuchsia-500/30 bg-fuchsia-50/30 dark:bg-fuchsia-950/15 p-3">
+              <div class="text-pink-600 dark:text-pink-400 font-bold mb-1">cheap_ct_sim64_t25_w810</div>
+              <div class="text-slate-600 dark:text-slate-400">thresh=0.25 · <span class="text-fuchsia-600 dark:text-fuchsia-400 font-semibold">window [8, 10]m</span></div>
+            </div>
+          </div>
+          <p class="mt-4 text-xs text-slate-500 leading-relaxed">
+            All four share cap=0.40, ride-to-settle, all 7 assets. sim61/62 are fresh duplicates of sim19/sim20 (parallel histories starting from now); sim63/64 fire the trigger <em>earlier</em> in the window — at 8–10m left instead of 10–12m. Hypothesis: an earlier entry gives the contract more time to drift in our favor, but also more time for the underlying to whipsaw against us. Live v2 unaffected — its <span class="mono">cheap_config</span> doesn't pass the new field, so <span class="mono">cfg.get("entry_threshold_window", (10.0, 12.0))</span> defaults to the old behavior.
+          </p>
+        </div>
+      </section>
+
+      <!-- Decisions + open questions -->
+      <section class="mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+              <span class="w-1 h-5 rounded bg-fuchsia-500"></span>
+              Decisions today
+            </h3>
+            <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 p-4 sm:p-5 text-sm space-y-2">
+              <p><span class="text-emerald-600 dark:text-emerald-400 font-semibold">✓</span> Spawned sim61–64 (price-trigger window sweep, +4 cohort).</p>
+              <p><span class="text-emerald-600 dark:text-emerald-400 font-semibold">✓</span> Added <span class="mono">entry_threshold_window</span> field to <span class="mono">SimSpec</span>; deployed to droplet.</p>
+              <p><span class="text-amber-600 dark:text-amber-400 font-semibold">⏸</span> <span class="font-semibold">Hold</span> on shipping <span class="mono">sim55_hg_v2</span> to live — strongest forward edge but n=80 wide CI; want another day before promoting.</p>
+              <p><span class="text-amber-600 dark:text-amber-400 font-semibold">⏸</span> <span class="font-semibold">Hold</span> on disabling the auto-rule — net positive lifetime, but if it stays &lt;1.0× another 24h, switch off.</p>
+              <p><span class="text-rose-600 dark:text-rose-400 font-semibold">✗</span> <span class="font-semibold">Don't ship</span> the original <span class="mono">cheap_ct_sim20_hourgated</span> hour gate.</p>
+              <p><span class="text-rose-600 dark:text-rose-400 font-semibold">✗</span> <span class="font-semibold">Don't ship</span> the book-imbalance filter (sim59) — edge is noise on fresh data.</p>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+              <span class="w-1 h-5 rounded bg-fuchsia-500"></span>
+              Open questions for May 13
+            </h3>
+            <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 p-4 sm:p-5">
+              <ol class="space-y-2 text-sm text-slate-700 dark:text-slate-300 list-decimal list-inside marker:text-fuchsia-500 marker:font-bold">
+                <li>Does <span class="mono text-pink-600 dark:text-pink-400">sim55_hg_v2</span>'s +$1.76/t edge hold to n=150+? If yes, ship to live.</li>
+                <li>Earlier window [8,10] vs default [10,12] — does sim63/64 outperform sim61/62 on a head-to-head, same-asset basis?</li>
+                <li>Auto-rule's rule× — does it cross back above 1.0× tomorrow, or commit to disable.</li>
+                <li>HYPE/BNB shadow fills — enough data yet for a per-asset EV check?</li>
+              </ol>
+            </div>
+          </div>
         </div>
       </section>
 
